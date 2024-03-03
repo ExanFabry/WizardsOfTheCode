@@ -1,8 +1,8 @@
 # Wizards of the Code
 
 ## Leden
-Bence Kazari
-Dennis Duckaert
+Bence Kazari,
+Dennis Duckaert,
 Exan Fabry
 
 ## Commits
