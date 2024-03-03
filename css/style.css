@@ -1,0 +1,43 @@
+/*Different sections*/
+nav, main{margin: 1rem;}
+
+/*Body*/
+#BodyHome{
+    display: grid;
+    grid-template-areas: 
+    'nav'
+    'main';
+}
+
+/*Nav*/
+nav{grid-area: nav;}
+nav header a{
+    margin-right: 2rem;
+    position: relative;
+}
+.AllHeaderActive{border-bottom: 2px solid black;}
+
+/*Main*/
+main{grid-area: main;}
+#IndexMainInputCard{width: 93%;}
+#IndexMainSearchCard{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: 1rem;
+}
+#IndexMainInputCard, #IndexMainSearchCard{border: 1px solid black;}
+main img{
+    padding-top: 1rem;
+    width: 18%;
+}
+#IndexMainButtons{
+    display: flex;
+    padding-left: 45%;
+}
+#IndexMainButtons button, #IndexMainButtons p{
+    display: flex;
+    padding-left: 2%;
+}
+#cards{
+    padding-left: 7%;
+}
