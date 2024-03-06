@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Landingspagina</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 20%;
+            width: 60%;
+            justify-content: space-evenly;
+        }
+        img {
+            width: 15vw;
+            height: 15vw;
+            margin: 0 auto;
+        }
+        figure, section {
+            background-color: #eee;
+        }
+        figure {
+            cursor: pointer;
+            width: 15vw;
+            transition: filter 0.25s;
+            background-color: white;
+        }
+        figure:not(a figure) {
+            filter: brightness(0.8) blur(5px);
+        }
+        figure:not(a figure):hover {
+            filter: brightness(1) blur(0);
+        }
+        a figure:hover {
+            filter: brightness(1.4);
+        }
+        figcaption {
+            text-align: center;
+            font-weight: bold;
+        }
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="main_login"></a>
+    </header>
+    <main>
+        <section>
+            <figure>
+                <img src="assets/img/thumb_pokemon.png" alt="Pokémon">
+                <figcaption>Pokémon</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/thumb_fifa.png" alt="FIFA">
+                <figcaption>FIFA</figcaption>
+            </figure>
+            <a href="index.html">
+                <figure>
+                    <img src="assets/img/thumb_magicthegathering.png" alt="Magic&colon; the Gathering">
+                    <figcaption>Magic&colon; the Gathering</figcaption>
+                </figure>
+            </a>
+            <figure>
+                <img src="assets/img/thumb_fortnite.png" alt="Fortnite">
+                <figcaption>Fortnite</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/thumb_legomasters.png" alt="Lego Masters">
+                <figcaption>Lego Masters</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/img/thumb_lordoftherings.png" alt="Lord of the Rings">
+                <figcaption>Lord of the Rings</figcaption>
+            </figure>
+        </section>
+    </main>
+</body>
+</html>
