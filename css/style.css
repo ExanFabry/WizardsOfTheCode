@@ -20,7 +20,7 @@ body {
     background-size: cover;
     max-width: 100vw;
     color: #fff;
-    /* ----- Grid system: ----- */
+    /* --- Grid system: --- */
     grid-template-areas: "header" "main" "footer";
     grid-template-rows: 1fr 6fr 1fr;
     box-sizing: border-box;
@@ -47,7 +47,7 @@ header nav a {
     margin-right: 2rem;
     position: relative;
 }
-/* -------- Modals -------- */
+/* ---------------- Modals ---------------- */
 #modal {
     background-color: var(--clearblack);
     cursor: pointer;
@@ -80,7 +80,7 @@ header nav a {
 #close:hover {
     color: #fff;
 }
-/* -------- All Pages -------- */
+/* ---------------- All Pages ---------------- */
 .AllHeaderActive {
     border-bottom: 2px solid #fff;
 }
@@ -89,34 +89,74 @@ header nav a {
     height: 50px;
     width: 50px;
 }
-/* -------- Index Page -------- */
-#IndexMainInputCard {
+/* ---------------- Index Page ---------------- */
+#IndexHeader {
+    margin: 3rem 3rem 0 3rem;
+}
+#IndexSection {
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    display: flex;
+    margin: 0 20%;
+    width: 60%;
+}
+.IndexOption {
+    margin: 20px 0 10px 0;
+    border-radius: 20px;
+    height: 15vw;
+    width: 15vw;
+}
+.IndexFigure {
+    transition: filter 0.25s;
+    cursor: pointer;
+    width: 15vw;
+}
+.IndexFigure:not(a .IndexFigure) {
+    filter: brightness(0.8) blur(5px);
+}
+.IndexFigure:not(a .IndexFigure):hover {
+    filter: brightness(1) blur(0);
+}
+a .IndexFigure:hover {
+    filter: brightness(1.4);
+}
+.IndexFigure figcaption {
+    text-align: center;
+    font-weight: bold;
+}
+/* ---------------- Home Page ---------------- */
+#HomeMainInputCard {
     width: 93%;
 }
-#IndexMainSearchCard {
+#HomeMainSearchCard {
     padding-right: 1rem;
     padding-left: 1rem;
     margin-left: 1rem;
 }
-#IndexMainInputCard, #IndexMainSearchCard {
+#HomeMainInputCard, #HomeMainSearchCard {
     border: 1px solid #fff;
 }
-#cards img{
+#HomeCards {
+    padding-left: 10%;
+}
+#HomeCards img{
     padding-top: 1rem;
     width: 18%;
 }
-#IndexMainButtons {
+#HomeMainButtons {
     padding-left: 45%;
     display: flex;
 }
-#IndexMainButtons button, #IndexMainButtons p {
-    padding-left: 2%;
+#HomeMainButtons p {
     display: flex;
+    padding: 0 2%;
 }
-#cards {
-    padding-left: 7%;
+#HomeMainButtons button {
+    border: 1px solid #fff;
+    text-align: center;
+    padding: 0 1%;
 }
-/* -------- Decks Page -------- */
+/* ---------------- Decks Page ---------------- */
 .DecksMainContainer {
     flex-direction: row;
     align-items: center;
@@ -127,48 +167,18 @@ header nav a {
 .DecksMainItem {
     width: 300px;
 }
+.DecksMainItem img {
+    border-radius: 20px;
+}
 .DecksMainItem figcaption {
     text-align: center;
 }
 .NieuwDeckMainContainer form button, .NieuwDeckMainContainer form input {
     border: 1px solid #767676;
 }
-/* -------- Land Page -------- */
-#LandHeader {
-    margin: 3rem 3rem 0 3rem;
-}
-#LandSection {
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    display: flex;
-    margin: 0 20%;
-    width: 60%;
-}
-.LandOption {
-    margin: 20px 0 10px 0;
-    border-radius: 20px;
-    height: 15vw;
-    width: 15vw;
-}
-.LandFigure {
-    transition: filter 0.25s;
-    cursor: pointer;
-    width: 15vw;
-}
-.LandFigure:not(a .LandFigure) {
-    filter: brightness(0.8) blur(5px);
-}
-.LandFigure:not(a .LandFigure):hover {
-    filter: brightness(1) blur(0);
-}
-a .LandFigure:hover {
-    filter: brightness(1.4);
-}
-.LandFigure figcaption {
-    text-align: center;
-    font-weight: bold;
-}
-/* -------- New Deck Window -------- */
+/* ---------------- Drawtest Page ---------------- */
+/* Enter CSS here */
+/* ---------------- New Deck Window ---------------- */
 #NewDeckWindow {
     flex-wrap: wrap;
     display: flex;
