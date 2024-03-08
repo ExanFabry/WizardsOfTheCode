@@ -153,3 +153,19 @@ a .LandFigure:hover {
     text-align: center;
     font-weight: bold;
 }
+/* New Deck Window */
+#NewDeckWindow {
+    flex-wrap: wrap;
+    display: flex;
+    padding: 1rem;
+}
+#NewDeckWindow section {
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    display: flex;
+    width: 25%;
+}
+.NewDeckWindowImg {
+    width: 50%;
+}
