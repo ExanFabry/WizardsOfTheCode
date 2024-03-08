@@ -6,18 +6,18 @@
     <title>Decks</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/modal.js" defer></script>
 </head>
 <body>
-    <nav>
-        <header>
+    <header>
+        <nav>
             <a href="index.html">Home</a>
             <a href="decks.html">Decks</a>
             <a href="drawTest.html">Draw Test</a>
-        </header>
-    </nav>
-    <nav></nav>
+        </nav>
+    </header>
     <main class="DecksMainContainer">
-        <figure class="DecksMainItem">
+        <figure class="DecksMainItem" class="item">
             <a href="#" title="image"><img src="assets/images/Decks.jpg" alt="image"></a>
             <figcaption>
                 <p>Deckname</p>
@@ -59,11 +59,16 @@
                 <p>New Deck</p>
             </figcaption>
         </figure>
-    </main>
-    <div id="modal"> <!-- donkere achtergrond -->
-        <div id="modal-content"> <!-- inhoud van het venster -->
-          <span id="close">&times;</span> <!-- sluitknop -->
+        <div id="modal"> <!-- donkere achtergrond -->
+            <div id="modal-content"> <!-- inhoud van het venster -->
+                <form action="#" method="get">
+                    <input type="search" name="Nieuw deck" id="zoeken" placeholder="naam deck">
+                </form>
+                <button>image url</button>
+                <button>create</button>
+                <span id="close">&times;</span> <!-- sluitknop -->
+            </div>
         </div>
-      </div>
+    </main>
 </body>
 </html>
