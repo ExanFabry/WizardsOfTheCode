@@ -28,15 +28,20 @@ body {
 }
 header {
     grid-area: header;
+    margin: 3rem;
 }
 main {
     grid-area: main;
+    margin: 2rem;
+}
+nav {
+    display: inline-block;
 }
 footer {
+    background-color: var(--clearblack);
     grid-area: footer;
-}
-main, nav {
-    margin: 1rem;
+    color: #fff;
+    padding: 2rem;
 }
 header nav a {
     margin-right: 2rem;
@@ -78,6 +83,11 @@ header nav a {
 /* -------- All Pages -------- */
 .AllHeaderActive {
     border-bottom: 2px solid #fff;
+}
+#AllLoginButton {
+    float: right;
+    height: 50px;
+    width: 50px;
 }
 /* -------- Index Page -------- */
 #IndexMainInputCard {
@@ -124,6 +134,9 @@ header nav a {
     border: 1px solid #767676;
 }
 /* -------- Land Page -------- */
+#LandHeader {
+    margin: 3rem 3rem 0 3rem;
+}
 #LandSection {
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -155,7 +168,7 @@ a .LandFigure:hover {
     text-align: center;
     font-weight: bold;
 }
-/* New Deck Window */
+/* -------- New Deck Window -------- */
 #NewDeckWindow {
     flex-wrap: wrap;
     display: flex;
