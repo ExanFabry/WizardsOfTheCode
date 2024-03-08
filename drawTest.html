@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav>
-            <a href="index.html">Home</a>
+            <a href="home.html">Home</a>
             <a href="decks.html">Decks</a>
             <a href="drawTest.html" class="AllHeaderActive">Draw Test</a>
         </nav>
@@ -19,27 +19,19 @@
     </header>
     <main>
         <select name="devices">
+            <option value="" disabled selected>Deck to pick</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
         </select>
-        <input type="text">
-        <button>Track</button>
+        <input type="text" style="border: 1px solid #fff">
+        <button style="border: 1px solid #fff">Track</button>
         <p>Percentage</p>
-        <img src="" alt="" id="drawPile">
-        <button>Draw pile</button>
-        <button>Reset</button>
-        <img src="" alt="" id="discardPile">
-        <div id="modal"> <!-- donkere achtergrond -->
-            <div id="modal-content"> <!-- inhoud van het venster -->
-                <span id="close">&times;</span> <!-- sluitknop -->
-                <form action="#" method="get">
-                    <input type="search" name="Nieuw deck" id="zoeken" placeholder="naam deck">
-                </form>
-                <button>image url</button>
-                <button>create</button>
-            </div>
-        </div>
+        
+        <img src="/assets/images/Decks.jpg" alt="" id="DrawTestDrawPile" style="width: 300px">
+        <button style="border: 1px solid #fff">Draw pile</button>
+        <button style="border: 1px solid #fff">Reset</button>
+        <img src="/assets/images/Decks.jpg" alt="" id="DrawTestDiscardPile" style="width: 300px">
     </main>
     <footer>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab similique eligendi vel ea deserunt? Beatae ex tempora sint dolor quasi deleniti ipsa vel, voluptatem earum saepe odit enim omnis placeat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Id consectetur blanditiis doloribus quia architecto cum est, ab accusamus, voluptates, magni voluptatum saepe quae dolor dicta modi. Dicta sunt repellendus accusamus? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi suscipit commodi atque dolor delectus iure ratione incidunt exercitationem doloribus dolorem similique dolores fugit pariatur expedita alias quas autem, cumque deserunt?</p>
