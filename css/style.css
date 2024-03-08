@@ -1,43 +1,154 @@
-/*Different sections*/
-nav, main{margin: 1rem;}
-
-/*Body*/
-#BodyHome{
-    display: grid;
-    grid-template-areas: 
-    'nav'
-    'main';
+@font-face {
+    src: url("../assets/font/ReggaeOne-Regular.ttf");
+    font-family: "ReggaeOne";
 }
-
-/*Nav*/
-nav{grid-area: nav;}
-nav header a{
+:root {
+    --clearblack: #00000080;
+}
+::-webkit-scrollbar {
+    width: 0;
+}
+html {
+    box-sizing: border-box;
+}
+body {
+    background-image: url("../assets/background.webp");
+    font-family: "ReggaeOne", serif;
+    background-attachment: fixed;
+    background-size: cover;
+    max-width: 100vw;
+    color: #fff;
+    /* ----- Grid system: ----- */
+    grid-template-areas: "header" "main" "footer";
+    grid-template-rows: 1fr 6fr 1fr;
+    box-sizing: border-box;
+    display: grid;
+}
+header {
+    grid-area: header;
+}
+main {
+    grid-area: main;
+}
+footer {
+    grid-area: footer;
+}
+main, nav {
+    margin: 1rem;
+}
+header nav a {
     margin-right: 2rem;
     position: relative;
 }
-.AllHeaderActive{border-bottom: 2px solid black;}
-
-/*Main*/
-main{grid-area: main;}
-#IndexMainInputCard{width: 93%;}
-#IndexMainSearchCard{
+/* -------- Modals -------- */
+#modal {
+    background-color: var(--clearblack);
+    cursor: pointer;
+    position: fixed;
+    display: none;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+#modal-content {
+    border: 1px solid #fff;
+    background-color: var(--clearblack);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    cursor: default;
+    margin: 8% auto;
+    padding: 3rem;
+    width: 60%;
+    height: 60%;
+}
+#close {
+    color: #008CFF;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 30px;
+    float: right;
+}
+#close:hover {
+    color: #fff;
+}
+/* -------- All Pages -------- */
+.AllHeaderActive {
+    border-bottom: 2px solid #fff;
+}
+/* -------- Index Page -------- */
+#IndexMainInputCard {
+    width: 93%;
+}
+#IndexMainSearchCard {
     padding-left: 1rem;
     padding-right: 1rem;
     margin-left: 1rem;
 }
-#IndexMainInputCard, #IndexMainSearchCard{border: 1px solid black;}
-main img{
+#IndexMainInputCard, #IndexMainSearchCard {
+    border: 1px solid #fff;
+}
+#cards img{
     padding-top: 1rem;
     width: 18%;
 }
-#IndexMainButtons{
+#IndexMainButtons {
     display: flex;
     padding-left: 45%;
 }
-#IndexMainButtons button, #IndexMainButtons p{
+#IndexMainButtons button, #IndexMainButtons p {
     display: flex;
     padding-left: 2%;
 }
-#cards{
+#cards {
     padding-left: 7%;
+}
+/* -------- Decks Page -------- */
+.DecksMainContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.DecksMainItem {
+    width: 300px;
+}
+.DecksMainItem figcaption {
+    text-align: center;
+}
+.NieuwDeckMainContainer form button, .NieuwDeckMainContainer form input {
+    border: 1px solid #767676;
+}
+/* -------- Land Page -------- */
+#LandSection {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 20%;
+    width: 60%;
+    justify-content: space-evenly;
+}
+.LandOption {
+    width: 15vw;
+    height: 15vw;
+    margin: 0 auto;
+}
+.LandFigure {
+    cursor: pointer;
+    width: 15vw;
+    transition: filter 0.25s;
+    background-color: white;
+}
+.LandFigure:not(a .LandFigure) {
+    filter: brightness(0.8) blur(5px);
+}
+.LandFigure:not(a .LandFigure):hover {
+    filter: brightness(1) blur(0);
+}
+a .LandFigure:hover {
+    filter: brightness(1.4);
+}
+.LandFigure figcaption {
+    text-align: center;
+    font-weight: bold;
 }
