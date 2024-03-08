@@ -52,8 +52,8 @@ header nav a {
     top: 0;
 }
 #modal-content {
-    border: 1px solid #fff;
     background-color: var(--clearblack);
+    border: 1px solid #fff;
     overflow-x: hidden;
     overflow-y: scroll;
     cursor: default;
@@ -63,11 +63,12 @@ header nav a {
     height: 60%;
 }
 #close {
-    color: #008CFF;
+    transition: color 0.25s;
     font-weight: bold;
     cursor: pointer;
     font-size: 30px;
     float: right;
+    color: red;
 }
 #close:hover {
     color: #fff;
@@ -81,8 +82,8 @@ header nav a {
     width: 93%;
 }
 #IndexMainSearchCard {
-    padding-left: 1rem;
     padding-right: 1rem;
+    padding-left: 1rem;
     margin-left: 1rem;
 }
 #IndexMainInputCard, #IndexMainSearchCard {
@@ -93,22 +94,22 @@ header nav a {
     width: 18%;
 }
 #IndexMainButtons {
-    display: flex;
     padding-left: 45%;
+    display: flex;
 }
 #IndexMainButtons button, #IndexMainButtons p {
-    display: flex;
     padding-left: 2%;
+    display: flex;
 }
 #cards {
     padding-left: 7%;
 }
 /* -------- Decks Page -------- */
 .DecksMainContainer {
-    display: flex;
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
+    display: flex;
     gap: 10px;
 }
 .DecksMainItem {
@@ -122,22 +123,22 @@ header nav a {
 }
 /* -------- Land Page -------- */
 #LandSection {
-    display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
+    display: flex;
     margin: 0 20%;
     width: 60%;
-    justify-content: space-evenly;
 }
 .LandOption {
-    width: 15vw;
-    height: 15vw;
     margin: 0 auto;
+    height: 15vw;
+    width: 15vw;
 }
 .LandFigure {
+    transition: filter 0.25s;
+    background-color: #fff;
     cursor: pointer;
     width: 15vw;
-    transition: filter 0.25s;
-    background-color: white;
 }
 .LandFigure:not(a .LandFigure) {
     filter: brightness(0.8) blur(5px);
