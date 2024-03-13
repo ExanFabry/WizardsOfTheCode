@@ -22,17 +22,20 @@ body {
     color: #fff;
     /* --- Grid system: --- */
     grid-template-areas: "header" "main" "footer";
-    grid-template-rows: 1fr 6fr 1fr;
+    grid-template-rows: 0.8fr 4fr 1fr;
     box-sizing: border-box;
     display: grid;
 }
 header {
     grid-area: header;
     margin: 3rem;
+    padding-bottom: 0%;
+    margin-bottom: 0%;
 }
 main {
     grid-area: main;
-    margin: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 nav {
     display: inline-block;
@@ -201,3 +204,4 @@ a .IndexFigure:hover {
 .NewDeckWindowImg {
     width: 50%;
 }
+
