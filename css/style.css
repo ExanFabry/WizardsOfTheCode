@@ -157,6 +157,8 @@ a .IndexFigure:hover {
     padding: 0 1%;
 }
 .HomeSearchForCards{
+    width: 92.5%;
+    padding-left: 10%;
     display: flex;
 }
 /* ---------------- Decks Page ---------------- */
