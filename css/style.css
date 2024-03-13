@@ -26,6 +26,13 @@ body {
     box-sizing: border-box;
     display: grid;
 }
+#DecksBody {
+    /* --- Grid system: --- */
+    grid-template-areas: "header" "main" "footer";
+    grid-template-rows: 0.4fr 4fr 1fr;
+    box-sizing: border-box;
+    display: grid;
+}
 header {
     grid-area: header;
     margin: 3rem;
@@ -168,14 +175,18 @@ a .IndexFigure:hover {
 }
 /* ---------------- Decks Page ---------------- */
 .DecksMainContainer {
+    padding-left: 15%;
+    padding-right: 15%;
+    display: flex;
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
-    display: flex;
-    gap: 10px;
+    justify-content: center;
+    gap: 3%;
 }
 .DecksMainItem {
-    width: 300px;
+    width: 30%;
+    height: 40%;
 }
 .DecksMainItem img {
     border-radius: 20px;
@@ -213,7 +224,21 @@ a .IndexFigure:hover {
         box-sizing: border-box;
         display: grid;
     }
+    #DecksBody {
+        grid-template-areas: "header" "main" "footer";
+        grid-template-rows: 0.4fr 1.5fr 1fr;
+        box-sizing: border-box;
+        display: grid;
+    }
     .HomeSearchForCards{
         padding-right: 14.5%;
+    }
+    .DecksMainItem figcaption {
+        text-align: start;
+    }
+    .DecksMainItem img{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
