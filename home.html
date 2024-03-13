@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/home.js" defer></script>
+    <script src="js/modal.js" defer></script>
 </head>
 <body id="BodyHome">
     <header>
@@ -23,35 +23,45 @@
             <button id="HomeMainSearchCard">Search</button>
         </section>
         <section id="HomeCards">
-            <img src="assets/images/card_birds_of_paradise.jpg" alt="Birds of Paradise">
-            <img src="assets/images/card_black_lotus.jpg" alt="Black Lotus">
-            <img src="assets/images/card_counterspell.jpg" alt="Counterspell">
-            <img src="assets/images/card_goblin_guide.jpg" alt="Goblin Guide">
-            <img src="assets/images/card_jace,_the_mind_sculptor.png" alt="Jace&comma; the Mind Sculptor">
-            <img src="assets/images/card_lightning_bolt.jpg" alt="Lightning Bolt">
-            <img src="assets/images/card_llanowar_elves.jpg" alt="Llanowar Elves">
-            <img src="assets/images/card_necropotence.jpg" alt="Necropotence">
-            <img src="assets/images/card_sol_ring.jpg" alt="Sol Ring">
-            <img src="assets/images/card_swords_to_plowshares.jpg" alt="Swords to Plowshares">
+            <img class="AllModalTriggers" src="assets/images/card_birds_of_paradise.jpg" alt="Birds of Paradise">
+            <img class="AllModalTriggers" src="assets/images/card_black_lotus.jpg" alt="Black Lotus">
+            <img class="AllModalTriggers" src="assets/images/card_counterspell.jpg" alt="Counterspell">
+            <img class="AllModalTriggers" src="assets/images/card_goblin_guide.jpg" alt="Goblin Guide">
+            <img class="AllModalTriggers" src="assets/images/card_jace,_the_mind_sculptor.png" alt="Jace&comma; the Mind Sculptor">
+            <img class="AllModalTriggers" src="assets/images/card_lightning_bolt.jpg" alt="Lightning Bolt">
+            <img class="AllModalTriggers" src="assets/images/card_llanowar_elves.jpg" alt="Llanowar Elves">
+            <img class="AllModalTriggers" src="assets/images/card_necropotence.jpg" alt="Necropotence">
+            <img class="AllModalTriggers" src="assets/images/card_sol_ring.jpg" alt="Sol Ring">
+            <img class="AllModalTriggers" src="assets/images/card_swords_to_plowshares.jpg" alt="Swords to Plowshares">
         </section>
         <section id="HomeMainButtons">
             <button>&lt;</button>
             <p>1/3</p>
             <button>&gt;</button>
         </section>
-        <div id="modal"> <!-- donkere achtergrond -->
-            <div id="modal-content"> <!-- inhoud van het venster -->
-                <span id="close">&times;</span> <!-- sluitknop -->
-                <form action="#" method="get">
-                    <input type="search" name="Nieuw deck" id="zoeken" placeholder="naam deck">
-                </form>
-                <button>image url</button>
-                <button>create</button>
+        <!-- modal -->
+        <div class="AllModal">
+            <!-- modal content -->
+            <div class="AllModalContent">
+                <span class="AllModalClose">X</span>
+                <img src="assets/images/card_birds_of_paradise.jpg" alt="Card">
+                <h2>Birds of Paradise</h2>
+                <p>Type: creature</p>
+                <p>Color: green</p>
+                <p>Toevoegen aan deck</p>
+                <select name="devices">
+                    <option value="1">Deck 1</option>
+                    <option value="2">Deck 2</option>
+                    <option value="3">Deck 3</option>
+                </select>
             </div>
         </div>
     </main>
     <footer>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab similique eligendi vel ea deserunt? Beatae ex tempora sint dolor quasi deleniti ipsa vel, voluptatem earum saepe odit enim omnis placeat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Id consectetur blanditiis doloribus quia architecto cum est, ab accusamus, voluptates, magni voluptatum saepe quae dolor dicta modi. Dicta sunt repellendus accusamus? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi suscipit commodi atque dolor delectus iure ratione incidunt exercitationem doloribus dolorem similique dolores fugit pariatur expedita alias quas autem, cumque deserunt?</p>
+        <h2>Over Magic&colon; The Gathering</h2>
+        <p>Magic&colon; The Gathering is een verzamelbaar kaartspel waarin spelers elkaar uitdagen door spreuken&comma; wezens en strategie&euml;n te gebruiken om hun tegenstander te verslaan&period; Elke speler bouwt een deck van kaarten met verschillende krachten en effecten&comma; en het doel is om de levenspunten van de tegenstander naar nul te brengen&period; Het spel combineert elementen van strategie&comma; verzamelen en geluk&comma; en biedt een diepgaande en uitdagende ervaring voor spelers van alle niveaus&period;</p>
+        <h2>Over Dit Programma</h2>
+        <p>Deze applicatie biedt een mogelijkheid om informatie van kaarten te bekijken&comma; zelf decks samen te stellen &lpar;ook om bij te houden&rpar; en is ook ingebouwd met een DrawTest&dash;functionaliteit&period;</p>
         <p>&copy; Wizards of the Code&colon; 2024</p>
     </footer>
 </body>
