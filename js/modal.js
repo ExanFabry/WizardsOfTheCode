@@ -1,19 +1,34 @@
-// declaraties
-let modal = document.getElementById("modal");
-let chosenId = "no-item-selected";
-// wanneer je klikt op een element met class "item" verschijnt het venster
-for (let item of document.getElementsByClassName("item")) {
-    item.onclick = function() {
-        modal.style.display = "block";
+// declarations
+let modals = document.getElementsByClassName("AllModal");
+let buttons = document.getElementsByClassName("AllModalTriggers");
+let spans = document.getElementsByClassName("AllModalClose");
+// modal open sequence
+function openModal(index) {
+    modals[index].style.display = "block";
+}
+// modal close sequence
+function closeModal(index) {
+    modals[index].style.display = "none";
+}
+// click event for opening modal
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].onclick = function(e) {
+        e.preventDefault();
+        openModal(i);
+    };
+}
+// click event for closing modal (X button)
+for (let i = 0; i < spans.length; i++) {
+    spans[i].onclick = function(e) {
+        e.preventDefault();
+        closeModal(i);
+    };
+}
+// click event for closing modal (dark background)
+window.onclick = function(event) {
+    for (let i = 0; i < modals.length; i++) {
+        if (event.target == modals[i]) {
+            closeModal(i);
+        }
     }
-}
-// wanneer je klikt op de X knop verdwijnt het venster
-document.getElementById("close").onclick = function() {
-    modal.style.display = "none";
-}
-// wanneer je klikt op de zwarte achtergrond verdwijnt het venster
-window.onclick = function(clickAway) {
-    if (clickAway.target == modal) {
-        modal.style.display = "none";
-    }
-}
+};

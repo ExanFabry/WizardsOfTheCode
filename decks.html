@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/modal.js" defer></script>
 </head>
-<body id="DecksBody">
+<body>
     <header>
         <nav>
             <a href="home.html">Home</a>
             <a href="decks.html" class="AllHeaderActive">Decks</a>
             <a href="drawTest.html">Draw Test</a>
         </nav>
-        <a class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
+        <img id="AllLoginButton" src="assets/images/login-icon.png">
     </header>
     <main class="DecksMainContainer">
         <figure class="DecksMainItem">
-            <a href="#" title="image" class="item">
+            <a href="#" title="image" class="AllModalTriggers">
                 <img src="assets/images/Decks.jpg" alt="image">
             </a>
             <figcaption>
@@ -27,7 +27,7 @@
             </figcaption>
         </figure>
         <figure class="DecksMainItem">
-            <a href="#" title="image" class="item">
+            <a href="#" title="image" class="AllModalTriggers">
                 <img src="assets/images/Decks.jpg" alt="image">
             </a>
             <figcaption>
@@ -35,7 +35,7 @@
             </figcaption>
         </figure>
         <figure class="DecksMainItem">
-            <a href="#" title="image" class="item">
+            <a href="#" title="image" class="AllModalTriggers">
                 <img src="assets/images/Decks.jpg" alt="image">
             </a>
             <figcaption>
@@ -43,7 +43,7 @@
             </figcaption>
         </figure>
         <figure class="DecksMainItem">
-            <a href="#" title="image" class="item">
+            <a href="#" title="image" class="AllModalTriggers">
                 <img src="assets/images/Decks.jpg" alt="image">
             </a>
             <figcaption>
@@ -51,7 +51,7 @@
             </figcaption>
         </figure>
         <figure class="DecksMainItem">
-            <a href="#" title="image" class="item">
+            <a href="#" title="image" class="AllModalTriggers">
                 <img src="assets/images/Decks.jpg" alt="image">
             </a>
             <figcaption>
@@ -59,26 +59,34 @@
             </figcaption>
         </figure>
         <figure class="DecksMainItem">
-            <a href="#" title="image" class="item">
+            <a href="#" title="image" class="AllModalTriggers">
                 <img src="assets/images/Decks.jpg" alt="image">
             </a>
             <figcaption>
                 <p>Deckname</p>
             </figcaption>
         </figure>
-        <div id="modal"> <!-- donkere achtergrond -->
-            <div id="modal-content"> <!-- inhoud van het venster -->
-                <span id="close">&times;</span> <!-- sluitknop -->
-                <form action="#" method="get">
-                    <input type="search" name="Nieuw deck" id="zoeken" placeholder="naam deck">
-                </form>
-                <button>image url</button>
-                <button>create</button>
+        <figure class="DecksMainItem">
+            <!-- "new deck" modal trigger goes here -->
+            <figcaption>
+                <p>&plus;</p>
+            </figcaption>
+        </figure>
+        <!-- modal -->
+        <div class="AllModal">
+            <!-- modal content -->
+            <div class="AllModalContent">
+                <span class="AllModalClose">X</span>
+                <img src="assets/images/Decks.jpg" alt="Card">
+                <h2>Deckname</h2>
             </div>
         </div>
     </main>
     <footer>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab similique eligendi vel ea deserunt? Beatae ex tempora sint dolor quasi deleniti ipsa vel, voluptatem earum saepe odit enim omnis placeat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Id consectetur blanditiis doloribus quia architecto cum est, ab accusamus, voluptates, magni voluptatum saepe quae dolor dicta modi. Dicta sunt repellendus accusamus? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi suscipit commodi atque dolor delectus iure ratione incidunt exercitationem doloribus dolorem similique dolores fugit pariatur expedita alias quas autem, cumque deserunt?</p>
+        <h2>Over Magic&colon; The Gathering</h2>
+        <p>Magic&colon; The Gathering is een verzamelbaar kaartspel waarin spelers elkaar uitdagen door spreuken&comma; wezens en strategie&euml;n te gebruiken om hun tegenstander te verslaan&period; Elke speler bouwt een deck van kaarten met verschillende krachten en effecten&comma; en het doel is om de levenspunten van de tegenstander naar nul te brengen&period; Het spel combineert elementen van strategie&comma; verzamelen en geluk&comma; en biedt een diepgaande en uitdagende ervaring voor spelers van alle niveaus&period;</p>
+        <h2>Over Dit Programma</h2>
+        <p>Deze applicatie biedt een mogelijkheid om informatie van kaarten te bekijken&comma; zelf decks samen te stellen &lpar;ook om bij te houden&rpar; en is ook ingebouwd met een DrawTest&dash;functionaliteit&period;</p>
         <p>&copy; Wizards of the Code&colon; 2024</p>
     </footer>
 </body>
