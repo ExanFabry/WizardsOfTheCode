@@ -178,11 +178,11 @@ a .IndexFigure:hover {
 }
 /* ---------------- Decks Page ---------------- */
 .DecksMainContainer {
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    display: flex;
     gap: 3%;
 }
 .DecksMainItem {
@@ -200,31 +200,11 @@ a .IndexFigure:hover {
 }
 .DecksMainItem img {
     border-radius: 20px;
-    width: 100%;
 }
 .DecksMainItem figcaption {
     text-align: center;
 }
 /* ---------------- Drawtest Page ---------------- */
-/* Enter CSS here */
-/* ---------------- New Deck Window ---------------- */
-#NewDeckWindow {
-    flex-wrap: wrap;
-    display: flex;
-    padding: 1rem;
-}
-#NewDeckWindow section {
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
-    display: flex;
-    width: 25%;
-}
-.NewDeckWindowImg {
-    width: 50%;
-}
-
-/*drawTest.html*/
 #DrawTestChooseDeck{
     margin-bottom: 5%;
     width: 64%;
@@ -258,4 +238,27 @@ a .IndexFigure:hover {
 }
 #DrawTestMainPercentageCheck button{
     padding: 5%;
+}
+/* ---------------- New Deck Window ---------------- */
+#NewDeckWindow {
+    flex-wrap: wrap;
+    display: flex;
+    padding: 1rem;
+}
+#NewDeckWindow section {
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    display: flex;
+    width: 25%;
+}
+.NewDeckWindowImg {
+    width: 50%;
+}
+
+/*Media queries*/
+@media only screen and (max-width: 404px) {
+    header {
+        margin: 1rem 0.5rem;
+    }
 }
