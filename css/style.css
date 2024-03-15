@@ -223,3 +223,39 @@ a .IndexFigure:hover {
 .NewDeckWindowImg {
     width: 50%;
 }
+
+/*drawTest.html*/
+#DrawTestChooseDeck{
+    margin-bottom: 5%;
+    width: 64%;
+    padding: 1%;
+}
+#DrawTestChooseDeck, input, button{
+    border: white 3px solid;
+}
+#DrawTestMain{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+#DrawTestMainSectionSecondArticle{
+    padding-left: 5%;
+}
+#DrawTestBody section article p{
+    margin-bottom: 2.5%;
+}
+#DrawTestMainSectionFirstArticle{
+    padding-right: 5%;
+    border-right: white 4px solid;
+}
+#DrawTestBody section{
+    display: flex;
+}
+#DrawTestMainPercentageCheck{
+    margin-top: 5%;
+}
+#DrawTestMainPercentageCheck button{
+    margin-right: 5%;
+}
+#DrawTestMainPercentageCheck button{
+    padding: 5%;
+}

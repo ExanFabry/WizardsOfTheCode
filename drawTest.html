@@ -8,31 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/drawTest.js" defer></script>
     <style>
-        #DrawTestChooseDeck{
-            margin-bottom: 5%;
-            width: 64%;
-            padding: 1%;
-        }
-        #DrawTestChooseDeck, input, button{
-            border: white 3px solid;
-        }
-        #DrawTestMain{
-            padding-left: 10%;
-            padding-right: 10%;
-        }
-        #DrawTestMainSectionSecondArticle{
-            padding-left: 5%;
-        }
-        #DrawTestBody section article p{
-            margin-bottom: 2.5%;
-        }
-        #DrawTestMainSectionFirstArticle{
-            padding-right: 5%;
-            border-right: white 4px solid;
-        }
-        #DrawTestBody section{
-            display: flex;
-        }
+        
     </style>
 </head>
 <body id="DrawTestBody">
@@ -42,7 +18,7 @@
             <a href="decks.html">Decks</a>
             <a href="drawTest.html" class="AllHeaderActive">Draw Test</a>
         </nav>
-        <a class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
+        <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
     </header>
     <main id="DrawTestMain">
         <form action="" method="GET">
@@ -64,8 +40,10 @@
             <article id="DrawTestMainSectionSecondArticle">
                 <p>Percentage Check</p>
                 <input type="text">
-                <button>Search</button>
-                <p>Percentage</p>
+                <section id="DrawTestMainPercentageCheck">
+                    <button>Track</button>
+                    <p>Percentage</p>
+                </section>
             </article>
         </section>
     </main>
