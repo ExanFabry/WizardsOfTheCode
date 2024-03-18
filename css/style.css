@@ -8,6 +8,9 @@
 ::-webkit-scrollbar {
     width: 0;
 }
+::placeholder {
+    opacity: 0.75;
+}
 html {
     box-sizing: border-box;
 }
@@ -25,7 +28,6 @@ header {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 0%;
-    margin-bottom: 0%;
     grid-area: header;
     margin: 1rem 2rem;
     display: flex;
@@ -47,8 +49,13 @@ nav {
 footer {
     background-color: var(--clearblack);
     grid-area: footer;
+    margin-top: 7.5%;
+    margin-top: 5%;
     color: #fff;
     padding: 2rem;
+}
+footer h2, footer p {
+    width: 70%;
 }
 footer h2 {
     font-weight: bold;
@@ -62,8 +69,14 @@ footer p:last-of-type {
     font-size: 80%;
     opacity: 0.75;
 }
+select, button, input {
+    border-radius: 10px;
+}
+select, button {
+    cursor: pointer;
+}
 /* ---------------- Modals ---------------- */
-.AllModal {
+.Modal {
     background-color: var(--clearblack);
     padding-top: 100px; /* modal box location */
     position: fixed;
@@ -75,36 +88,38 @@ footer p:last-of-type {
     left: 0;
     top: 0;
 }
-.AllModalContent {
+.ModalContent {
     background-image: url("../assets/modalBackground.webp");
     border: 1px solid #888;
     padding: 20px;
     margin: auto;
     width: 80%;
 }
-.AllModalClose {
+.ModalClose {
+    transition: color 0.25s;
     font-weight: bold;
-    color: #aaaaaa;
+    cursor: pointer;
     font-size: 28px;
     float: right;
+    color: #fff;
 }
-.AllModalClose:hover, .AllModalClose:focus {
+.ModalClose:hover, .ModalClose:focus {
     text-decoration: none;
-    cursor: pointer;
     color: #000;
 }
 /* ---------------- All Pages ---------------- */
-.AllHeaderActive {
+.AllActiveLink {
     border-bottom: 2px solid #fff;
 }
 #AllLoginButton {
-    float: right;
     height: 50px;
     width: 50px;
 }
 /* ---------------- Index Page ---------------- */
 #IndexHeader {
-    margin: 3rem 3rem 0 3rem;
+    justify-content: right;
+    display: flex;
+    margin: 3rem;
 }
 #IndexSection {
     justify-content: space-evenly;
@@ -138,106 +153,190 @@ a .IndexFigure:hover {
     font-weight: bold;
 }
 /* ---------------- Home Page ---------------- */
-#HomeMainInputCard {
+#HomeSearch {
+    margin-top: 5%;
+    padding: 0 14%;
+    display: flex;
+    width: 100%;
+}
+#HomeSearch input, #HomeSearch button {
+    border: 3px solid #fff;
+    padding: 1% 2%;
+}
+#HomeSearch input {
     width: 93%;
 }
-#HomeMainSearchCard {
+#HomeSearch button {
+    transition: background-color 0.25s;
     padding-right: 1rem;
     padding-left: 1rem;
     margin-left: 1rem;
 }
-#HomeMainInputCard, #HomeMainSearchCard {
-    border: 1px solid #fff;
+#HomeSearch button:hover {
+    background-color: #fff;
+    color: #000;
 }
 #HomeCards {
-    padding-left: 15%;
-    padding-right: 10%;
+    padding: 0 10%;
+    margin: 3% 0 3% 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
-#HomeCards img{
+#HomeCards img {
+    transition: filter 0.25s;
     padding-top: 1rem;
-    width: 18%;
+    cursor: pointer;
+    width: 17%;
 }
-#HomeMainButtons {
+#HomeCards img:hover {
+    filter: brightness(1.4);
+}
+#HomeButtons {
+    align-content: center;
+    margin-bottom: 7.5%;
     padding-left: 45%;
     display: flex;
 }
-#HomeMainButtons p {
-    display: flex;
-    padding: 0 2%;
+#HomeButtons button, #HomeButtons p {
+    cursor: pointer;
 }
-#HomeMainButtons button {
-    border: 1px solid #fff;
+#HomeButtons button {
+    transition: background-color 0.25s, color 0.25s;
+    border: 3px solid #fff;
     text-align: center;
-    padding: 0 1%;
+    padding: 1% 2%;
 }
-.HomeSearchForCards{
-    padding-left: 15%;
-    padding-right: 16%;
-    display: flex;
-    width: 100%;
+#HomeButtons button:hover {
+    background-color: #fff;
+    color: #000;
+}
+#HomeButtons p {
+    margin: 1% 2%;
 }
 /* ---------------- Decks Page ---------------- */
-.DecksMainContainer {
-    display: flex;
+#DecksGallery {
     justify-content: center;
-    align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    display: flex;
+    margin: 0 10%;
     gap: 3%;
 }
-.DecksMainItem {
+#DecksGallery figure {
+    margin-bottom: 2%;
     cursor: pointer;
-    width: 300px;
+    height: 380px;
+    width: 250px;
 }
-.DecksMainItem:last-of-type {
+#DecksGallery figure:last-of-type {
+    transition: background-color 0.25s, color 0.25s;
     border: 2px solid #fff;
+    justify-content: center;
+    border-radius: 20px;
+    display: flex;
+    height: 350px;
 }
-.DecksMainItem:last-of-type figcaption {
+#DecksGallery figure:last-of-type:hover {
+    background-color: #fff;
+    color: #000;
+}
+#DecksGallery figure:last-of-type figcaption {
     font-family: monospace;
     user-select: none;
     font-size: 40px;
     margin: auto 0;
 }
-.DecksMainItem img {
+#DecksGallery figure img {
+    transition: filter 0.25s;
     border-radius: 20px;
 }
-.DecksMainItem figcaption {
+#DecksGallery figure img:hover {
+    filter: brightness(1.4);
+}
+#DecksGallery figcaption {
     text-align: center;
 }
 /* ---------------- Drawtest Page ---------------- */
-#DrawTestChooseDeck{
-    margin-bottom: 5%;
-    width: 64%;
-    padding: 1%;
-}
-#DrawTestChooseDeck, input, button{
-    border: white 3px solid;
-}
-#DrawTestMain{
-    padding-left: 10%;
+#DrawTestSelection, #DrawTestTitles, #DrawTestContent {
     padding-right: 10%;
+    padding-left: 10%;
 }
-#DrawTestMainSectionSecondArticle{
-    padding-left: 5%;
-}
-#DrawTestBody section article p{
-    margin-bottom: 2.5%;
-}
-#DrawTestMainSectionFirstArticle{
-    padding-right: 5%;
-    border-right: white 4px solid;
-}
-#DrawTestBody section{
+#DrawTestTitles {
+    justify-content: space-between;
+    margin-bottom: 1%;
     display: flex;
 }
-#DrawTestMainPercentageCheck{
-    margin-top: 5%;
+#DrawTestSelection select {
+    margin: 2.5% 0;
+    padding: 1%;
+    width: 64%;
 }
-#DrawTestMainPercentageCheck button{
-    margin-right: 5%;
+#DrawTestSelection select, input, button {
+    border: #fff 3px solid;
 }
-#DrawTestMainPercentageCheck button{
+#DrawTestContent {
+    display: flex;
+    gap: 20px;
+}
+#DrawTestButtons {
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+}
+#DrawTestContent img {
+    transition: filter 0.25s;
+}
+#DrawTestContent img:hover {
+    filter: brightness(1.4);
+}
+#DrawTestContent figure {
+    width: 15vw;
+}
+#DrawTestContent section:last-of-type {
+    border-left: #fff 4px solid;
+    flex-direction: column;
+    padding-left: 5%;
+    margin-left: 5%;
+    display: flex;
+}
+#DrawTestContent section:last-of-type button, #DrawTestContent section:last-of-type input, #DrawTestButtons button {
     padding: 5%;
+}
+#DrawTestContent section:last-of-type input {
+    margin-bottom: 10%;
+}
+#DrawTestButtons {
+    margin: 0 2.5%;
+    text-align: center;
+    width: 10%;
+}
+#DrawTestButtons button {
+    padding: 7% 5%;
+}
+#DrawTestButtons button:hover {
+    background-color: #fff;
+    color: #000;
+}
+#DrawTestPercentage {
+    align-items: center;
+    display: flex;
+}
+#DrawTestTitles button, #DrawTestPercentage button {
+    transition: background-color 0.25s, color 0.25s;
+}
+#DrawTestTitles button:hover, #DrawTestPercentage button:hover {
+    background-color: #fff;
+    color: #000;
+}
+#DrawTestPercentage p {
+    user-select: none;
+    margin-left: 10%;
+}
+option {
+    background-color: #000;
 }
 /* ---------------- New Deck Window ---------------- */
 #NewDeckWindow {
@@ -255,9 +354,13 @@ a .IndexFigure:hover {
 .NewDeckWindowImg {
     width: 50%;
 }
-
-/*Media queries*/
-@media only screen and (max-width: 404px) {
+/* ---------------- Media Queries ---------------- */
+@media screen and (max-width: 1000px) {
+    footer h2, footer p {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 404px) {
     header {
         margin: 1rem 0.5rem;
     }

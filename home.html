@@ -8,46 +8,44 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/modal.js" defer></script>
 </head>
-<body id="BodyHome">
+<body>
     <header>
         <nav>
-            <a href="home.html" class="AllHeaderActive">Home</a>
+            <a href="home.html" class="AllActiveLink">Home</a>
             <a href="decks.html">Decks</a>
             <a href="drawTest.html">Draw Test</a>
         </nav>
         <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
     </header>
     <main>
-        <section class="HomeSearchForCards">
-            <input type="text" id="HomeMainInputCard" placeholder="Search card">
-            <button id="HomeMainSearchCard">Search</button>
+        <section id="HomeSearch">
+            <input type="text" placeholder="Name of a Card">
+            <button>Search</button>
         </section>
         <section id="HomeCards">
-            <img class="AllModalTriggers" src="assets/images/card_birds_of_paradise.jpg" alt="Birds of Paradise">
-            <img class="AllModalTriggers" src="assets/images/card_black_lotus.jpg" alt="Black Lotus">
-            <img class="AllModalTriggers" src="assets/images/card_counterspell.jpg" alt="Counterspell">
-            <img class="AllModalTriggers" src="assets/images/card_goblin_guide.jpg" alt="Goblin Guide">
-            <img class="AllModalTriggers" src="assets/images/card_jace,_the_mind_sculptor.png" alt="Jace&comma; the Mind Sculptor">
-            <img class="AllModalTriggers" src="assets/images/card_lightning_bolt.jpg" alt="Lightning Bolt">
-            <img class="AllModalTriggers" src="assets/images/card_llanowar_elves.jpg" alt="Llanowar Elves">
-            <img class="AllModalTriggers" src="assets/images/card_necropotence.jpg" alt="Necropotence">
-            <img class="AllModalTriggers" src="assets/images/card_sol_ring.jpg" alt="Sol Ring">
-            <img class="AllModalTriggers" src="assets/images/card_swords_to_plowshares.jpg" alt="Swords to Plowshares">
+            <img class="ModalTrigger" src="assets/images/card_birds_of_paradise.jpg" alt="Birds of Paradise">
+            <img class="ModalTrigger" src="assets/images/card_black_lotus.jpg" alt="Black Lotus">
+            <img class="ModalTrigger" src="assets/images/card_counterspell.jpg" alt="Counterspell">
+            <img class="ModalTrigger" src="assets/images/card_goblin_guide.jpg" alt="Goblin Guide">
+            <img class="ModalTrigger" src="assets/images/card_jace,_the_mind_sculptor.png" alt="Jace&comma; the Mind Sculptor">
+            <img class="ModalTrigger" src="assets/images/card_lightning_bolt.jpg" alt="Lightning Bolt">
+            <img class="ModalTrigger" src="assets/images/card_llanowar_elves.jpg" alt="Llanowar Elves">
+            <img class="ModalTrigger" src="assets/images/card_necropotence.jpg" alt="Necropotence">
+            <img class="ModalTrigger" src="assets/images/card_sol_ring.jpg" alt="Sol Ring">
+            <img class="ModalTrigger" src="assets/images/card_swords_to_plowshares.jpg" alt="Swords to Plowshares">
         </section>
-        <section id="HomeMainButtons">
-            <button>&lt;</button>
-            <p>1/3</p>
-            <button>&gt;</button>
+        <section id="HomeButtons">
+            <button>&leftarrow;</button>
+            <p>1&sol;3</p>
+            <button>&rightarrow;</button>
         </section>
-        <!-- modal -->
-        <div class="AllModal">
-            <!-- modal content -->
-            <div class="AllModalContent">
-                <span class="AllModalClose">X</span>
+        <div class="Modal">
+            <div class="ModalContent">
+                <span class="ModalClose">X</span>
                 <img src="assets/images/card_birds_of_paradise.jpg" alt="Card">
                 <h2>Birds of Paradise</h2>
-                <p>Type: creature</p>
-                <p>Color: green</p>
+                <p>Type&colon; Creature</p>
+                <p>Color&colon; Green</p>
                 <p>Toevoegen aan deck</p>
                 <select name="devices">
                     <option value="1">Deck 1</option>
