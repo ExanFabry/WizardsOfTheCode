@@ -7,45 +7,52 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/drawTest.js" defer></script>
-    <style>
-        
-    </style>
 </head>
-<body id="DrawTestBody">
+<body>
     <header>
         <nav>
             <a href="home.html">Home</a>
             <a href="decks.html">Decks</a>
-            <a href="drawTest.html" class="AllHeaderActive">Draw Test</a>
+            <a href="drawTest.html" class="AllActiveLink">Draw Test</a>
         </nav>
         <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
     </header>
-    <main id="DrawTestMain">
-        <form action="" method="GET">
-            <select name="devices" id="DrawTestChooseDeck">
+    <main>
+        <form action="" method="GET" id="DrawTestSelection">
+            <select name="devices">
                 <option value="" selected>Choose a deck</option>
                 <option value="">Deck 1</option>
                 <option value="">Deck 2</option>
                 <option value="">Deck 3</option>
             </select>
         </form>
-        <section>
-            <article id="DrawTestMainSectionFirstArticle">
-                <p>Draw test</p>
-                <img src="/assets/images/Decks.jpg" alt="" id="DrawTestDrawPile" style="width: 300px">
-                <button style="border: 1px solid #fff">Draw pile</button>
-                <button style="border: 1px solid #fff">Reset</button>
-                <img src="/assets/images/Decks.jpg" alt="" id="DrawTestDiscardPile" style="width: 300px">
-            </article>
-            <article id="DrawTestMainSectionSecondArticle">
-                <p>Percentage Check</p>
-                <input type="text">
-                <section id="DrawTestMainPercentageCheck">
-                    <button>Track</button>
-                    <p>Percentage</p>
-                </section>
-            </article>
+        <section id="DrawTestTitles">
+            <h2>Draw Test</h2>
+            <h2>Percentage Check</h2>
         </section>
+        <article id="DrawTestContent">
+            <section>
+                <figure>
+                    <img src="assets/images/decks.jpg" alt="Draw Pile" id="DrawTestDrawPile">
+                </figure>
+            </section>
+            <section id="DrawTestButtons">
+                <button>Draw Pile</button>
+                <button>Reset</button>
+            </section>
+            <section>
+                <figure>
+                    <img src="assets/images/decks.jpg" alt="Reset" id="DrawTestDiscardPile">
+                </figure>
+            </section>
+            <section>
+                <input type="text" placeholder="&UnderBar;">
+                <article id="DrawTestPercentage">
+                    <button>Track</button>
+                    <p>&quest;&quest;&quest;&percnt;</p>
+                </article>
+            </section>
+        </article>
     </main>
     <footer>
         <h2>Over Magic&colon; The Gathering</h2>

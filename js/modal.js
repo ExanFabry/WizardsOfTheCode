@@ -1,7 +1,7 @@
 // declarations
-let modals = document.getElementsByClassName("AllModal");
-let buttons = document.getElementsByClassName("AllModalTriggers");
-let spans = document.getElementsByClassName("AllModalClose");
+let modals = document.getElementsByClassName("Modal");
+let buttons = document.getElementsByClassName("ModalTrigger");
+let spans = document.getElementsByClassName("ModalClose");
 // modal open sequence
 function openModal(index) {
     modals[index].style.display = "block";
