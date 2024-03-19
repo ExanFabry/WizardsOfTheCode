@@ -314,6 +314,7 @@ a .IndexFigure:hover {
     width: 10%;
 }
 #DrawTestButtons button {
+    transition: background-color 0.25s, color 0.25s;
     padding: 7% 5%;
 }
 #DrawTestButtons button:hover {
