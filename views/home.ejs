@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title><%= title %></title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/home" class="AllActiveLink">Home</a>
+            <a href="/decks">Decks</a>
+            <a href="/drawTest">Draw Test</a>
+        </nav>
+        <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
+    </header>
+    <main>
+        <section id="HomeSearch">
+            <input type="text" placeholder="Name of a Card">
+            <button>Search</button>
+        </section>
+        <section id="HomeCards">
+
+            <section id="HomeCards">
+                <% for (const card of cards) { %>
+                    <% if (card.multiverseid) { %>
+                        <article>
+                            <img class="ModalTrigger" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
+                            <p><%= card.name %></p>
+                        </article>
+                        
+                    <% } %>
+                <% } %>
+            </section>
+            
+            
+
+            <img class="ModalTrigger" src="assets/images/card_birds_of_paradise.jpg" alt="Birds of Paradise">
+            <img class="ModalTrigger" src="assets/images/card_black_lotus.jpg" alt="Black Lotus">
+            <img class="ModalTrigger" src="assets/images/card_counterspell.jpg" alt="Counterspell">
+            <img class="ModalTrigger" src="assets/images/card_goblin_guide.jpg" alt="Goblin Guide">
+            <img class="ModalTrigger" src="assets/images/card_jace,_the_mind_sculptor.png" alt="Jace&comma; the Mind Sculptor">
+            <img class="ModalTrigger" src="assets/images/card_lightning_bolt.jpg" alt="Lightning Bolt">
+            <img class="ModalTrigger" src="assets/images/card_llanowar_elves.jpg" alt="Llanowar Elves">
+            <img class="ModalTrigger" src="assets/images/card_necropotence.jpg" alt="Necropotence">
+            <img class="ModalTrigger" src="assets/images/card_sol_ring.jpg" alt="Sol Ring">
+            <img class="ModalTrigger" src="assets/images/card_swords_to_plowshares.jpg" alt="Swords to Plowshares">
+        </section>
+        <section id="HomeButtons">
+            <button>&leftarrow;</button>
+            <p>1&sol;3</p>
+            <button>&rightarrow;</button>
+        </section>
+        <div class="Modal">
+            <div class="ModalContent">
+                <span class="ModalClose">X</span>
+                <img src="assets/images/card_birds_of_paradise.jpg" alt="Card">
+                <h2>Birds of Paradise</h2>
+                <p>Type&colon; Creature</p>
+                <p>Color&colon; Green</p>
+                <p>Toevoegen aan deck</p>
+                <select name="devices">
+                    <option value="1">Deck 1</option>
+                    <option value="2">Deck 2</option>
+                    <option value="3">Deck 3</option>
+                </select>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <h2>Over Magic&colon; The Gathering</h2>
+        <p>Magic&colon; The Gathering is een verzamelbaar kaartspel waarin spelers elkaar uitdagen door spreuken&comma; wezens en strategie&euml;n te gebruiken om hun tegenstander te verslaan&period; Elke speler bouwt een deck van kaarten met verschillende krachten en effecten&comma; en het doel is om de levenspunten van de tegenstander naar nul te brengen&period; Het spel combineert elementen van strategie&comma; verzamelen en geluk&comma; en biedt een diepgaande en uitdagende ervaring voor spelers van alle niveaus&period;</p>
+        <h2>Over Dit Programma</h2>
+        <p>Deze applicatie biedt een mogelijkheid om informatie van kaarten te bekijken&comma; zelf decks samen te stellen &lpar;ook om bij te houden&rpar; en is ook ingebouwd met een DrawTest&dash;functionaliteit&period;</p>
+        <p>&copy; Wizards of the Code&colon; 2024</p>
+    </footer>
+</body>
+</html>

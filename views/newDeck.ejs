@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>New Deck Window</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title><%= title %></title>
+</head>
+<body>
+    <main>
+        <section class="NewDeckWindow">
+            <% if (newDeck) { %>
+                <form action="" method="post">
+                    <h2>Nieuwe decknaam: "<%= deckName %>"</h2>
+                    <button>Verander naam</button>
+                </form>
+            <% } else { %>
+                <h2>Wijzigingen aanbrengen in deck: <%= deckName %></h2>
+            <% } %>
+        </section>
+        <section>
+            <form action="" method="get">
+                <label for="name">Zoek een kaart</label>
+                <input type="text" name="name" id="">
+            </form>
+
+        </section>
+        
+        <section class="NewDeckWindow">
+        
+            <% for (let i = 0; i < deck1.length; i++) { %>
+                <article>
+                    <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= deck1Id[i] %>&type=card" alt="Deck Image" class="NewDeckWindowImg">
+                    <p><%= deck1[i].name %></p>
+                    <p>Cards in deck: 4</p>
+                    <form action="" method="get">
+                        <button>'▲'</button>
+                        <button>'▼'</button>
+                    </form>
+                </article>
+            <% } %>
+            
+        </section>
+
+    </main>
+</body>
+</html>
