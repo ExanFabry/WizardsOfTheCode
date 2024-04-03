@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="/js/modalDeck.js" defer></script>
+    <title><%= title %></title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/decks" class="AllActiveLink">Decks</a>
+            <a href="/drawTest">Draw Test</a>
+        </nav>
+        <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
+    </header>
+    <main>
+        <section id="DecksGallery">
+            <% for (let i = 0; i < decksArr.length; i++) { %>
+                <figure>
+                    <a href="#" class="ModalTrigger" title="<%= decksArr[i] %>">
+                        <img src="assets/images/deck<%= i+1 %>.jpg" alt="<%= decksArr[i] %>">
+                    </a>
+                    <figcaption>
+                        <p><%= decksArr[i] %></p>
+                    </figcaption>
+                </figure>
+            <% } %>
+
+            <figure>
+                <a href="#" id="TriggerNewDeck">
+                    <figcaption>
+                        <p>&plus;</p>
+                    </figcaption>
+                </a>
+            </figure>
+        </section>
+
+        
+        <div class="Modal">
+            <div class="ModalContent">
+                <h2></h2>
+                <figure>
+                    <img src="" alt="Card">
+                </figure>
+                <form action="" method="post">
+                    <button>Edit</button>
+                    <% /* vragen aan de leraar */ %>    
+                    <input type="hidden" name="nameEdit" value="">
+                </form>
+                <form action="" method="post">
+                    <button>Export</button>
+                </form>
+
+                <span class="ModalClose">X</span>
+            </div>
+        </div>
+
+        <div class="ModalNewDeck Modal">
+            <div class="ModalContent">
+                <p>Maak een nieuw deck:</p>
+                <form action="" method="post">
+                    <label for="name">Naam:</label>
+                    <input type="text" name="nameNew" id="name">
+                    <input type="submit" value="Create">
+                </form>
+                <form action="" method="post">
+                    <button>Foto uploaden</button>
+                </form>
+                <span class="ModalClose">X</span>
+            </div>
+        </div>
+
+
+    </main>
+    <footer>
+        <h2>Over Magic&colon; The Gathering</h2>
+        <p>Magic&colon; The Gathering is een verzamelbaar kaartspel waarin spelers elkaar uitdagen door spreuken&comma; wezens en strategie&euml;n te gebruiken om hun tegenstander te verslaan&period; Elke speler bouwt een deck van kaarten met verschillende krachten en effecten&comma; en het doel is om de levenspunten van de tegenstander naar nul te brengen&period; Het spel combineert elementen van strategie&comma; verzamelen en geluk&comma; en biedt een diepgaande en uitdagende ervaring voor spelers van alle niveaus&period;</p>
+        <h2>Over Dit Programma</h2>
+        <p>Deze applicatie biedt een mogelijkheid om informatie van kaarten te bekijken&comma; zelf decks samen te stellen &lpar;ook om bij te houden&rpar; en is ook ingebouwd met een DrawTest&dash;functionaliteit&period;</p>
+        <p>&copy; Wizards of the Code&colon; 2024</p>
+    </footer>
+</body>
+</html>

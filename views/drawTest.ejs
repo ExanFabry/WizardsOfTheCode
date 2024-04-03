@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title><%= title %></title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/decks">Decks</a>
+            <a href="/drawTest" class="AllActiveLink">Draw Test</a>
+        </nav>
+        <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
+    </header>
+    <main>
+        <form action="" method="GET" id="DrawTestSelection">
+            <select name="devices">
+                <option value="" selected>Choose a deck</option>
+                <option value="">Deck 1</option>
+                <option value="">Deck 2</option>
+                <option value="">Deck 3</option>
+            </select>
+        </form>
+        <section id="DrawTestTitles">
+            <h2>Draw Test</h2>
+            <h2>Percentage Check</h2>
+        </section>
+        <article id="DrawTestContent">
+            <section>
+                <figure>
+                    <img src="assets/images/decks.jpg" alt="Draw Pile" id="DrawTestDrawPile">
+                </figure>
+            </section>
+            <section id="DrawTestButtons">
+                <button>Draw</button>
+                <button>Reset</button>
+            </section>
+            <section>
+                <figure>
+                    <img src="assets/images/decks.jpg" alt="Reset" id="DrawTestDiscardPile">
+                </figure>
+            </section>
+            <section>
+                <input type="text" placeholder="&UnderBar;">
+                <article id="DrawTestPercentage">
+                    <button>Track</button>
+                    <p>&quest;&quest;&quest;&percnt;</p>
+                </article>
+            </section>
+        </article>
+    </main>
+    <footer>
+        <h2>Over Magic&colon; The Gathering</h2>
+        <p>Magic&colon; The Gathering is een verzamelbaar kaartspel waarin spelers elkaar uitdagen door spreuken&comma; wezens en strategie&euml;n te gebruiken om hun tegenstander te verslaan&period; Elke speler bouwt een deck van kaarten met verschillende krachten en effecten&comma; en het doel is om de levenspunten van de tegenstander naar nul te brengen&period; Het spel combineert elementen van strategie&comma; verzamelen en geluk&comma; en biedt een diepgaande en uitdagende ervaring voor spelers van alle niveaus&period;</p>
+        <h2>Over Dit Programma</h2>
+        <p>Deze applicatie biedt een mogelijkheid om informatie van kaarten te bekijken&comma; zelf decks samen te stellen &lpar;ook om bij te houden&rpar; en is ook ingebouwd met een DrawTest&dash;functionaliteit&period;</p>
+        <p>&copy; Wizards of the Code&colon; 2024</p>
+    </footer>
+</body>
+</html>
