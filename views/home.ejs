@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <script src="/js/modalHome.js" defer></script>
     <title><%= title %></title>
 </head>
 <body>
@@ -17,57 +19,58 @@
         <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
     </header>
     <main>
-        <section id="HomeSearch">
-            <input type="text" placeholder="Name of a Card">
-            <button>Search</button>
+        <section>
+            <form id="HomeSearch" action="" method="get">
+                <input type="text" placeholder="Name of a Card" name="q" value="<%= q %>">
+                <button>Search</button>
+            </form>
         </section>
         <section id="HomeCards">
-
-            <section id="HomeCards">
-                <% for (const card of cards) { %>
-                    <% if (card.multiverseid) { %>
-                        <article>
-                            <img class="ModalTrigger" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
-                            <p><%= card.name %></p>
-                        </article>
-                        
-                    <% } %>
+            <% for (const card of cards) { %>
+                <% if (card.multiverseid) { %>
+                    <article>
+                        <a href="#" class="ModalTrigger" title="<%= card.name %>" value="<%= card.multiverseid %>">
+                            <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
+                        </a>
+                        <p><%= card.name %></p>
+                    </article>
+                    
                 <% } %>
-            </section>
-            
-            
-
-            <img class="ModalTrigger" src="assets/images/card_birds_of_paradise.jpg" alt="Birds of Paradise">
-            <img class="ModalTrigger" src="assets/images/card_black_lotus.jpg" alt="Black Lotus">
-            <img class="ModalTrigger" src="assets/images/card_counterspell.jpg" alt="Counterspell">
-            <img class="ModalTrigger" src="assets/images/card_goblin_guide.jpg" alt="Goblin Guide">
-            <img class="ModalTrigger" src="assets/images/card_jace,_the_mind_sculptor.png" alt="Jace&comma; the Mind Sculptor">
-            <img class="ModalTrigger" src="assets/images/card_lightning_bolt.jpg" alt="Lightning Bolt">
-            <img class="ModalTrigger" src="assets/images/card_llanowar_elves.jpg" alt="Llanowar Elves">
-            <img class="ModalTrigger" src="assets/images/card_necropotence.jpg" alt="Necropotence">
-            <img class="ModalTrigger" src="assets/images/card_sol_ring.jpg" alt="Sol Ring">
-            <img class="ModalTrigger" src="assets/images/card_swords_to_plowshares.jpg" alt="Swords to Plowshares">
+            <% } %>
         </section>
         <section id="HomeButtons">
             <button>&leftarrow;</button>
             <p>1&sol;3</p>
             <button>&rightarrow;</button>
         </section>
+
         <div class="Modal">
             <div class="ModalContent">
+                <figure>
+                    <img src="" alt="Card">
+                </figure>
+                <section>
+                    <p>Name&colon;</p>
+                    <h2></h2>
+                    <p>Type&colon;</p>
+                    <h2></h2>
+                    <p>Color&colon;</p>
+                    <h2></h2>
+                </section>
+                <section>
+                    <p>Toevoegen aan deck&colon;</p>
+                    <select name="devices">
+                        <option disabled selected>Choose here</option>
+                        <option value="1">Deck 1</option>
+                        <option value="2">Deck 2</option>
+                        <option value="3">Deck 3</option>
+                        <input type="submit" value="Toevoegen">
+                    </select>
+                </section>
                 <span class="ModalClose">X</span>
-                <img src="assets/images/card_birds_of_paradise.jpg" alt="Card">
-                <h2>Birds of Paradise</h2>
-                <p>Type&colon; Creature</p>
-                <p>Color&colon; Green</p>
-                <p>Toevoegen aan deck</p>
-                <select name="devices">
-                    <option value="1">Deck 1</option>
-                    <option value="2">Deck 2</option>
-                    <option value="3">Deck 3</option>
-                </select>
             </div>
         </div>
+
     </main>
     <footer>
         <h2>Over Magic&colon; The Gathering</h2>

@@ -5,6 +5,7 @@ import { drawTestRouter } from "./routers/drawTestRouter";
 import { homeRouter } from "./routers/homeRouter";
 import { landingPageRouter } from "./routers/landingPageRouter";
 import { RootObject, Card } from "./types";
+import { newDeckRouter } from "./routers/newDeckRouter";
 
 const app : Express = express();
 
@@ -19,6 +20,7 @@ app.set("port", process.env.PORT || 3000);
 app.use("/decks", decksRouter());
 app.use("/drawtest", drawTestRouter());
 app.use("/home", homeRouter());
+app.use("/newDeck", newDeckRouter());
 app.use("/", landingPageRouter());
 
 app.listen(app.get("port"), async() => {

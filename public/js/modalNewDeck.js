@@ -1,35 +1,29 @@
 // declarations
+let decksArr = ["Azorius", "Orzhov", "Dimir", "Rakdos" ];
+
 let modals = document.getElementsByClassName("Modal");
 let buttons = document.getElementsByClassName("ModalTrigger");
 let spans = document.getElementsByClassName("ModalClose");
 
-let triggerNewDeck = document.getElementById("TriggerNewDeck");
-let modalNewDeck = document.getElementsByClassName("ModalNewDeck");
+let trigger2 = document.getElementById("Trigger2");
 
 // modal open sequence
 function openModal(index) {
     if (index === -1) {
-        modalNewDeck[0].style.display = "block";
-    } else {
         modals[0].style.display = "block";
-        
-
-        let dataIndexElement = document.querySelector('.Modal'); 
-        dataIndexElement.setAttribute('dataIndex', index);
-        
+    } 
+    else {
+        modals[0].style.display = "block";
         let modalImg = document.querySelector('.Modal img');
         modalImg.src = `assets/images/deck${index+1}.jpg`;
     
-        let modalLabel = document.querySelector('.Modal label[for="img"]');
-        modalLabel.textContent = "<%= decksArr["+index+"] %>";
-        
+        let modalTitle = document.querySelector('.ModalContent h2');
+        modalTitle.textContent = decksArr[index];
+                
         let hiddenInput = document.querySelector('input[type="hidden"][name="name"]');
-        hiddenInput.value = "<%= decksArr[" + index + "] %>";
+        hiddenInput.value = decksArr[index];
         
-
-
     }
-
 
 }
 // modal close sequence
@@ -59,7 +53,7 @@ window.onclick = function(event) {
     }
 };
 
-triggerNewDeck.onclick = function(e) {
+trigger2.onclick = function(e) {
     e.preventDefault();
     openModal(-1);
 };

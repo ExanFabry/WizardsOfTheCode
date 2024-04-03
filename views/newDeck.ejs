@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <script src="/js/newDeckFilter.js" defer></script>
     <title><%= title %></title>
 </head>
 <body>
@@ -24,26 +25,80 @@
         <section>
             <form action="" method="get">
                 <label for="name">Zoek een kaart</label>
-                <input type="text" name="name" id="">
+                <input type="text" name="q" id="searchInput">
+                <input type="submit" value="zoek" style="display: none;">
             </form>
 
         </section>
         
-        <section class="NewDeckWindow">
-        
+        <section class="NewDeckWindow" id="deckSection">
             <% for (let i = 0; i < deck1.length; i++) { %>
-                <article>
-                    <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= deck1Id[i] %>&type=card" alt="Deck Image" class="NewDeckWindowImg">
-                    <p><%= deck1[i].name %></p>
+                <article class="cardItem">
+                    <a href="" class="ModalTrigger">
+                        <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= deck1Id[i] %>&type=card" alt="Deck Image" class="NewDeckWindowImg">
+                    </a>
+                    <p><%= deck1[i] %></p>
                     <p>Cards in deck: 4</p>
-                    <form action="" method="get">
-                        <button>'▲'</button>
-                        <button>'▼'</button>
-                    </form>
+                    <section>
+                        <form action="" method="post">
+                            <input type="hidden" name="nameToAdd" value="<%= deck1[i] %>">
+                            <input type="hidden" name="idToAdd" value="<%= deck1Id[i] %>">
+                            <button type="submit">'▲'</button>
+                        </form>
+                        <form action="" method="post">
+                            <input type="hidden" name="nameToRemove" value="<%= deck1[i] %>">
+                            <input type="hidden" name="idToRemove" value="<%= deck1Id[i] %>">
+                            <button type="submit">'▼'</button>
+                        </form>
+                    </section>
+
                 </article>
             <% } %>
-            
         </section>
+
+        <section class="NewDeckWindow" id="deckSection">
+            <% for (const card of cards) { %>
+                <% if (card.multiverseid) { %>
+                    <article class="cardItem">
+                        <a href="" class="ModalTrigger2">
+                            <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
+                        </a>
+                        <p><%= card.name %></p>
+                        <p>Cards in deck: 0</p>
+                        <section>
+                            <form action="" method="post">
+                                <input type="hidden" name="nameToAdd" value="<%= card.name %>">
+                                <input type="hidden" name="idToAdd" value="<%= card.multiverseid %>">
+                                <button type="submit">'▲'</button>
+                            </form>
+                            <form action="" method="post">
+                                <input type="hidden" name="nameToRemove" value="<%= card.name %>">
+                                <input type="hidden" name="idToRemove" value="<%= card.multiverseid %>">
+                                <button type="submit">'▼'</button>
+                            </form>
+                        </section>
+
+                    </article>
+                <% } %>
+            <% } %>
+        </section>
+
+        <div class="Modal">
+            <div class="ModalContent">
+                <figure>
+                    <img src="" alt="Card">
+                </figure>
+                <section>
+                    <p>Name&colon;</p>
+                    <h2></h2>
+                    <p>Type&colon;</p>
+                    <h2></h2>
+                    <p>Color&colon;</p>
+                    <h2></h2>
+                </section>
+                <span class="ModalClose">X</span>
+            </div>
+        </div>
 
     </main>
 </body>
