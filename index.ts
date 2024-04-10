@@ -19,6 +19,8 @@ app.set("port", process.env.PORT || 3000);
 
 app.use("/decks", decksRouter());
 app.use("/drawtest", drawTestRouter());
+app.use("/draw", drawTestRouter());
+app.use("/reset", drawTestRouter());
 app.use("/home", homeRouter());
 app.use("/newDeck", newDeckRouter());
 app.use("/", landingPageRouter());
