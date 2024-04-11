@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="/js/modalDrawTest.js" defer></script>
+    <script src="/js/modalDrawTestDiscard.js" defer></script>
     <title><%= title %></title>
 </head>
 <body>
@@ -14,7 +16,7 @@
             <a href="/decks">Decks</a>
             <a href="/drawTest" class="AllActiveLink">Draw Test</a>
         </nav>
-        <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
+        <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="../assets/images/login-icon.png"></a>
     </header>
     <main>
         <form action="" method="GET" id="DrawTestSelection">
@@ -32,16 +34,20 @@
         <article id="DrawTestContent">
             <section>
                 <figure>
-                    <img src="assets/images/decks.jpg" alt="Draw Pile" id="DrawTestDrawPile">
+                    <img src="../assets/images/decks.jpg" alt="Draw Pile" id="DrawTestDrawPile" class="ModalTrigger">
                 </figure>
             </section>
             <section id="DrawTestButtons">
-                <button>Draw</button>
-                <button>Reset</button>
+                <form action="/drawTest/draw" method="get">
+                    <button id="draw">Draw</button>
+                </form>
+                <form action="/drawTest/reset" method="get">
+                    <button id="reset">Reset</button>
+                </form>
             </section>
             <section>
                 <figure>
-                    <img src="assets/images/decks.jpg" alt="Reset" id="DrawTestDiscardPile">
+                    <img src="../assets/images/decks.jpg" alt="Reset" id="DrawTestDiscardPile" class="ModalTriggerDiscard">
                 </figure>
             </section>
             <section>
@@ -52,6 +58,22 @@
                 </article>
             </section>
         </article>
+        <!-- The Modal -->
+        <div class="Modal">
+            <!-- Modal content -->
+            <div class="ModalContent">
+                <h1>Drawpile</h1>
+                <span class="ModalClose">X</span>
+            </div>
+        </div>
+        <div class="Modal" class="DiscardModal">
+            <!-- Modal content -->
+            <div class="ModalContentDiscard">
+                <h1>Discardpile</h1>
+                <span class="ModalCloseDiscard">X</span>
+            </div>
+        </div>
+        
     </main>
     <footer>
         <h2>Over Magic&colon; The Gathering</h2>

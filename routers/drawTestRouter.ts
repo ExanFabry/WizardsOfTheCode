@@ -3,7 +3,7 @@ import express from "express";
 //Declaratie van arrays
 let deck : String[] = [];
 let drawPile : String[] = [];
-let discardPile : String[] = [];
+let discardPile : String[] = [];  
 
 //Links
 let plains : string = "https://c1.scryfall.com/file/scryfall-cards/large/front/0/2/023d333b-14f2-40ad-bb76-8b9e38040f89.jpg?1562730596";
@@ -37,14 +37,38 @@ for(let i : number = 0; i < 20; i++){
 
 //Resets piles
 function MakePilesEmpty() : void{
+    for(let i = 0; i < drawPile.length; i++){
+        deck.push(drawPile[i]);
+    }
+    for(let i = 0; i < discardPile.length; i++){
+        deck.push(discardPile[i]);
+    }
     drawPile.splice(0, drawPile.length);
     discardPile.splice(0, discardPile.length);
+    for(let i = 0; i < deck.length; i++){
+        console.log(deck[i]);
+    }
 }
 
 //Voeg toe aan drawpile
-function AddToDrawPileOrDiscardPile(cardArray : string[]) : void{
-    let randomNumber : number = Math.floor(Math.random() * cardArray.length);
-    drawPile.push(cardArray[randomNumber]);
+function AddToDrawPile() : void{
+    console.log("hallo");
+    let randomNumber : number = Math.floor(Math.random() * deck.length);
+    drawPile.push(deck[randomNumber]);
+    deck.splice(randomNumber, 1);
+    for(let i = 0; i < drawPile.length; i++){
+        console.log(drawPile[i]);
+    }
+}
+
+//Voeg toe aan drawpile
+function AddToDiscardPile() : void{
+    let randomNumber : number = Math.floor(Math.random() * drawPile.length);
+    discardPile.push(drawPile[randomNumber]);
+    deck.splice(randomNumber, 1);
+    for(let i = 0; i < discardPile.length; i++){
+        console.log(discardPile[i]);
+    }
 }
 
 export function drawTestRouter() {
@@ -56,5 +80,19 @@ export function drawTestRouter() {
         })
     });
 
+    router.get("/draw", (req, res) => {
+        AddToDrawPile();
+        res.render("drawTest", {
+            title: "Draw Test"
+        })
+    });
+
+    router.get("/reset", (req, res) => {
+        MakePilesEmpty(); 
+        res.render("drawTest", { 
+            title: "Draw Test"
+        })
+    });
+    
     return router;
 }
