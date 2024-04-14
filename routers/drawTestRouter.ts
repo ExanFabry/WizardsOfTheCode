@@ -76,21 +76,24 @@ export function drawTestRouter() {
 
     router.get("/", (req, res) => {
         res.render("drawTest", {
-            title: "Draw Test"
+            title: "Draw Test",
+            cardImage: drawPile
         })
     });
 
     router.get("/draw", (req, res) => {
         AddToDrawPile();
         res.render("drawTest", {
-            title: "Draw Test"
+            title: "Draw Test",
+            cardImage: drawPile
         })
     });
 
     router.get("/reset", (req, res) => {
         MakePilesEmpty(); 
         res.render("drawTest", { 
-            title: "Draw Test"
+            title: "Draw Test",
+            cardImage: drawPile
         })
     });
     

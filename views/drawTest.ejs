@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="/js/modalDrawTest.js" defer></script>
-    <script src="/js/modalDrawTestDiscard.js" defer></script>
+    <!--<script src="/js/modalDrawTestDiscard.js" defer></script>-->
     <title><%= title %></title>
 </head>
 <body>
@@ -63,16 +63,19 @@
             <!-- Modal content -->
             <div class="ModalContent">
                 <h1>Drawpile</h1>
+                <% for( let index = 0; index < cardImage.length; index++ ) { %>
+                    <img src="<%= cardImage[index] %>" alt="" width="300px">
+                <% } %>
                 <span class="ModalClose">X</span>
             </div>
         </div>
-        <div class="Modal" class="DiscardModal">
+        <!--<div class="Modal" class="DiscardModal">
             <!-- Modal content -->
-            <div class="ModalContentDiscard">
+            <!--<div class="ModalContentDiscard">
                 <h1>Discardpile</h1>
                 <span class="ModalCloseDiscard">X</span>
             </div>
-        </div>
+        </div>-->
         
     </main>
     <footer>
