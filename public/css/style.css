@@ -391,3 +391,27 @@ option {
         margin: 1rem 0.5rem;
     }
 }
+#HomeSearch button {
+    transition: background-color 0.25s;
+    margin-left: 1rem;
+    padding: 0 1rem;
+}
+#HomeSearch button:hover {
+    background-color: #fff;
+    color: #000;
+}
+#HomeCards {
+    justify-content: center;
+    margin: 3% 0 3% 0;
+    flex-wrap: wrap;
+    padding: 0 10%;
+    display: flex;
+    gap: 10px;
+}
+#HomeCards img {
+    transition: filter 0.25s;
+    border: 3px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 17%;
+}
