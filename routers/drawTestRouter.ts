@@ -96,6 +96,14 @@ export function drawTestRouter() {
             cardImage: drawPile
         })
     });
+
+    router.get("/selectedDeck", (req, res) => {
+        MakePilesEmpty(); 
+        res.render("drawTest", { 
+            title: "Draw Test",
+            cardImage: drawPile
+        })
+    });
     
     return router;
 }

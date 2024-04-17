@@ -8,6 +8,12 @@
     <script src="/js/modalDrawTest.js" defer></script>
     <!--<script src="/js/modalDrawTestDiscard.js" defer></script>-->
     <title><%= title %></title>
+    <style>
+        #drawPileCards{
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,7 +25,7 @@
         <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="../assets/images/login-icon.png"></a>
     </header>
     <main>
-        <form action="" method="GET" id="DrawTestSelection">
+        <form action="/selectedDeck" method="GET" id="DrawTestSelection">
             <select name="devices">
                 <option value="" selected>Choose a deck</option>
                 <option value="">Deck 1</option>
@@ -63,9 +69,11 @@
             <!-- Modal content -->
             <div class="ModalContent">
                 <h1>Drawpile</h1>
-                <% for( let index = 0; index < cardImage.length; index++ ) { %>
-                    <img src="<%= cardImage[index] %>" alt="" width="300px">
-                <% } %>
+                <section id="drawPileCards">
+                    <% for( let index = 0; index < cardImage.length; index++ ) { %>
+                        <img src="<%= cardImage[index] %>" alt="" width="300px">
+                    <% } %>
+                </section>
                 <span class="ModalClose">X</span>
             </div>
         </div>
