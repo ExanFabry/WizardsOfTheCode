@@ -1,9 +1,9 @@
 import express from "express";
 
 //Declaratie van arrays
-let deck : String[] = [];
-let drawPile : String[] = [];
-let discardPile : String[] = [];  
+let deck : string[] = [];
+let drawPile : string[] = [];
+let discardPile : string[] = ["https://c1.scryfall.com/file/scryfall-cards/large/front/0/2/023d333b-14f2-40ad-bb76-8b9e38040f89.jpg?1562730596", "https://c1.scryfall.com/file/scryfall-cards/large/front/0/2/023d333b-14f2-40ad-bb76-8b9e38040f89.jpg?1562730596"];  
 
 //Links
 let plains : string = "https://c1.scryfall.com/file/scryfall-cards/large/front/0/2/023d333b-14f2-40ad-bb76-8b9e38040f89.jpg?1562730596";
@@ -62,7 +62,7 @@ function AddToDrawPile() : void{
 }
 
 //Voeg toe aan drawpile
-function AddToDiscardPile() : void{
+function AddToDiscardPileRandom() : void{
     let randomNumber : number = Math.floor(Math.random() * drawPile.length);
     discardPile.push(drawPile[randomNumber]);
     deck.splice(randomNumber, 1);
@@ -71,13 +71,35 @@ function AddToDiscardPile() : void{
     }
 }
 
+//Voeg toe aan drawpile
+function AddToDiscardPile(image : number) : void{
+    discardPile.push(drawPile[image]);
+    drawPile.splice(image, 1);
+}
+
+function CountingSpecificCard(arrayOfCards : string[]) : { [key: string]: number }{
+    let counts : { [key: string]: number } = {};
+    for(let i : number = 0; i < arrayOfCards.length; i++){
+        if(counts.hasOwnProperty(arrayOfCards[i])){
+            counts[arrayOfCards[i]]++;
+        }
+        else{
+            counts[arrayOfCards[i]] = 1;
+        }
+    }
+    return counts;
+}
+
 export function drawTestRouter() {
     const router = express.Router();
+    const cardCounts = CountingSpecificCard(discardPile);
 
     router.get("/", (req, res) => {
         res.render("drawTest", {
             title: "Draw Test",
-            cardImage: drawPile
+            cardImage: drawPile,
+            cardImageDiscard: Object.keys(cardCounts),
+            numberOfCards: Object.values(cardCounts)
         })
     });
 
@@ -85,7 +107,9 @@ export function drawTestRouter() {
         AddToDrawPile();
         res.render("drawTest", {
             title: "Draw Test",
-            cardImage: drawPile
+            cardImage: drawPile,
+            cardImageDiscard: Object.keys(cardCounts),
+            numberOfCards: Object.values(cardCounts)
         })
     });
 
@@ -93,7 +117,8 @@ export function drawTestRouter() {
         MakePilesEmpty(); 
         res.render("drawTest", { 
             title: "Draw Test",
-            cardImage: drawPile
+            cardImage: drawPile,
+            cardImageDiscard: discardPile
         })
     });
 
@@ -101,7 +126,19 @@ export function drawTestRouter() {
         MakePilesEmpty(); 
         res.render("drawTest", { 
             title: "Draw Test",
-            cardImage: drawPile
+            cardImage: drawPile,
+            cardImageDiscard: discardPile
+        })
+    });
+    
+    router.get("/addToDiscardPile", (req, res) => {
+        let addToDiscard : number | undefined = Number(req.query.addToDiscard);
+        AddToDiscardPile(addToDiscard);
+        res.render("drawTest", {
+            title: "Draw Test",
+            cardImage: drawPile,
+            cardImageDiscard: discardPile,
+            addToDiscard: addToDiscard
         })
     });
     

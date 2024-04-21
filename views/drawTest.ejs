@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="/js/modalDrawTest.js" defer></script>
+    <script src="/js/drawTestSelectedDeck.js" defer></script>
     <!--<script src="/js/modalDrawTestDiscard.js" defer></script>-->
     <title><%= title %></title>
     <style>
@@ -26,8 +27,8 @@
     </header>
     <main>
         <form action="/selectedDeck" method="GET" id="DrawTestSelection">
-            <select name="devices">
-                <option value="" selected>Choose a deck</option>
+            <select name="devices" id="deckSelect">
+                <option value="chooseADeck" selected>Kies een deck</option>
                 <option value="">Deck 1</option>
                 <option value="">Deck 2</option>
                 <option value="">Deck 3</option>
@@ -53,7 +54,7 @@
             </section>
             <section>
                 <figure>
-                    <img src="../assets/images/decks.jpg" alt="Reset" id="DrawTestDiscardPile" class="ModalTriggerDiscard">
+                    <img src="../assets/images/decks.jpg" alt="Reset" id="DrawTestDiscardPile" class="ModalTrigger2">
                 </figure>
             </section>
             <section>
@@ -71,19 +72,28 @@
                 <h1>Drawpile</h1>
                 <section id="drawPileCards">
                     <% for( let index = 0; index < cardImage.length; index++ ) { %>
-                        <img src="<%= cardImage[index] %>" alt="" width="300px">
+                        <form action="/addToDiscardPile" method="get">
+                            <button><img src="<%= cardImage[index] %>" alt="" width="300px"></button>
+                            <p><%= addToDiscard = index %></p>
+                        </form>
                     <% } %>
                 </section>
                 <span class="ModalClose">X</span>
             </div>
         </div>
-        <!--<div class="Modal" class="DiscardModal">
+        <div class="Modal" id="Modal2">
             <!-- Modal content -->
-            <!--<div class="ModalContentDiscard">
+            <div class="ModalContent">
                 <h1>Discardpile</h1>
-                <span class="ModalCloseDiscard">X</span>
+                <section id="drawPileCards">
+                    <% for( let index = 0; index < cardImageDiscard.length; index++ ) { %>
+                        <img src="<%= cardImageDiscard[index] %>" alt="" width="300px">
+                        <p><%= numberOfCards %></p>
+                    <% } %>
+                </section>
+                <span class="ModalClose" id="ModalClose2">X</span>
             </div>
-        </div>-->
+        </div>
         
     </main>
     <footer>
