@@ -185,28 +185,31 @@ a .IndexFigure:hover {
 }
 #HomeSearch button {
     transition: background-color 0.25s;
-    padding-right: 1rem;
-    padding-left: 1rem;
     margin-left: 1rem;
+    padding: 0 1rem;
 }
 #HomeSearch button:hover {
     background-color: #fff;
     color: #000;
 }
 #HomeCards {
-    display: flex;
+    justify-content: center;
+    margin: 3% 0 3% 0;
     flex-wrap: wrap;
-    gap: 15px;
+    padding: 0 10%;
+    display: flex;
+    gap: 10px;
 }
 #HomeCards article {
     margin-bottom: 30px;
+    height: 300px;
     width: 200px;
 }
 #HomeCards img {
     transition: filter 0.25s;
+    border: 3px solid #fff;
+    border-radius: 10px;
     cursor: pointer;
-    width: 100%;
-    height: auto;
 }
 #HomeCards img:hover {
     filter: brightness(1.4);
@@ -390,28 +393,4 @@ option {
     header {
         margin: 1rem 0.5rem;
     }
-}
-#HomeSearch button {
-    transition: background-color 0.25s;
-    margin-left: 1rem;
-    padding: 0 1rem;
-}
-#HomeSearch button:hover {
-    background-color: #fff;
-    color: #000;
-}
-#HomeCards {
-    justify-content: center;
-    margin: 3% 0 3% 0;
-    flex-wrap: wrap;
-    padding: 0 10%;
-    display: flex;
-    gap: 10px;
-}
-#HomeCards img {
-    transition: filter 0.25s;
-    border: 3px solid #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 17%;
 }
