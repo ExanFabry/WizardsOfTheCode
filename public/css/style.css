@@ -207,7 +207,6 @@ a .IndexFigure:hover {
 }
 #HomeCards img {
     transition: filter 0.25s;
-    border: 3px solid #fff;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -242,22 +241,25 @@ a .IndexFigure:hover {
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;
-    margin: 0 10%;
+    margin: 8% 10%;
     gap: 3%;
+}
+#DecksGallery figure:not(#DecksGallery figure:last-of-type) img, #DecksGallery figure:last-of-type {
+    height: 350px;
+    width: 230px;
 }
 #DecksGallery figure {
     margin-bottom: 2%;
     cursor: pointer;
     height: auto;
-    width: 250px;
 }
 #DecksGallery figure:last-of-type {
     transition: background-color 0.25s, color 0.25s;
     border: 2px solid #fff;
     justify-content: center;
+    align-items: center;
     border-radius: 20px;
     display: flex;
-    height: 350px;
 }
 #DecksGallery figure:last-of-type:hover {
     background-color: #fff;
