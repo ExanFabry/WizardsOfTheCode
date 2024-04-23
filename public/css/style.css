@@ -311,6 +311,7 @@ a .IndexFigure:hover {
 }
 #DrawTestContent img {
     transition: filter 0.25s;
+    border-radius: 1vw;
 }
 #DrawTestContent img:hover {
     filter: brightness(1.4);
