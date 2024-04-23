@@ -89,22 +89,26 @@ select, button {
     top: 0;
 }
 .ModalContent {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 10px;
     background-image: url("../assets/modalBackground.webp");
-    border: 1px solid #888;
-    padding: 15px 0px 15px 0px;
+    border: 1px solid #fff8;
+    border-radius: 10px;
+    padding: 15px;
     margin: auto;
     width: 60%;
+    gap: 10px;
 }
-.ModalContent section:nth-child(3) {
-    display: flex;
-    flex-direction: column;
-    gap: 15px
+.ModalContent figure, .ModalContent section:first-of-type, .ModalContent form {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 1rem;
 }
 .ModalContent section h2, .ModalContent section p {
     margin-bottom: 20px;
+}
+.ModalContent section h2 {
+    margin-bottom: 2rem;
+    font-size: 160%;
+    line-height: 0;
 }
 .ModalContent form button {
     height: auto;
@@ -112,13 +116,18 @@ select, button {
 .ModalContent select {
     border: solid 2px #fff;
 }
+.ModalContent button {
+    padding: 0.6 1rem;
+}
 .ModalClose {
     transition: color 0.25s;
+    position: absolute;
     font-weight: bold;
     cursor: pointer;
     font-size: 28px;
-    float: right;
     color: #fff;
+    right: 22vw;
+    top: 14%;
 }
 .ModalClose:hover, .ModalClose:focus {
     text-decoration: none;
@@ -171,10 +180,10 @@ a .IndexFigure:hover {
 }
 /* ---------------- Home Page ---------------- */
 #HomeSearch {
+    margin-bottom: 30px;
     padding: 0 14%;
     display: flex;
     width: 100%;
-    margin-bottom: 30px;
 }
 #HomeSearch input, #HomeSearch button {
     border: 3px solid #fff;
@@ -241,8 +250,8 @@ a .IndexFigure:hover {
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    display: flex;
     margin: 8% 10%;
+    display: flex;
     gap: 3%;
 }
 #DecksGallery figure:not(#DecksGallery figure:last-of-type) img, #DecksGallery figure:last-of-type {
@@ -366,10 +375,10 @@ option {
 }
 /* ---------------- New Deck Window ---------------- */
 .NewDeckWindow {
-    display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    display: flex;
     padding: 1rem;
+    gap: 30px;
 }
 .NewDeckWindow article {
     flex-direction: column;
@@ -381,12 +390,10 @@ option {
     width: 100%;
 }
 .cardItem section {
-    display: flex;
     justify-content: left;
+    display: flex;
     gap: 10px
 }
-
-
 /* ---------------- Media Queries ---------------- */
 @media screen and (max-width: 1000px) {
     footer h2, footer p {
@@ -396,5 +403,20 @@ option {
 @media screen and (max-width: 404px) {
     header {
         margin: 1rem 0.5rem;
+    }
+}
+@media screen and (max-height: 700px) {
+    .ModalClose {
+        top: 18%;
+    }
+}
+@media screen and (max-height: 550px) {
+    .ModalClose {
+        top: 22%;
+    }
+}
+@media screen and (max-height: 300px) {
+    .ModalClose {
+        top: 26%;
     }
 }
