@@ -202,6 +202,7 @@ a .IndexFigure:hover {
 }
 #HomeCards article {
     margin-bottom: 30px;
+    text-align: center;
     height: 300px;
     width: 200px;
 }
