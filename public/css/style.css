@@ -185,28 +185,30 @@ a .IndexFigure:hover {
 }
 #HomeSearch button {
     transition: background-color 0.25s;
-    padding-right: 1rem;
-    padding-left: 1rem;
     margin-left: 1rem;
+    padding: 0 1rem;
 }
 #HomeSearch button:hover {
     background-color: #fff;
     color: #000;
 }
 #HomeCards {
-    display: flex;
+    justify-content: center;
+    margin: 3% 0 3% 0;
     flex-wrap: wrap;
-    gap: 15px;
+    padding: 0 10%;
+    display: flex;
+    gap: 10px;
 }
 #HomeCards article {
     margin-bottom: 30px;
+    height: 300px;
     width: 200px;
 }
 #HomeCards img {
     transition: filter 0.25s;
+    border-radius: 10px;
     cursor: pointer;
-    width: 100%;
-    height: auto;
 }
 #HomeCards img:hover {
     filter: brightness(1.4);
@@ -239,22 +241,25 @@ a .IndexFigure:hover {
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;
-    margin: 0 10%;
+    margin: 8% 10%;
     gap: 3%;
+}
+#DecksGallery figure:not(#DecksGallery figure:last-of-type) img, #DecksGallery figure:last-of-type {
+    height: 350px;
+    width: 230px;
 }
 #DecksGallery figure {
     margin-bottom: 2%;
     cursor: pointer;
     height: auto;
-    width: 250px;
 }
 #DecksGallery figure:last-of-type {
     transition: background-color 0.25s, color 0.25s;
     border: 2px solid #fff;
     justify-content: center;
+    align-items: center;
     border-radius: 20px;
     display: flex;
-    height: 350px;
 }
 #DecksGallery figure:last-of-type:hover {
     background-color: #fff;
@@ -306,6 +311,7 @@ a .IndexFigure:hover {
 }
 #DrawTestContent img {
     transition: filter 0.25s;
+    border-radius: 1vw;
 }
 #DrawTestContent img:hover {
     filter: brightness(1.4);
@@ -390,28 +396,4 @@ option {
     header {
         margin: 1rem 0.5rem;
     }
-}
-#HomeSearch button {
-    transition: background-color 0.25s;
-    margin-left: 1rem;
-    padding: 0 1rem;
-}
-#HomeSearch button:hover {
-    background-color: #fff;
-    color: #000;
-}
-#HomeCards {
-    justify-content: center;
-    margin: 3% 0 3% 0;
-    flex-wrap: wrap;
-    padding: 0 10%;
-    display: flex;
-    gap: 10px;
-}
-#HomeCards img {
-    transition: filter 0.25s;
-    border: 3px solid #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 17%;
 }
