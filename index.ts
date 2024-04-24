@@ -29,3 +29,11 @@ app.use("/", landingPageRouter());
 app.listen(app.get("port"), async() => {
     console.log("Server started on http://localhost:" + app.get('port'));
 });
+
+/*
+    BRONNEN
+    -------
+    Achtergrond website: Bence Kazari
+    Voorbeeld deck afbeeldingen: Perchance AI Generator
+    Afbeeldingen kaarten: MTG API
+*/
