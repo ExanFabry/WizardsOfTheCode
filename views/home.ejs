@@ -29,7 +29,7 @@
             <% for (const card of cards) { %>
                 <% if (card.multiverseid) { %>
                     <article>
-                        <a href="#" class="ModalTrigger" title="<%= card.name %>" value="<%= card.multiverseid %>">
+                        <a href="#" class="ModalTrigger" title="<%= card.name %>" value="<%= card.multiverseid %>" type="<%= card.type %>" rarity="<%= card.rarity %>">
                             <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
                         </a>
                         <p><%= card.name %></p>
@@ -39,28 +39,27 @@
             <% } %>
         </section>
         <section id="HomeButtons">
-            <button>&leftarrow;</button>
-            <p>1&sol;3</p>
-            <button>&rightarrow;</button>
+            <form action="/home" method="get">
+                <input type="hidden" name="q" value="<%= q %>">
+                <button name="page" value="<%= page - 1 %>" <% if (page === 1) { %> disabled <% } %> >&leftarrow;</button>
+            </form>
+            <p><%= page %>/<%= totalPages %></p>
+            <form action="/home" method="get">
+                <input type="hidden" name="q" value="<%= q %>">
+                <button name="page" value="<%= page + 1 %>" <% if (page === totalPages) { %> disabled <% } %> >&rightarrow;</button>
+            </form>
         </section>
 
         <div class="Modal">
             <div class="ModalContent">
-                <figure>
-                    <img src="" alt="Card">
+                <figure id="ModalFigure">
                 </figure>
-                <section>
-                    <p>Name&colon;</p>
-                    <h2></h2>
-                    <p>Type&colon;</p>
-                    <h2></h2>
-                    <p>Color&colon;</p>
-                    <h2></h2>
+                <section id="ModalSection">
                 </section>
                 <section>
                     <p>Toevoegen aan deck&colon;</p>
                     <select name="devices">
-                        <option disabled selected>Choose here</option>
+                        <option disabled selected>Choose deck</option>
                         <option value="1">Deck 1</option>
                         <option value="2">Deck 2</option>
                         <option value="3">Deck 3</option>
