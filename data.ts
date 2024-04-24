@@ -2,22 +2,41 @@ import { RootObject, Card } from "./types";
 
 export let cards : Card[] =[];
 
-let getData = async() => {
+let getData = async () => {
     try {
-        let response = await fetch('https://api.magicthegathering.io/v1/cards');
+        let currentPage = 1;
 
-        if (response.status === 404) throw new Error ('not found')
-        if (response.status === 500) throw new Error ('internal server error')
+        let uniqueCardNames = new Set<string>();
 
-        let data : any = await response.json();
-        cards = data.cards;
+        // Fetch data until we receive an empty response
+        while (true) {
+            let response = await fetch(`https://api.magicthegathering.io/v1/cards?page=${currentPage}&pageSize=100`);
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data: ${response.status} - ${response.statusText}`);
+            }
+
+            let data: any = await response.json();
+
+            // If no cards are returned, break the loop
+            if (data.cards.length === 0) {
+                break;
+            }
+
+            data.cards.forEach((card: Card) => {
+                if (!uniqueCardNames.has(card.name)) {
+                    cards.push(card);
+                    uniqueCardNames.add(card.name);
+                }
+            });
+            currentPage++;
+        }
+    } catch (e) {
+        console.error(e);
     }
-    catch (e) {
-        console.log(e)
-    }
-}
+};
 
-getData()
+getData();
 
 export let decksArr : string[] = ["Azorius", "Orzhov", "Dimir", "Rakdos" ];
 

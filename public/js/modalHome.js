@@ -9,16 +9,29 @@ function openModal(index, trigger) {
         modals[0].style.display = "block";
 
         const title = trigger.getAttribute('title')
-        let modalTitle = document.querySelector('.ModalContent h2');
-        modalTitle.textContent = title;
-
         const multiverseid = trigger.getAttribute('value');
-        let modalImg = document.querySelector('.Modal img');
-        modalImg.src = `http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${multiverseid}&type=card`;
-        
-
-
+        const type = trigger.getAttribute('type');
+        const rarity = trigger.getAttribute('rarity');
+        populateModal(title, multiverseid, type, rarity)
 }
+
+// populate modal
+function populateModal(title, multiverseid, type, rarity) {
+
+    const modalfigure = document.getElementById('ModalFigure');
+    modalfigure.innerHTML = `
+        <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${multiverseid}&type=card" alt="Card">`;
+
+    const modalContent = document.getElementById('ModalSection');
+    modalContent.innerHTML = `
+        <h2>Name&colon;</h2>
+        <p>${title}</p>
+        <h2>Type&colon;</h2>
+        <p>${type}</p>
+        <h2>Rarity&colon;</h2>
+        <h2>${rarity}</h2>`;
+}
+
 // modal close sequence
 function closeModal(index) {
     modals[index].style.display = "none";
