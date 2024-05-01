@@ -4,8 +4,8 @@ import { decksRouter } from "./routers/decksRouter";
 import { drawTestRouter } from "./routers/drawTestRouter";
 import { homeRouter } from "./routers/homeRouter";
 import { landingPageRouter } from "./routers/landingPageRouter";
-import { RootObject, Card } from "./types";
 import { newDeckRouter } from "./routers/newDeckRouter";
+import { connect } from "./database";
 
 const app : Express = express();
 
@@ -27,5 +27,6 @@ app.use("/newDeck", newDeckRouter());
 app.use("/", landingPageRouter());
 
 app.listen(app.get("port"), async() => {
+    await connect()
     console.log("Server started on http://localhost:" + app.get('port'));
 });
