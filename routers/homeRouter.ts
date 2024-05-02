@@ -1,10 +1,8 @@
 import express from "express";
-import { Card } from "../types";
-import { getCards, getUserDecks } from "../database";
+import { Card} from "../types";
+import { addCardToDeck, getCards, getUserDecks } from "../database";
 
 const app = express();
-
-app.set("port", 3000);
 
 let cachedCards : Card[];
 
@@ -45,5 +43,15 @@ export function homeRouter() {
         });
     });
 
+    router.post("/", async (req, res) => {
+        let selectedDeck = req.body.selectedDeck;
+        let namecard = req.body.namecard;
+        let multiverseid = req.body.multiverseid;
+        
+        await addCardToDeck("dennis", selectedDeck, namecard, multiverseid)
+
+        res.redirect("/home");
+    });
+    
     return router;
 }

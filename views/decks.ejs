@@ -26,9 +26,20 @@
                         <img src="assets/images/deck<%= i+1 %>.jpg" alt="<%= decks[i] %>">
                     </a>
                     <figcaption>
-                        <p><%= decks[i] %></p>
+                        <h3 class="deckName"><%= decks[i] %></h3>
+                        <button class="changeNameBtn">Change Name</button>
+                        <form class="changeNameForm" action="" method="post">
+                            <input type="hidden" name="oldDeckName" value="<%= decks[i] %>">
+                            <input type="text" name="newDeckName" class="newDeckNameInput" placeholder="New deck name" style="display: none;" required>
+                            <button type="submit" class="saveBtn" style="display: none;">Save</button>
+                        </form>
+                        <form action="" method="post" class="deleteForm">
+                            <input type="hidden" name="deckDelete" value="<%= decks[i] %>">
+                            <button type="submit" class="deleteBtn">Delete</button>
+                        </form>
                     </figcaption>
-                </figure>
+                </figure>              
+
             <% } %>
 
             <figure>
@@ -43,19 +54,16 @@
         
         <div class="Modal">
             <div class="ModalContent">
-                <h2></h2>
-                <figure>
-                    <img src="" alt="Card">
-                </figure>
-                <form action="" method="post">
-                    <button>Edit</button>
-                    <% /* vragen aan de leraar */ %>    
-                    <input type="hidden" name="nameEdit" value="">
-                </form>
-                <form action="" method="post">
-                    <button>Export</button>
-                </form>
-
+                <section>
+                    <h2></h2>
+                    <figure>
+                        <img src="" alt="Card">
+                    </figure>
+                    <form action="" method="post">
+                        <button>Edit</button>
+                        <input type="hidden" name="nameEdit" value="">
+                    </form>
+                </section>
                 <span class="ModalClose">X</span>
             </div>
         </div>

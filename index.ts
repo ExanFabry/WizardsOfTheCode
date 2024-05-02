@@ -6,6 +6,7 @@ import { homeRouter } from "./routers/homeRouter";
 import { landingPageRouter } from "./routers/landingPageRouter";
 import { newDeckRouter } from "./routers/newDeckRouter";
 import { connect } from "./database";
+import { loginFormRouter } from "./routers/loginFormRouter";
 
 const app : Express = express();
 
@@ -25,6 +26,7 @@ app.use("/addToDiscardPile", drawTestRouter());
 app.use("/home", homeRouter());
 app.use("/newDeck", newDeckRouter());
 app.use("/", landingPageRouter());
+app.use("/loginForm", loginFormRouter())
 
 app.listen(app.get("port"), async() => {
     await connect()

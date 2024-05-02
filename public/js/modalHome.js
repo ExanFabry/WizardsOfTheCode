@@ -30,6 +30,11 @@ function populateModal(title, multiverseid, type, rarity) {
         <p>${type}</p>
         <h2>Rarity&colon;</h2>
         <h2>${rarity}</h2>`;
+
+        const modalFormContent = document.getElementById('ModalForm');
+        modalFormContent.value = title;
+        const modalFormContent2 = document.getElementById('ModalForm2');
+        modalFormContent2.data = multiverseid;
 }
 
 // modal close sequence
