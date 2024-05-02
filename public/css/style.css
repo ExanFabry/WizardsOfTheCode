@@ -141,6 +141,46 @@ select, button {
     height: 50px;
     width: 50px;
 }
+/* ---------------- Login Page ---------------- */
+#LogInForm {
+    justify-content: center;
+    display: flex;
+}
+#LogInForm:not(#LogInForm input) {
+    user-select: none;
+}
+#LogInForm form {
+    background-color: var(--clearblack);
+    border-radius: 10px;
+    margin-top: 8rem;
+    padding: 5%;
+    width: 45%;
+}
+#LogInForm h1, #LogInForm label, #LogInForm input {
+    display: inline-block;
+}
+#LogInForm h1 {
+    font-size: 300%;
+}
+#LogInForm label {
+    flex-wrap: block;
+    font-size: 80%;
+}
+#LogInForm input {
+    padding: 0.4rem 01rem;
+}
+#LogInForm input[type=text], #LogInForm input[type=password] {
+    width: 100%;
+}
+#LogInForm input[type=submit] {
+    transition: background-color 0.25s, color 0.25s;
+    margin: 2rem auto 0 auto;
+    cursor: pointer;
+}
+#LogInForm input[type=submit]:hover {
+    background-color: #fff;
+    color: #000;
+}
 /* ---------------- Index Page ---------------- */
 #IndexHeader {
     justify-content: right;

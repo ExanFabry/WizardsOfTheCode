@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+    <script src="/js/loginForm.js" defer></script>
+    <title><%= title %></title>
+</head>
+<body>
+    <main>
+        <section id="LogInForm">
+            <form action="/home">
+                <h1>Sign Up&colon;</h1><br>
+                <label for="username">Username</label><br>
+                <input type="text" name="username" placeholder="person@example.com" required><br>
+                <label for="password">Password</label><br>
+                <input type="password" name="password" placeholder="&bull;&bull;&bull;&bull;" required><br>
+                <input type="submit" value="Log In">
+            </form>
+        </section>
+    </main>
+</body>
+</html>
