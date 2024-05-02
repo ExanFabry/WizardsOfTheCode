@@ -32,36 +32,36 @@
         </section>
         
         <section class="NewDeckWindow" id="deckSection">
-            <% for (let i = 0; i < deck1.length; i++) { %>
+            <% for (const card of deck) { %>
                 <article class="cardItem">
                     <a href="" class="ModalTrigger">
-                        <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= deck1Id[i] %>&type=card" alt="Deck Image" class="NewDeckWindowImg">
+                        <img loading="lazy" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="Deck Image" class="NewDeckWindowImg">
                     </a>
-                    <p><%= deck1[i] %></p>
+                    <p><%= card.name %></p>
                     <p>Cards in deck: 4</p>
                     <section>
                         <form action="" method="post">
-                            <input type="hidden" name="nameToAdd" value="<%= deck1[i] %>">
-                            <input type="hidden" name="idToAdd" value="<%= deck1Id[i] %>">
+                            <input type="hidden" name="nameToAdd" value="<%= card.name %>">
+                            <input type="hidden" name="idToAdd" value="<%= card.multiverseid %>">
                             <button type="submit">'▲'</button>
                         </form>
                         <form action="" method="post">
-                            <input type="hidden" name="nameToRemove" value="<%= deck1[i] %>">
-                            <input type="hidden" name="idToRemove" value="<%= deck1Id[i] %>">
+                            <input type="hidden" name="nameToRemove" value="<%= card.name %>">
+                            <input type="hidden" name="idToRemove" value="<%= card.multiverseid %>">
                             <button type="submit">'▼'</button>
                         </form>
                     </section>
-
                 </article>
             <% } %>
         </section>
+        
 
         <section class="NewDeckWindow" id="deckSection">
             <% for (const card of cards) { %>
                 <% if (card.multiverseid) { %>
                     <article class="cardItem">
                         <a href="" class="ModalTrigger2">
-                            <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
+                            <img loading="lazy" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
                         </a>
                         <p><%= card.name %></p>
                         <p>Cards in deck: 0</p>
