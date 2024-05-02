@@ -22,9 +22,7 @@ function openModal(index) {
                 
         let hiddenInput = document.querySelector('input[type="hidden"][name="name"]');
         hiddenInput.value = decksArr[index];
-        
     }
-
 }
 // modal close sequence
 function closeModal(index) {

@@ -20,13 +20,13 @@
     </header>
     <main>
         <section id="DecksGallery">
-            <% for (let i = 0; i < decksArr.length; i++) { %>
+            <% for (let i = 0; i < decks.length; i++) { %>
                 <figure>
-                    <a href="#" class="ModalTrigger" title="<%= decksArr[i] %>">
-                        <img src="assets/images/deck<%= i+1 %>.jpg" alt="<%= decksArr[i] %>">
+                    <a href="#" class="ModalTrigger" title="<%= decks[i] %>">
+                        <img src="assets/images/deck<%= i+1 %>.jpg" alt="<%= decks[i] %>">
                     </a>
                     <figcaption>
-                        <p><%= decksArr[i] %></p>
+                        <p><%= decks[i] %></p>
                     </figcaption>
                 </figure>
             <% } %>
