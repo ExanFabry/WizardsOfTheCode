@@ -14,13 +14,22 @@
     <main>
         <section class="NewDeckWindow">
             <% if (newDeck) { %>
-                <form action="" method="post">
-                    <h2>Nieuwe decknaam: "<%= deckName %>"</h2>
-                    <button>Verander naam</button>
+                <h2>Current deck name: "<%= deckName %>"</h2>
+                <button id="toggleChangeName">Change Deck Name</button>
+                <form id="changeNameForm" action="" method="post" style="display: none;">
+                    <label for="newDeckName">New deck name:</label>
+                    <input type="text" id="newDeckName" name="newDeckName" required>
+                    <button type="submit">Change name</button>
                 </form>
             <% } else { %>
                 <h2>Wijzigingen aanbrengen in deck: <%= deckName %></h2>
             <% } %>
+        </section>
+        <section>
+            <p>When you're finished, press the button below.</p>
+            <button>
+                <a href="/decks" class="LeaveLink">Done</a>
+            </button>
         </section>
         <section>
             <form action="" method="get">
@@ -32,36 +41,35 @@
         </section>
         
         <section class="NewDeckWindow" id="deckSection">
-            <% for (let i = 0; i < deck1.length; i++) { %>
+            <% for (const card of deck) { %>
                 <article class="cardItem">
                     <a href="" class="ModalTrigger">
-                        <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= deck1Id[i] %>&type=card" alt="Deck Image" class="NewDeckWindowImg">
+                        <img loading="lazy" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="Deck Image" class="NewDeckWindowImg">
                     </a>
-                    <p><%= deck1[i] %></p>
-                    <p>Cards in deck: 4</p>
+                    <p><%= card.name %></p>
+                    <p>Cards in deck: <%= card.numberOfCards %></p>
                     <section>
                         <form action="" method="post">
-                            <input type="hidden" name="nameToAdd" value="<%= deck1[i] %>">
-                            <input type="hidden" name="idToAdd" value="<%= deck1Id[i] %>">
+                            <input type="hidden" name="nameToAdd" value="<%= card.name %>">
+                            <input type="hidden" name="idToAdd" value="<%= card.multiverseid %>">
                             <button type="submit">'▲'</button>
                         </form>
                         <form action="" method="post">
-                            <input type="hidden" name="nameToRemove" value="<%= deck1[i] %>">
-                            <input type="hidden" name="idToRemove" value="<%= deck1Id[i] %>">
+                            <input type="hidden" name="nameToRemove" value="<%= card.name %>">
                             <button type="submit">'▼'</button>
                         </form>
                     </section>
-
                 </article>
             <% } %>
         </section>
+        
 
         <section class="NewDeckWindow" id="deckSection">
             <% for (const card of cards) { %>
                 <% if (card.multiverseid) { %>
                     <article class="cardItem">
                         <a href="" class="ModalTrigger2">
-                            <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
+                            <img loading="lazy" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
                         </a>
                         <p><%= card.name %></p>
                         <p>Cards in deck: 0</p>

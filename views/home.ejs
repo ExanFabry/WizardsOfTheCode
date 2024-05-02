@@ -58,14 +58,19 @@
                 </section>
                 <section>
                     <p>Toevoegen aan deck&colon;</p>
-                    <select name="devices">
-                        <option disabled selected>Choose deck</option>
-                        <option value="1">Deck 1</option>
-                        <option value="2">Deck 2</option>
-                        <option value="3">Deck 3</option>
-                        <input type="submit" value="Toevoegen">
-                    </select>
-                </section>
+                    <form action="" method="post" >
+                        <input type="hidden" name="namecard" value="" id="ModalForm"></input>
+                        <input type="hidden" name="multiverseid" value="" id="ModalForm2"></input>
+                        <select name="selectedDeck">
+                            <option disabled selected>Choose deck</option>
+                            <% for (const deck of userDecks) { %>
+                                <option value="<%= deck %>"><%= deck %></option>
+                            <% } %>
+                        </select>
+                        <button type="submit">Toevoegen</button>
+                    </form>
+                    
+                    
                 <span class="ModalClose">X</span>
             </div>
         </div>

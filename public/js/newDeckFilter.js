@@ -16,3 +16,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     searchInput.addEventListener('input', filterCards);
 });
+
+document.getElementById('toggleChangeName').addEventListener('click', function() {
+    const form = document.getElementById('changeNameForm');
+    form.style.display = (form.style.display === 'none') ? 'block' : 'none';
+});
+
