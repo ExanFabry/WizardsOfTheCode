@@ -92,28 +92,33 @@ function CountingSpecificCard(arrayOfCards : string[]) : { [key: string]: number
 
 export function drawTestRouter() {
     const router = express.Router();
-    const cardCounts = CountingSpecificCard(discardPile);
+    let cardCounts = CountingSpecificCard(discardPile);
 
     router.get("/", (req, res) => {
+        cardCounts = CountingSpecificCard(discardPile);
         res.render("drawTest", {
             title: "Draw Test",
             cardImage: drawPile,
+            discardPile: discardPile,
             cardImageDiscard: Object.keys(cardCounts),
-            numberOfCards: Object.values(cardCounts)
+            numberOfCards: Object.values(cardCounts),
         })
     });
 
     router.get("/draw", (req, res) => {
         AddToDrawPile();
+        cardCounts = CountingSpecificCard(discardPile);
         res.render("drawTest", {
             title: "Draw Test",
             cardImage: drawPile,
+            discardPile: discardPile,
             cardImageDiscard: Object.keys(cardCounts),
             numberOfCards: Object.values(cardCounts)
         })
     });
 
     router.get("/reset", (req, res) => {
+        cardCounts = CountingSpecificCard(discardPile);
         MakePilesEmpty(); 
         res.render("drawTest", { 
             title: "Draw Test",
@@ -123,6 +128,7 @@ export function drawTestRouter() {
     });
 
     router.get("/selectedDeck", (req, res) => {
+        cardCounts = CountingSpecificCard(discardPile);
         MakePilesEmpty(); 
         res.render("drawTest", { 
             title: "Draw Test",
@@ -132,11 +138,13 @@ export function drawTestRouter() {
     });
     
     router.get("/addToDiscardPile", (req, res) => {
+        cardCounts = CountingSpecificCard(discardPile);
         let addToDiscard : number | undefined = Number(req.query.addToDiscard);
         AddToDiscardPile(addToDiscard);
         res.render("drawTest", {
             title: "Draw Test",
             cardImage: drawPile,
+            discardPile: discardPile,
             cardImageDiscard: discardPile,
             addToDiscard: addToDiscard
         })

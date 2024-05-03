@@ -26,11 +26,13 @@ for (let i = 0; i < buttons2.length; i++) {
 }
 
 // Assign click event listeners to spans to close corresponding modals
-for (let i = 0; i < spans2.length; i++) {
-    spans2[i].onclick = function(e) {
-        e.preventDefault();
-        closeModal2(i);
-    };
+if(spans2 !== null){
+    for (let i = 0; i < spans2.length; i++) {
+        spans2[i].onclick = function(e) {
+            e.preventDefault();
+            closeModal2(i);
+        };
+    }
 }
 
 // Function to handle clicking on the dark background to close modals

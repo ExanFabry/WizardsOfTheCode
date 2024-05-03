@@ -1,9 +1,7 @@
-let selectedDeck = document.getElementById("deckSelect");
-
 function ErrorDecks(){
-    event.preventDefault();
-    console.log(selectedDeck.value);
+    let selectedDeck = document.getElementById("deckSelect");
     if(selectedDeck.value === "chooseADeck"){
+        event.preventDefault();
         selectedDeck.style.color = "red";
         selectedDeck.style.borderColor = "red";
     }
@@ -13,5 +11,5 @@ function ErrorDecks(){
     }
 }
 
-document.getElementById("draw").addEventListener("click", ErrorDecks);
-document.getElementById("reset").addEventListener("click", ErrorDecks);
+document.getElementById("draw").addEventListener("click", ErrorDecks, false);
+document.getElementById("reset").addEventListener("click", ErrorDecks, false);

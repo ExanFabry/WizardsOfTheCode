@@ -7,12 +7,36 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="/js/modalDrawTest.js" defer></script>
     <script src="/js/drawTestSelectedDeck.js" defer></script>
+    <script src="/routers/drawTestRouter.ts" defer></script>
     <!--<script src="/js/modalDrawTestDiscard.js" defer></script>-->
     <title><%= title %></title>
     <style>
         #drawPileCards{
             display: flex;
             flex-wrap: wrap;
+        }
+        .ModalContent {
+            max-height: 400px; /* Stel een maximale hoogte in waarbij de scrollbar moet verschijnen */
+            overflow-y: auto; /* Laat de scrollbar verschijnen indien nodig */
+        }
+        /* width */
+        .ModalContent::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        .ModalContent::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        } 
+
+        /* Handle */
+        .ModalContent::-webkit-scrollbar-thumb {
+            background: #888; 
+        }
+
+        /* Handle on hover */
+        .ModalContent::-webkit-scrollbar-thumb:hover {
+            background: #555; 
         }
     </style>
 </head>
@@ -23,7 +47,7 @@
             <a href="/decks">Decks</a>
             <a href="/drawTest" class="AllActiveLink">Draw Test</a>
         </nav>
-        <a href="loginFormulier.html" class="main_login"><img id="AllLoginButton" src="../assets/images/login-icon.png"></a>
+        <a href="/loginForm" class="main_login"><img id="AllLoginButton" src="../assets/images/login-icon.png"></a>
     </header>
     <main>
         <form action="/selectedDeck" method="GET" id="DrawTestSelection">
@@ -73,27 +97,33 @@
                 <section id="drawPileCards">
                     <% for( let index = 0; index < cardImage.length; index++ ) { %>
                         <form action="/addToDiscardPile" method="get">
-                            <button><img src="<%= cardImage[index] %>" alt="" width="300px"></button>
-                            <p><%= addToDiscard = index %></p>
+                            <button onclick="addItemToDiscard()"><img src="<%= cardImage[index] %>" alt="" width="300px"></button>
+                            <% function addItemToDiscard(){
+                                discardPile.push(cardImage[index]);
+                                cardImage.splice(index, 1);
+                            } 
+                            %>
                         </form>
                     <% } %>
                 </section>
                 <span class="ModalClose">X</span>
             </div>
         </div>
-        <div class="Modal" id="Modal2">
-            <!-- Modal content -->
-            <div class="ModalContent">
-                <h1>Discardpile</h1>
-                <section id="drawPileCards">
-                    <% for( let index = 0; index < cardImageDiscard.length; index++ ) { %>
-                        <img src="<%= cardImageDiscard[index] %>" alt="" width="300px">
-                        <p><%= numberOfCards %></p>
-                    <% } %>
-                </section>
-                <span class="ModalClose" id="ModalClose2">X</span>
+        <% if (cardImageDiscard.length != 0) { %>
+            <div class="Modal" id="Modal2">
+                <!-- Modal content -->
+                <div class="ModalContent">
+                    <h1>Discardpile</h1>
+                    <section id="drawPileCards">
+                        <% for( let index = 0; index < cardImageDiscard.length; index++ ) { %>
+                            <img src="<%= cardImageDiscard[index] %>" alt="" width="300px">
+                            <p><%= numberOfCards %></p>
+                        <% } %>
+                    </section>
+                    <span class="ModalClose" id="ModalClose2">X</span>
+                </div>
             </div>
-        </div>
+        <% } %>
         
     </main>
     <footer>
