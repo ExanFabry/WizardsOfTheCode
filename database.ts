@@ -1,10 +1,12 @@
 import { Collection, MongoClient } from "mongodb";
 import { Card, RootObject, User, UserDeck, UserCard } from "./types";
+import bcrypt from "bcrypt";
 
-const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mongodb.net/";
+export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mongodb.net/";
 const client = new MongoClient(uri);
 
 const cardCollection : Collection<Card> = client.db("mtgProject").collection<Card>("apiCardCollection");
+const saltRounds : number = 10;
 
 export async function getCards() {
     return await cardCollection.find({}).toArray();
@@ -51,7 +53,8 @@ export async function loadCardsFromApi() {
 export async function connect() {
     try {
         await client.connect();
-        loadCardsFromApi()
+        loadCardsFromApi();
+        await createInitialUser();
         console.log("Connected to database");
         process.on("SIGINT", exit);
     } catch (error) {
@@ -86,7 +89,8 @@ export async function addUser(username: string) {
         // If the user does not exist, create a new user with an empty deck array
         const newUser: User = {
             username: username,
-            deck: []
+            deck: [],
+            role: "USER"
         };
 
         // Insert the new user into the collection
@@ -155,7 +159,6 @@ export async function deleteDeck(username: string, deckTitle: string) {
         console.error(e);
     }
 }
-
 
 export async function getUserDecks(username: string) {
     try {
@@ -254,8 +257,6 @@ export async function addCardToDeck(username: string, title: string, name: strin
     } 
 }
 
-
-
 export async function deleteCardFromDeck(username: string, title: string, cardName: string) {
     try {
         // Find the user
@@ -296,7 +297,6 @@ export async function deleteCardFromDeck(username: string, title: string, cardNa
     }
 }
 
-
 export async function readCardsFromDeck(username: string, title: string) {
     try {
         // Find the user
@@ -329,8 +329,40 @@ export async function readCardsFromDeck(username: string, title: string) {
     }
 }
 
+//Create admin login
+async function createInitialUser() {
+    if (await userCollection.countDocuments() > 0) {
+        return;
+    }
+    let email : string | undefined = process.env.ADMIN_EMAIL;
+    let password : string | undefined = process.env.ADMIN_PASSWORD;
+    if (email === undefined || password === undefined) {
+        throw new Error("ADMIN_EMAIL and ADMIN_PASSWORD must be set in environment");
+    }
+    await userCollection.insertOne({
+        username: email,
+        deck: [],
+        password: await bcrypt.hash(password, saltRounds),
+        role: "ADMIN"
+    });
+}
 
-
+//Login function
+export async function login(email: string, password: string) {
+    if (email === "" || password === "") {
+        throw new Error("Email and password required");
+    }
+    let user : User | null = await userCollection.findOne<User>({email: email});
+    if (user) {
+        if (await bcrypt.compare(password, user.password!)) {
+            return user;
+        } else {
+            throw new Error("Password incorrect");
+        }
+    } else {
+        throw new Error("User not found");
+    }
+}
 
 /*
 let cards: UserCard[] = [

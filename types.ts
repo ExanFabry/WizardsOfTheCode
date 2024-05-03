@@ -13,8 +13,11 @@ export interface Card {
 }
 
 export interface User {
+    _id?: ObjectId;
     username: string;
     deck: UserDeck[];
+    password?: string;
+    role: "ADMIN" | "USER";
 }
 
 export interface UserDeck {

@@ -6,7 +6,7 @@ import { homeRouter } from "./routers/homeRouter";
 import { landingPageRouter } from "./routers/landingPageRouter";
 import { newDeckRouter } from "./routers/newDeckRouter";
 import { connect } from "./database";
-import { loginFormRouter } from "./routers/loginFormRouter";
+import { loginFormRouter } from "./routers/loginFormRouter";import session from "./session";
 
 const app : Express = express();
 
@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.set('views', path.join(__dirname, "views"));
+app.use(session);
 
 app.set("port", process.env.PORT || 3000);
 
@@ -26,7 +27,10 @@ app.use("/addToDiscardPile", drawTestRouter());
 app.use("/home", homeRouter());
 app.use("/newDeck", newDeckRouter());
 app.use("/", landingPageRouter());
-app.use("/loginForm", loginFormRouter())
+app.use("/loginForm", loginFormRouter());
+app.get("/login", (req, res) => {
+    res.render("login");
+});
 
 app.listen(app.get("port"), async() => {
     await connect()
