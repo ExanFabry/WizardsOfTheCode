@@ -6,7 +6,12 @@ import { homeRouter } from "./routers/homeRouter";
 import { landingPageRouter } from "./routers/landingPageRouter";
 import { newDeckRouter } from "./routers/newDeckRouter";
 import { connect } from "./database";
-import { loginFormRouter } from "./routers/loginFormRouter";import session from "./session";
+import { loginFormRouter } from "./routers/loginFormRouter";
+import session from "./session";
+import { User } from "./types";
+import { login } from "./database";
+import { secureMiddleware } from "./secureMiddleware";
+import { loginRouter } from "./routers/loginRouter";
 
 const app : Express = express();
 
@@ -28,8 +33,37 @@ app.use("/home", homeRouter());
 app.use("/newDeck", newDeckRouter());
 app.use("/", landingPageRouter());
 app.use("/loginForm", loginFormRouter());
+app.use(loginRouter());
+app.use(homeRouter());
 app.get("/login", (req, res) => {
-    res.render("login");
+    res.render("loginForm");
+});
+app.post("/login", async(req, res) => {
+    const email : string = req.body.email;
+    const password : string = req.body.password;
+    try {
+        let user : User = await login(email, password);
+        delete user.password; 
+        req.session.user = user;
+        res.redirect("/")
+    } catch (e : any) {
+        res.redirect("/loginForm");
+    }
+});
+app.get("/", async(req, res) => {
+    if (req.session.user) {
+        res.render("/loginForm", {user: req.session.user});
+    } else {
+        res.redirect("/login");
+    }
+});
+app.get("/", secureMiddleware, async(req, res) => {
+    res.render("index");
+});
+app.get("/logout", async(req, res) => {
+    req.session.destroy(() => {
+        res.redirect("/login");
+    });
 });
 
 app.listen(app.get("port"), async() => {

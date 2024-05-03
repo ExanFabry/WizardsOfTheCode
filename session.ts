@@ -1,4 +1,4 @@
-import { uri } from "./database.ts";
+import { uri } from "./database";
 import session, { MemoryStore } from "express-session";
 import { User } from "./types";
 import mongoDbSession from "connect-mongodb-session";
