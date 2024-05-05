@@ -6,29 +6,35 @@ import { secureMiddleware } from "../secureMiddleware";
 export function loginRouter() {
     const router = express.Router();
 
-    router.get("/login", async (req, res) => {
-        res.render("loginForm", {
-            user: null
-        });
-    });
-
-    router.post("/login", async (req, res) => {
-        const email: string = req.body.email;
+    router.post("/loginForm/login", async (req, res) => {
+        const username: string = req.body.username; // Veranderd van email naar username
         const password: string = req.body.password;
         try {
-            let user: User = await login(email, password);
-            delete user.password; // Remove password from user object. Sounds like a good idea.
-            req.session.user = user;
-            res.redirect("/loginForm")
+            let user: User | null = await login(username, password); // Gebruik username voor de login
+            if(user){
+                delete user.password; // Verwijder het wachtwoord voordat je het gebruikersobject verzendt
+                (req.session as any).user = user;
+                res.render("loginForm", {
+                    title: "login",
+                    loggedIn: true,
+                    user: user
+                });
+            } else {
+                console.log("Login mislukt."); // Log als de inloggegevens onjuist zijn
+                res.render("loginForm", {
+                    title: "login",
+                    loggedIn: false,
+                    user: null
+                });
+            }
         } catch (e: any) {
-            res.redirect("/loginForm");
+            console.error("Fout bij het inloggen:", e); // Log eventuele fouten bij het inloggen
+            res.render("loginForm", {
+                title: "login",
+                loggedIn: false,
+                user: null
+            });
         }
-    });
-
-    router.post("/logout", secureMiddleware, async (req, res) => {
-        req.session.destroy((err) => {
-            res.redirect("/login");
-        });
     });
 
     return router;

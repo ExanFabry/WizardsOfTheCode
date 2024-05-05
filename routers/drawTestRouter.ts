@@ -102,6 +102,7 @@ export function drawTestRouter() {
             discardPile: discardPile,
             cardImageDiscard: Object.keys(cardCounts),
             numberOfCards: Object.values(cardCounts),
+            user: req.session.user?.username
         })
     });
 

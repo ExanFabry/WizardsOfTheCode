@@ -39,7 +39,8 @@ export function homeRouter() {
             q: q,
             page: page,
             totalPages: totalPages,
-            userDecks : userDecks
+            userDecks : userDecks,
+            user: req.session.user?.username
         });
     });
 

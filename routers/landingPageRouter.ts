@@ -6,7 +6,8 @@ export function landingPageRouter() {
 
     router.get("/", (req, res) => {
         res.render("landingPage", {
-            title: "Landing Page"
+            title: "Landing Page",
+            user: req.session.user
         })
     });
 

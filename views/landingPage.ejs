@@ -9,7 +9,7 @@
 </head>
 <body>
     <header id="IndexHeader">
-        <a><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
+        <a href="loginForm"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
     </header>
     <main>
         <section id="IndexSection">
@@ -21,12 +21,21 @@
                 <img class="IndexOption" src="assets/thumb/thumb_fifa.png" alt="FIFA">
                 <figcaption>FIFA</figcaption>
             </figure class="IndexFigure">
-            <a href="/home">
+            <% if (user !== undefined && user !== null) { %>
+                <% console.log(user); %>
+                <a href="/home">
+                    <figure class="IndexFigure">
+                        <img class="IndexOption" src="assets/thumb/thumb_magicthegathering.png" alt="Magic&colon; the Gathering">
+                        <figcaption>Magic&colon; the Gathering</figcaption>
+                    </figure>
+                </a>
+            <% } %>
+            <% if (user === undefined || user === null) { %>
                 <figure class="IndexFigure">
-                    <img class="IndexOption" src="assets/thumb/thumb_magicthegathering.png" alt="Magic&colon; the Gathering">
+                    <img class="IndexOption" src="assets/thumb/thumb_magicthegathering.png" alt="Magic&colon; the Gathering" onclick="alert('Log eerst in voor je verder gaat.');">
                     <figcaption>Magic&colon; the Gathering</figcaption>
                 </figure>
-            </a>
+            <% } %>
             <figure class="IndexFigure">
                 <img class="IndexOption" src="assets/thumb/thumb_fortnite.png" alt="Fortnite">
                 <figcaption>Fortnite</figcaption>

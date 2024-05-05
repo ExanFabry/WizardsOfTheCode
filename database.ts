@@ -3,9 +3,11 @@ import { Card, RootObject, User, UserDeck, UserCard } from "./types";
 import bcrypt from "bcrypt";
 
 export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mongodb.net/";
+//export const uri = "mongodb+srv://Exan:WizardsOfTheCode@decks.9htkbkt.mongodb.net/?retryWrites=true&w=majority&appName=Decks";
 const client = new MongoClient(uri);
 
 const cardCollection : Collection<Card> = client.db("mtgProject").collection<Card>("apiCardCollection");
+//const cardCollection : Collection<Card> = client.db("WizardsOfTheCode").collection<Card>("apiCardCollection");
 const saltRounds : number = 10;
 
 export async function getCards() {
@@ -331,11 +333,13 @@ export async function readCardsFromDeck(username: string, title: string) {
 
 //Create admin login
 async function createInitialUser() {
-    if (await userCollection.countDocuments() > 0) {
+    if (await userCollection.countDocuments() > 1) {
         return;
     }
     let email : string | undefined = process.env.ADMIN_EMAIL;
     let password : string | undefined = process.env.ADMIN_PASSWORD;
+    console.log((email!));
+    console.log((password!));
     if (email === undefined || password === undefined) {
         throw new Error("ADMIN_EMAIL and ADMIN_PASSWORD must be set in environment");
     }
@@ -348,11 +352,11 @@ async function createInitialUser() {
 }
 
 //Login function
-export async function login(email: string, password: string) {
-    if (email === "" || password === "") {
+export async function login(username: string, password: string) {
+    if (username === "" || password === "") {
         throw new Error("Email and password required");
     }
-    let user : User | null = await userCollection.findOne<User>({email: email});
+    let user : User | null = await userCollection.findOne<User>({username: username});
     if (user) {
         if (await bcrypt.compare(password, user.password!)) {
             return user;

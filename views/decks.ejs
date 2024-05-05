@@ -16,7 +16,13 @@
             <a href="/decks" class="AllActiveLink">Decks</a>
             <a href="/drawTest">Draw Test</a>
         </nav>
-        <a href="/loginForm" class="main_login"><img id="AllLoginButton" src="assets/images/login-icon.png"></a>
+        
+        <% if (user !== undefined && user !== null) { %>
+            <a href="/loginForm" class="main_login"><p><%= user %></p></a>
+        <% } %>
+        <% if (user === undefined || user === null) { %>
+            <a href="/loginForm" class="main_login"><img id="AllLoginButton" src="../assets/images/login-icon.png"></a>
+        <% } %>
     </header>
     <main>
         <section id="DecksGallery">

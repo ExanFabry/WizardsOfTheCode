@@ -6,7 +6,7 @@ export function loginFormRouter() {
     const user : User | null = null;
     router.get("/", (req, res) => {
         res.render("loginForm", {
-            title: "Welcome",
+            title: "Login",
             user: user
         })
     });

@@ -17,7 +17,8 @@ export function decksRouter() {
         res.render("decks", {
             title: "Decks",
             decks : userDecks,
-            cards : cards
+            cards : cards,
+            user: req.session.user?.username
         })
     })
 

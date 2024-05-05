@@ -12,9 +12,13 @@ import { User } from "./types";
 import { login } from "./database";
 import { secureMiddleware } from "./secureMiddleware";
 import { loginRouter } from "./routers/loginRouter";
-
+import * as dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+dotenv.config(); 
 const app : Express = express();
 
+
+app.use(cookieParser());
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -35,26 +39,46 @@ app.use("/", landingPageRouter());
 app.use("/loginForm", loginFormRouter());
 app.use(loginRouter());
 app.use(homeRouter());
-app.get("/login", (req, res) => {
-    res.render("loginForm");
+app.get("/loginForm/login", (req, res) => {
+    res.render("loginForm", {
+        title: "login form"
+    });
 });
-app.post("/login", async(req, res) => {
-    const email : string = req.body.email;
+app.post("/loginForm/login", async(req, res) => {
+    const email : string = req.body.username;
     const password : string = req.body.password;
     try {
+        res.cookie("username", req.body.username);
         let user : User = await login(email, password);
         delete user.password; 
         req.session.user = user;
-        res.redirect("/")
+        res.render("loginForm", {
+            title: "login",
+            user: user,
+            loggedIn: true
+        });
+        //res.redirect("/")
     } catch (e : any) {
-        res.redirect("/loginForm");
+        res.render("loginForm", {
+            title: "login",
+            user: null,
+            loggedIn: true
+        });
     }
 });
 app.get("/", async(req, res) => {
     if (req.session.user) {
-        res.render("/loginForm", {user: req.session.user});
+        res.render("/loginForm", {
+            title: "login",
+            user: req.session.user,
+            loggedIn: true
+        });
     } else {
-        res.redirect("/login");
+        res.render("loginForm", {
+            title: "login",
+            user: null,
+            loggedIn: true
+        });
     }
 });
 app.get("/", secureMiddleware, async(req, res) => {
@@ -62,7 +86,10 @@ app.get("/", secureMiddleware, async(req, res) => {
 });
 app.get("/logout", async(req, res) => {
     req.session.destroy(() => {
-        res.redirect("/login");
+        res.render("loginForm", {
+            title: "login",
+            user: undefined
+        });
     });
 });
 

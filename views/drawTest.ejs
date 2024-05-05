@@ -42,12 +42,19 @@
 </head>
 <body>
     <header>
-        <nav>
-            <a href="/home">Home</a>
-            <a href="/decks">Decks</a>
-            <a href="/drawTest" class="AllActiveLink">Draw Test</a>
-        </nav>
-        <a href="/loginForm" class="main_login"><img id="AllLoginButton" src="../assets/images/login-icon.png"></a>
+        <% if (user !== undefined && user !== null) { %>
+            <nav>
+                <a href="/home">Home</a>
+                <a href="/decks">Decks</a>
+                <a href="/drawTest" class="AllActiveLink">Draw Test</a>
+            </nav>
+        <% } %>
+        <% if (user !== undefined && user !== null) { %>
+            <a href="/loginForm" class="main_login"><p><%= user %></p></a>
+        <% } %>
+        <% if (user === undefined || user === null) { %>
+            <a href="/loginForm" class="main_login"><img id="AllLoginButton" src="../assets/images/login-icon.png"></a>
+        <% } %>
     </header>
     <main>
         <form action="/selectedDeck" method="GET" id="DrawTestSelection">
