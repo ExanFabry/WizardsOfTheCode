@@ -50,6 +50,7 @@ export function homeRouter() {
         let multiverseid = req.body.multiverseid;
         
         await addCardToDeck("dennis", selectedDeck, namecard, multiverseid)
+        console.log()
 
         res.redirect("/home");
     });
