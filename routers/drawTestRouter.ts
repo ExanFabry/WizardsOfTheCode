@@ -1,9 +1,25 @@
 import express from "express";
+import { getUserDecks, cards } from "../database";
+import { Card } from "../types";
 
 //Declaratie van arrays
-let deck : string[] = [];
-let drawPile : string[] = [];
-let discardPile : string[] = ["https://c1.scryfall.com/file/scryfall-cards/large/front/0/2/023d333b-14f2-40ad-bb76-8b9e38040f89.jpg?1562730596", "https://c1.scryfall.com/file/scryfall-cards/large/front/0/2/023d333b-14f2-40ad-bb76-8b9e38040f89.jpg?1562730596"];  
+let deck : Card[] = [];
+let drawPile : Card[] = [];
+let discardPile : Card[] = [];
+let result : Card[] | undefined;
+(async () => {
+    try {
+        result = await cards();
+        console.log(result);
+    } catch (error) {
+        console.error(error);
+    }
+})();
+if(result && result?.length > 0){
+    result.forEach((card: Card) => {
+        deck.push(card);
+    });
+}
 
 //Links
 let plains : string = "https://c1.scryfall.com/file/scryfall-cards/large/front/0/2/023d333b-14f2-40ad-bb76-8b9e38040f89.jpg?1562730596";
@@ -19,7 +35,7 @@ let jeweledLotus : string = "https://i.etsystatic.com/21187825/r/il/629e44/26421
 let chromaticLantern : string = "https://images.saymedia-content.com/.image/t_share/MTc0NDIxMjg2NjQ5MzQxMjg4/ten-artifacts-for-any-magic-the-gathering-deck.jpg";
 
 //Voegt kaarten toe (hardcoded: later met een databank.)
-for(let i : number = 0; i < 4; i++){
+/*for(let i : number = 0; i < 4; i++){
     deck.push(gloriousEnforcer);
     deck.push(radiantDestiny);
     deck.push(purity);
@@ -33,7 +49,7 @@ for(let i : number = 0; i < 4; i++){
 }
 for(let i : number = 0; i < 20; i++){
     deck.push(plains);
-}
+}*/
 
 //Resets piles
 function MakePilesEmpty() : void{
@@ -77,14 +93,14 @@ function AddToDiscardPile(image : number) : void{
     drawPile.splice(image, 1);
 }
 
-function CountingSpecificCard(arrayOfCards : string[]) : { [key: string]: number }{
+function CountingSpecificCard(arrayOfCards : Card[]) : { [key: string]: number }{
     let counts : { [key: string]: number } = {};
     for(let i : number = 0; i < arrayOfCards.length; i++){
-        if(counts.hasOwnProperty(arrayOfCards[i])){
-            counts[arrayOfCards[i]]++;
+        if(counts.hasOwnProperty(arrayOfCards[i].name)){
+            counts[arrayOfCards[i].name]++;
         }
         else{
-            counts[arrayOfCards[i]] = 1;
+            counts[arrayOfCards[i].name] = 1;
         }
     }
     return counts;

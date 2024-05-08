@@ -6,6 +6,13 @@ export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mong
 //export const uri = "mongodb+srv://Exan:WizardsOfTheCode@decks.9htkbkt.mongodb.net/?retryWrites=true&w=majority&appName=Decks";
 const client = new MongoClient(uri);
 
+export async function cards() { 
+    let cursor =  client.db("mtgProject").collection("apiCardCollection").find<Card>({});
+    let result : Card[] = await cursor.limit(60).toArray();
+    console.log(result);
+    return result;
+}
+
 const cardCollection : Collection<Card> = client.db("mtgProject").collection<Card>("apiCardCollection");
 //const cardCollection : Collection<Card> = client.db("WizardsOfTheCode").collection<Card>("apiCardCollection");
 const saltRounds : number = 10;
