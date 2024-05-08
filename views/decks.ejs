@@ -24,22 +24,22 @@
                         <img src="assets/images/deck<%= i+1 %>.jpg" alt="<%= decks[i] %>">
                     </a>
                     <figcaption>
-                        <h3 class="DecksDeckName"><%= decks[i] %></h3>
+                        <h3><%= decks[i] %></h3>
                         <button class="DecksChangeNameBtn">Change Name</button>
-                        <form action="" method="post" class="DecksChangeNameForm">
-                            <input type="hidden" name="DecksOldDeckName" value="<%= decks[i] %>">
-                            <input type="text" name="DecksNewDeckName" class="DecksNewDeckNameInput" placeholder="New deck name" style="display: none;" required>
-                            <button type="submit" class="DecksSaveBtn">Save</button>
+                        <form action="" method="post">
+                            <input type="hidden" name="oldDeckName" value="<%= decks[i] %>">
+                            <input type="text" name="newDeckName" class="DecksNewDeckInput" placeholder="New Deck Name" style="display:none" required>
+                            <button type="submit" class="DecksSaveBtn" style="display:none">Save</button>
                         </form>
                         <form action="" method="post" class="DecksDeleteForm">
-                            <input type="hidden" name="DecksDelete" value="<%= decks[i] %>">
+                            <input type="hidden" value="<%= decks[i] %>">
                             <button type="submit" class="DecksDeleteBtn">Delete</button>
                         </form>
                     </figcaption>
                 </figure>
             <% } %>
             <figure id="TriggerNewDeck">
-                <a href="#">
+                <a>
                     <figcaption>
                         <p>&plus;</p>
                     </figcaption>

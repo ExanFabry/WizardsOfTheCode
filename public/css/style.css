@@ -294,6 +294,9 @@ a .IndexFigure:hover {
     display: flex;
     gap: 3%;
 }
+#DecksGallery h3 {
+    font-size: 150%;
+}
 #DecksGallery figure:not(#DecksGallery figure:last-of-type) img, #DecksGallery figure:last-of-type {
     height: 350px;
     width: 230px;
@@ -331,11 +334,15 @@ a .IndexFigure:hover {
 #DecksGallery figcaption {
     text-align: center;
 }
-.DecksSaveBtn, .DecksDeleteBtn {
-    padding: 0.6rem 1rem;
+.DecksChangeNameBtn, .DecksSaveBtn, .DecksDeleteBtn, .DecksNewDeckInput {
+    padding: 0.4rem 0.6rem;
 }
-.DecksSaveBtn {
-    display: none;
+.DecksChangeNameBtn, .DecksSaveBtn, .DecksDeleteBtn {
+    transition: background-color 0.25s, color 0.25s;
+}
+.DecksChangeNameBtn:hover, .DecksSaveBtn:hover, .DecksDeleteBtn:hover {
+    background-color: #fff;
+    color: #000;
 }
 /* ---------------- Drawtest Page ---------------- */
 #DrawTestSelection, #DrawTestTitles, #DrawTestContent {

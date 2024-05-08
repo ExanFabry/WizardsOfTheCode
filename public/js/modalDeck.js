@@ -1,10 +1,8 @@
 // declarations
 let decksArr = ["Azorius", "Orzhov", "Dimir", "Rakdos" ];
-
 let modals = document.getElementsByClassName("Modal");
 let buttons = document.getElementsByClassName("ModalTrigger");
 let spans = document.getElementsByClassName("ModalClose");
-
 let triggerNewDeck = document.getElementById("TriggerNewDeck");
 let modalNewDeck = document.getElementsByClassName("ModalNewDeck");
 
@@ -15,20 +13,15 @@ function openModal(index, trigger) {
     } 
     else {
         const title = trigger.getAttribute('title');
-
         modals[0].style.display = "block";
-
         let modalImg = document.querySelector('.Modal img');
         modalImg.src = `assets/images/deck${index+1}.jpg`;
-    
         let modalTitle = document.querySelector('.ModalContent h2');
         modalTitle.textContent = title;
-
         let modalValue = document.querySelector('.ModalContent form input[name="nameEdit"]');
         modalValue.value = title;
     }
 }
-
 // modal close sequence
 function closeModal(index) {
     modals[index].style.display = "none";
@@ -55,17 +48,14 @@ window.onclick = function(event) {
         }
     }
 };
-
 triggerNewDeck.onclick = function(e) {
     e.preventDefault();
     openModal(-1);
 };
-
-
 document.querySelectorAll('.DecksChangeNameBtn').forEach(btn => {
     btn.addEventListener('click', function() {
         const form = this.nextElementSibling;
-        const input = form.querySelector('.DecksNewDeckNameInput');
+        const input = form.querySelector('.DecksNewDeckInput');
         const saveBtn = form.querySelector('.DecksSaveBtn');
         const deleteForm = this.parentElement.querySelector('.DecksDeleteForm');
         if (deleteForm.style.display === 'none') {
@@ -77,16 +67,12 @@ document.querySelectorAll('.DecksChangeNameBtn').forEach(btn => {
         saveBtn.style.display = saveBtn.style.display === 'none' ? 'block' : 'none';
     });
 });
-
 document.querySelectorAll('.DecksDeleteBtn').forEach(btn => {
     btn.addEventListener('click', function(e) {
-        // Prompt the user for confirmation
         if (confirm("Are you sure you want to delete this deck?")) {
-            // If user confirms, submit the form
             const form = this.parentElement;
             form.submit();
         } else {
-            // Prevent default form submission
             e.preventDefault();
         }
     });
