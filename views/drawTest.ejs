@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/style.css">
+<%- include("partials/header") %>
     <script src="/js/modalDrawTest.js" defer></script>
     <script src="/js/drawTestSelectedDeck.js" defer></script>
     <script src="/routers/drawTestRouter.ts" defer></script>
@@ -96,9 +90,7 @@
                 </article>
             </section>
         </article>
-        <!-- The Modal -->
         <div class="Modal">
-            <!-- Modal content -->
             <div class="ModalContent">
                 <h1>Drawpile</h1>
                 <section id="drawPileCards">
@@ -118,7 +110,6 @@
         </div>
         <% if (cardImageDiscard.length != 0) { %>
             <div class="Modal" id="Modal2">
-                <!-- Modal content -->
                 <div class="ModalContent">
                     <h1>Discardpile</h1>
                     <section id="drawPileCards">
@@ -131,8 +122,4 @@
                 </div>
             </div>
         <% } %>
-        
-    </main>
-    <%- include("partials/footer") %>
-</body>
-</html>
+<%- include("partials/footer") %>
