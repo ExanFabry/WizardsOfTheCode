@@ -7,7 +7,7 @@ let deck : Card[] = [];
 let drawPile : Card[] = [];
 let discardPile : Card[] = [];
 let result : Card[] | undefined;
-(async () => {
+/*(async () => {
     try {
         result = await cards();
         //console.log(result);
@@ -19,7 +19,7 @@ if(result && result?.length > 0){
     result.forEach((card: Card) => {
         deck.push(card);
     });
-}
+}*/
 
 //Links
 let plains : string = "https://c1.scryfall.com/file/scryfall-cards/large/front/0/2/023d333b-14f2-40ad-bb76-8b9e38040f89.jpg?1562730596";
