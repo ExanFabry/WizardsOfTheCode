@@ -295,6 +295,7 @@ a .IndexFigure:hover {
     gap: 3%;
 }
 #DecksGallery h3 {
+    margin: 0.6rem 0 1rem 0;
     font-size: 150%;
 }
 #DecksGallery figure:not(#DecksGallery figure:last-of-type) img, #DecksGallery figure:last-of-type {
@@ -339,6 +340,10 @@ a .IndexFigure:hover {
 }
 .DecksChangeNameBtn, .DecksSaveBtn, .DecksDeleteBtn {
     transition: background-color 0.25s, color 0.25s;
+}
+.DecksChangeNameBtn, .DecksDeleteBtn {
+    margin-bottom: 1rem;
+    width: 70%;
 }
 .DecksChangeNameBtn:hover, .DecksSaveBtn:hover, .DecksDeleteBtn:hover {
     background-color: #fff;
