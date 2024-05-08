@@ -10,7 +10,7 @@ let result : Card[] | undefined;
 (async () => {
     try {
         result = await cards();
-        console.log(result);
+        //console.log(result);
     } catch (error) {
         console.error(error);
     }
