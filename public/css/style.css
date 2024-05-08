@@ -331,6 +331,12 @@ a .IndexFigure:hover {
 #DecksGallery figcaption {
     text-align: center;
 }
+.DecksSaveBtn, .DecksDeleteBtn {
+    padding: 0.6rem 1rem;
+}
+.DecksSaveBtn {
+    display: none;
+}
 /* ---------------- Drawtest Page ---------------- */
 #DrawTestSelection, #DrawTestTitles, #DrawTestContent {
     padding-right: 10%;

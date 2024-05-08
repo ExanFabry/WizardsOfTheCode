@@ -9,7 +9,6 @@
             <a href="/decks" class="AllActiveLink">Decks</a>
             <a href="/drawTest">Draw Test</a>
         </nav>
-        
         <% if (user !== undefined && user !== null) { %>
             <a href="/loginForm" class="main_login"><p><%= user %></p></a>
         <% } %>
@@ -25,32 +24,28 @@
                         <img src="assets/images/deck<%= i+1 %>.jpg" alt="<%= decks[i] %>">
                     </a>
                     <figcaption>
-                        <h3 class="deckName"><%= decks[i] %></h3>
-                        <button class="changeNameBtn">Change Name</button>
-                        <form class="changeNameForm" action="" method="post">
-                            <input type="hidden" name="oldDeckName" value="<%= decks[i] %>">
-                            <input type="text" name="newDeckName" class="newDeckNameInput" placeholder="New deck name" style="display: none;" required>
-                            <button type="submit" class="saveBtn" style="display: none;">Save</button>
+                        <h3 class="DecksDeckName"><%= decks[i] %></h3>
+                        <button class="DecksChangeNameBtn">Change Name</button>
+                        <form action="" method="post" class="DecksChangeNameForm">
+                            <input type="hidden" name="DecksOldDeckName" value="<%= decks[i] %>">
+                            <input type="text" name="DecksNewDeckName" class="DecksNewDeckNameInput" placeholder="New deck name" style="display: none;" required>
+                            <button type="submit" class="DecksSaveBtn">Save</button>
                         </form>
-                        <form action="" method="post" class="deleteForm">
-                            <input type="hidden" name="deckDelete" value="<%= decks[i] %>">
-                            <button type="submit" class="deleteBtn">Delete</button>
+                        <form action="" method="post" class="DecksDeleteForm">
+                            <input type="hidden" name="DecksDelete" value="<%= decks[i] %>">
+                            <button type="submit" class="DecksDeleteBtn">Delete</button>
                         </form>
                     </figcaption>
-                </figure>              
-
+                </figure>
             <% } %>
-
-            <figure>
-                <a href="#" id="TriggerNewDeck">
+            <figure id="TriggerNewDeck">
+                <a href="#">
                     <figcaption>
                         <p>&plus;</p>
                     </figcaption>
                 </a>
             </figure>
         </section>
-
-        
         <div class="Modal">
             <div class="ModalContent">
                 <section>
@@ -66,7 +61,6 @@
                 <span class="ModalClose">X</span>
             </div>
         </div>
-
         <div class="ModalNewDeck Modal">
             <div class="ModalContent">
                 <p>Maak een nieuw deck:</p>

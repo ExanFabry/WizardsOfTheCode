@@ -62,27 +62,23 @@ triggerNewDeck.onclick = function(e) {
 };
 
 
-document.querySelectorAll('.changeNameBtn').forEach(btn => {
+document.querySelectorAll('.DecksChangeNameBtn').forEach(btn => {
     btn.addEventListener('click', function() {
-        // Toggle visibility of the input field and Save button
         const form = this.nextElementSibling;
-        const input = form.querySelector('.newDeckNameInput');
-        const saveBtn = form.querySelector('.saveBtn');
-        const deleteForm = this.parentElement.querySelector('.deleteForm'); // Select delete form
-
-        // Toggle visibility of delete form
+        const input = form.querySelector('.DecksNewDeckNameInput');
+        const saveBtn = form.querySelector('.DecksSaveBtn');
+        const deleteForm = this.parentElement.querySelector('.DecksDeleteForm');
         if (deleteForm.style.display === 'none') {
             deleteForm.style.display = 'block';
         } else {
             deleteForm.style.display = 'none';
         }
-
         input.style.display = input.style.display === 'none' ? 'block' : 'none';
         saveBtn.style.display = saveBtn.style.display === 'none' ? 'block' : 'none';
     });
 });
 
-document.querySelectorAll('.deleteBtn').forEach(btn => {
+document.querySelectorAll('.DecksDeleteBtn').forEach(btn => {
     btn.addEventListener('click', function(e) {
         // Prompt the user for confirmation
         if (confirm("Are you sure you want to delete this deck?")) {
@@ -95,5 +91,3 @@ document.querySelectorAll('.deleteBtn').forEach(btn => {
         }
     });
 });
-
-
