@@ -13,7 +13,7 @@ export function loginRouter() {
             let user: User | null = await login(username, password); // Gebruik username voor de login
             if(user){
                 delete user.password; // Verwijder het wachtwoord voordat je het gebruikersobject verzendt
-                (req.session as any).user = user;
+                req.session.user = user;
                 res.render("loginForm", {
                     title: "login",
                     loggedIn: true,

@@ -223,8 +223,7 @@ export async function changeDeckName(username: string, currentTitle: string, new
     }
 }
 
-
-export async function addCardToDeck(username: string, title: string, name: string, multiverseid: number) {
+export async function addCardToDeck(username: string, title: string, name: string, multiverseid: number, type: string) {
     try {
         // Find the user
         const user = await userCollection.findOne({ username: username });
@@ -248,6 +247,7 @@ export async function addCardToDeck(username: string, title: string, name: strin
             const newCard: UserCard = {
                 name: name,
                 multiverseid: multiverseid,
+                type: type.includes('Land') ? 'Land' : type, // Check if type contains 'Land'
                 numberOfCards: 1
             };
             // Add the new card to the deck
@@ -320,23 +320,25 @@ export async function readCardsFromDeck(username: string, title: string) {
             throw new Error(`Deck "${title}" not found for user "${username}".`);
         }
 
-        // Map the cards to include title, multiverseid, and numberOfCards
+        // Map the cards to include title, multiverseid, numberOfCards, and type
         const cardsWithInfo = deck.cards.map(card => ({
             title: card.name,
             multiverseid: card.multiverseid,
-            numberOfCards: card.numberOfCards
+            numberOfCards: card.numberOfCards,
+            type: card.type // Toevoegen van het kaarttype
         }));
 
         // Sort the cards by title
         const sortedCards = cardsWithInfo.sort((a, b) => a.title.localeCompare(b.title));
 
-        // Return the sorted cards with title, multiverseid, and numberOfCards
+        // Return the sorted cards with title, multiverseid, numberOfCards, and type
         return sortedCards;
     } catch (e) {
         console.error(e);
         return null;
     }
 }
+
 
 //Create admin login
 async function createInitialUser() {
@@ -375,81 +377,3 @@ export async function login(username: string, password: string) {
     }
 }
 
-/*
-let cards: UserCard[] = [
-    { name: "Ancestor's Chosen", multiverseid: 1151616, numberOfCards: 4 },
-    { name: "Beacon of Immortality", multiverseid: 148904, numberOfCards: 4 },
-    { name: "Blessed Spirits", multiverseid: 148804, numberOfCards: 4 },
-    { name: "Conclave Tribunal", multiverseid: 130542, numberOfCards: 4 },
-    { name: "Detention Sphere", multiverseid: 130575, numberOfCards: 4 },
-    { name: "Dovin's Veto", multiverseid: 148804, numberOfCards: 4 },
-    { name: "Elite Inquisitor", multiverseid: 130560, numberOfCards: 4 },
-    { name: "Favorable Winds", multiverseid: 149804, numberOfCards: 4 },
-    { name: "Geist of Saint Traft", multiverseid: 148805, numberOfCards: 4 },
-    { name: "Hallowed Fountain", multiverseid: 168804, numberOfCards: 4 },
-    { name: "Lavinia, Azorius Renegade", multiverseid: 159804, numberOfCards: 4 },
-    { name: "Lyev Skyknight", multiverseid: 148804, numberOfCards: 4 },
-    { name: "Sphinx's Revelation", multiverseid: 130591, numberOfCards: 4 },
-    { name: "Supreme Verdict", multiverseid: 130597, numberOfCards: 4 },
-    { name: "Teferi, Time Raveler", multiverseid: 148804, numberOfCards: 4 }
-];
-
-let newCards: UserCard[] = [
-    { name: "Archangel of Thune", multiverseid: 123456, numberOfCards: 4 },
-    { name: "Cyclonic Rift", multiverseid: 234567, numberOfCards: 4 },
-    { name: "Snapcaster Mage", multiverseid: 345678, numberOfCards: 4 },
-    { name: "Thoughtseize", multiverseid: 456789, numberOfCards: 4 },
-    { name: "Tarmogoyf", multiverseid: 567890, numberOfCards: 4 },
-    { name: "Force of Will", multiverseid: 678901, numberOfCards: 4 },
-    { name: "Sword of Fire and Ice", multiverseid: 789012, numberOfCards: 4 },
-    { name: "Noble Hierarch", multiverseid: 890123, numberOfCards: 4 },
-    { name: "Dark Confidant", multiverseid: 901234, numberOfCards: 4 },
-    { name: "Jace, the Mind Sculptor", multiverseid: 101112, numberOfCards: 4 },
-    { name: "Liliana of the Veil", multiverseid: 111213, numberOfCards: 4 },
-    { name: "Mana Drain", multiverseid: 121314, numberOfCards: 4 },
-    { name: "Verdant Catacombs", multiverseid: 131415, numberOfCards: 4 },
-    { name: "Force of Negation", multiverseid: 141516, numberOfCards: 4 },
-    { name: "Scalding Tarn", multiverseid: 151617, numberOfCards: 4 }
-];
-
-];
-
-
-
-await addUser("dennis")
-await addNewDeck("dennis", "azorius")
-await addCardsToDeck("dennis", "azorius", cards)
-await addCardsToDeck("dennis", "azorius", newCards)
-await deleteCardFromDeck("dennis", "azorius", "Geist of Saint Traft")
-await deleteCardFromDeck("dennis", "azorius", "Geist of Saint Traft")
-await deleteCardFromDeck("dennis", "azorius", "Geist of Saint Traft")
-*/
-
-export async function addCardsToDeck(username: string, title: string, newCards: UserCard[]) {
-    try {
-        // Find the user
-        const user = await userCollection.findOne({ username: username });
-        if (!user) {
-            throw new Error(`User "${username}" not found.`);
-        }
-
-        // Find the deck with the specified title
-        const deckIndex = user.deck.findIndex(deck => deck.title === title);
-        if (deckIndex === -1) {
-            throw new Error(`Deck "${title}" not found for user "${username}".`);
-        }
-
-        // Add new cards to the found deck
-        user.deck[deckIndex].cards.push(...newCards);
-
-        // Update the user collection with the updated data
-        await userCollection.updateOne(
-            { username: username },
-            { $set: { deck: user.deck } }
-        );
-
-        console.log(`Cards added to deck "${title}" for user "${username}".`);
-    } catch (e) {
-        console.error(e);
-    } 
-}

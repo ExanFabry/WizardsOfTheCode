@@ -48,8 +48,9 @@ export function homeRouter() {
         let selectedDeck = req.body.selectedDeck;
         let namecard = req.body.namecard;
         let multiverseid = req.body.multiverseid;
+        let type = req.body.type;
         
-        await addCardToDeck("dennis", selectedDeck, namecard, multiverseid)
+        await addCardToDeck("dennis", selectedDeck, namecard, multiverseid, type)
         console.log()
 
         res.redirect("/home");
