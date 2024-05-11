@@ -87,7 +87,7 @@ async function exit() {
 
 const userCollection : Collection<User> = client.db("mtgProject").collection<User>("users");
 
-export async function addUser(username: string) {
+export async function addUser(username: string, password: string) {
     try {
         // Check if the user already exists
         const existingUser = await userCollection.findOne({ username: username });
@@ -98,6 +98,7 @@ export async function addUser(username: string) {
         // If the user does not exist, create a new user with an empty deck array
         const newUser: User = {
             username: username,
+            password: await bcrypt.hash(password, saltRounds),
             deck: [],
             role: "USER"
         };
