@@ -7,6 +7,7 @@ import { landingPageRouter } from "./routers/landingPageRouter";
 import { newDeckRouter } from "./routers/newDeckRouter";
 import { connect } from "./database";
 import { loginFormRouter } from "./routers/loginFormRouter";
+import { registerFormRouter } from "./routers/registerFormRouter"
 import session from "./session";
 import { User } from "./types";
 import { login } from "./database";
@@ -26,7 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('views', path.join(__dirname, "views"));
 app.use(session);
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 80);
 
 app.use("/decks", decksRouter());
 app.use("/drawtest", drawTestRouter());
@@ -37,6 +38,7 @@ app.use("/home", homeRouter());
 app.use("/newDeck", newDeckRouter());
 app.use("/", landingPageRouter());
 app.use("/loginForm", loginFormRouter());
+app.use("/registerForm", registerFormRouter());
 app.use(loginRouter());
 app.use(homeRouter());
 app.get("/loginForm/login", (req, res) => {
