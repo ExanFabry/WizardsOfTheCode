@@ -35,6 +35,8 @@ function populateModal(title, multiverseid, type, rarity) {
         modalFormContent.value = title;
         const modalFormContent2 = document.getElementById('ModalForm2');
         modalFormContent2.value = multiverseid;
+        const modalFormContent3 = document.getElementById('ModalForm3');
+        modalFormContent3.value = type;
 }
 
 // modal close sequence

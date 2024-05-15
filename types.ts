@@ -28,5 +28,6 @@ export interface UserDeck {
 export interface UserCard {
     name: string;
     multiverseid: number;
+    type: string;
     numberOfCards: number;
 }

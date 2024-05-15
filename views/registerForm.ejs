@@ -12,19 +12,19 @@
                 <a href="/decks">Decks</a>
                 <a href="/drawTest">Draw Test</a>                
             <% } %>
-            <a href="/registerForm">Registreer</a>
+            <a href="/loginForm">Inloggen</a>
         </nav>
     </header>
     <main>
         <section id="LogInForm">
             <% if (user === undefined || user === null) { %>
-                <form action="/loginForm/login" method="post">
-                    <h1>Sign Up&colon;</h1><br>
+                <form action="/registerForm/createNewAccount" method="post">
+                    <h1>Registreer&colon;</h1><br>
                     <label for="email">Username</label><br>
                     <input type="text" name="username" placeholder="person@example.com" required><br>
                     <label for="password">Password</label><br>
                     <input type="password" name="password" placeholder="&bull;&bull;&bull;&bull;" required><br>
-                    <input type="submit" value="Log In">
+                    <input type="submit" value="Registreer">
                 </form>
             <% } %>
             <% if (user !== undefined && user !== null) { %>
