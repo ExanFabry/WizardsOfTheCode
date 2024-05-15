@@ -15,6 +15,7 @@ import { secureMiddleware } from "./secureMiddleware";
 import { loginRouter } from "./routers/loginRouter";
 import * as dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import { deleteAccountRouter } from "./routers/deleteAccount";
 dotenv.config(); 
 const app : Express = express();
 
@@ -27,7 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('views', path.join(__dirname, "views"));
 app.use(session);
 
-app.set("port", process.env.PORT || 80);
+app.set("port", process.env.PORT || 4000);
 
 app.use("/decks", decksRouter());
 app.use("/drawtest", drawTestRouter());
@@ -41,9 +42,11 @@ app.use("/loginForm", loginFormRouter());
 app.use("/registerForm", registerFormRouter());
 app.use(loginRouter());
 app.use(homeRouter());
+app.use("/deleteAccount", deleteAccountRouter());
 app.get("/loginForm/login", (req, res) => {
     res.render("loginForm", {
-        title: "login form"
+        title: "login form",
+        loginSuccesOrFailed: "Login"
     });
 });
 app.post("/loginForm/login", async(req, res) => {
@@ -57,14 +60,16 @@ app.post("/loginForm/login", async(req, res) => {
         res.render("loginForm", {
             title: "login",
             user: user,
-            loggedIn: true
+            loggedIn: true,
+            loginSuccesOrFailed: "Login"
         });
         //res.redirect("/")
     } catch (e : any) {
         res.render("loginForm", {
             title: "login",
             user: null,
-            loggedIn: true
+            loggedIn: true,
+            loginSuccesOrFailed: "Login"
         });
     }
 });
@@ -73,13 +78,15 @@ app.get("/", async(req, res) => {
         res.render("/loginForm", {
             title: "login",
             user: req.session.user,
-            loggedIn: true
+            loggedIn: true,
+            loginSuccesOrFailed: "Login"
         });
     } else {
         res.render("loginForm", {
             title: "login",
             user: null,
-            loggedIn: true
+            loggedIn: true,
+            loginSuccesOrFailed: "Login"
         });
     }
 });
@@ -90,7 +97,8 @@ app.get("/logout", async(req, res) => {
     req.session.destroy(() => {
         res.render("loginForm", {
             title: "login",
-            user: undefined
+            user: undefined,
+            loginSuccesOrFailed: "Login"
         });
     });
 });

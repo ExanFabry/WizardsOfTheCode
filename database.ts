@@ -112,6 +112,23 @@ export async function addUser(username: string, password: string) {
     }
 }
 
+export async function deleteUser(username: string, password: string){
+    try {
+        // Check if the user already exists
+        const existingUser = await userCollection.findOne({ username: username });
+        if (existingUser) {
+            await client.db("mtgProject").collection<User>("users").deleteOne({ username: username});
+        }
+        else{            
+            throw new Error(`User "${username}" exists.`);
+        }
+
+        console.log(`User "${username}" deleted.`);
+    } catch (e) {
+        console.error(e);
+    }
+}
+
 export async function addNewDeck( username: string, title: string,) {
     try {
         // Find the user

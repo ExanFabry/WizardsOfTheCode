@@ -1,12 +1,12 @@
 import express from "express";
 import { getUserDecks, cards } from "../database";
-import { Card } from "../types";
+import { Card, UserCard, UserDeck } from "../types";
 
 //Declaratie van arrays
-let deck : Card[] = [];
-let drawPile : Card[] = [];
-let discardPile : Card[] = [];
-let result : Card[] | undefined;
+let deck : UserDeck;
+let drawPile : UserCard[] = [];
+let discardPile : UserCard[] = [];
+let result : UserDeck[] | undefined;
 /*(async () => {
     try {
         result = await cards();
@@ -54,24 +54,24 @@ for(let i : number = 0; i < 20; i++){
 //Resets piles
 function MakePilesEmpty() : void{
     for(let i = 0; i < drawPile.length; i++){
-        deck.push(drawPile[i]);
+        deck.cards.push(drawPile[i]);
     }
     for(let i = 0; i < discardPile.length; i++){
-        deck.push(discardPile[i]);
+        deck.cards.push(discardPile[i]);
     }
     drawPile.splice(0, drawPile.length);
     discardPile.splice(0, discardPile.length);
-    for(let i = 0; i < deck.length; i++){
-        console.log(deck[i]);
-    }
+    /*for(let i = 0; i < deck.cards.length; i++){
+        console.log(deck.cards[i]);
+    }*/
 }
 
 //Voeg toe aan drawpile
 function AddToDrawPile() : void{
     console.log("hallo");
-    let randomNumber : number = Math.floor(Math.random() * deck.length);
-    drawPile.push(deck[randomNumber]);
-    deck.splice(randomNumber, 1);
+    let randomNumber : number = Math.floor(Math.random() * deck.cards.length); //.cards?.length
+    drawPile.push(deck.cards[randomNumber]);
+    deck.cards.splice(randomNumber, 1);
     for(let i = 0; i < drawPile.length; i++){
         console.log(drawPile[i]);
     }
@@ -81,7 +81,7 @@ function AddToDrawPile() : void{
 function AddToDiscardPileRandom() : void{
     let randomNumber : number = Math.floor(Math.random() * drawPile.length);
     discardPile.push(drawPile[randomNumber]);
-    deck.splice(randomNumber, 1);
+    deck.cards.splice(randomNumber, 1);
     for(let i = 0; i < discardPile.length; i++){
         console.log(discardPile[i]);
     }
@@ -93,7 +93,7 @@ function AddToDiscardPile(image : number) : void{
     drawPile.splice(image, 1);
 }
 
-function CountingSpecificCard(arrayOfCards : Card[]) : { [key: string]: number }{
+function CountingSpecificCard(arrayOfCards : UserCard[]) : { [key: string]: number }{
     let counts : { [key: string]: number } = {};
     for(let i : number = 0; i < arrayOfCards.length; i++){
         if(counts.hasOwnProperty(arrayOfCards[i].name)){
@@ -106,19 +106,32 @@ function CountingSpecificCard(arrayOfCards : Card[]) : { [key: string]: number }
     return counts;
 }
 
+function drawPercentage(deck : UserDeck, card : UserCard) : number{
+    let totalCards = 0;
+    for(let i : number = 0; i < deck.cards.length; i++){
+        if(deck.cards[i].name === card.name){
+            totalCards++;
+        }
+    }
+    return totalCards / 100 * deck.cards.length;
+}
+
 export function drawTestRouter() {
     const router = express.Router();
     let cardCounts = CountingSpecificCard(discardPile);
-
-    router.get("/", (req, res) => {
+    
+    router.get("/", async (req, res) => {
         cardCounts = CountingSpecificCard(discardPile);
+        const result =  await getUserDecks("dennis");
         res.render("drawTest", {
             title: "Draw Test",
             cardImage: drawPile,
             discardPile: discardPile,
             cardImageDiscard: Object.keys(cardCounts),
             numberOfCards: Object.values(cardCounts),
-            user: req.session.user?.username
+            user: req.session.user?.username,
+            decks: result,
+            deck: deck
         })
     });
 

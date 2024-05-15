@@ -7,7 +7,8 @@ export function loginFormRouter() {
     router.get("/", (req, res) => {
         res.render("loginForm", {
             title: "Login",
-            user: user
+            user: user,
+            loginSuccesOrFailed: "Login"
         })
     });
     return router;

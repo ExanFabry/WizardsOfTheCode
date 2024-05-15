@@ -53,10 +53,12 @@
     <main>
         <form action="/selectedDeck" method="GET" id="DrawTestSelection">
             <select name="devices" id="deckSelect">
-                <option value="chooseADeck" selected>Kies een deck</option>
-                <option value="">Deck 1</option>
-                <option value="">Deck 2</option>
-                <option value="">Deck 3</option>
+                <option value="chooseADeck">Kies een deck</option>
+                <% for( let index = 0; index < decks.length; index++ ) { %>
+                    <option value=""><%= decks[index] %></option>
+                    <%= deck = decks[index] %>
+                    <% console.log(deck.cards); %>
+                <% } %>
             </select>
         </form>
         <section id="DrawTestTitles">
