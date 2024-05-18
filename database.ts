@@ -2,7 +2,7 @@ import { Collection, MongoClient } from "mongodb";
 import { Card, RootObject, User, UserDeck, UserCard } from "./types";
 import bcrypt from "bcrypt";
 
-export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mongodb.net/";
+export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mongodb.net/?retryWrites=true&w=majority&appName=Webontwikkeling";
 //export const uri = "mongodb+srv://Exan:WizardsOfTheCode@decks.9htkbkt.mongodb.net/?retryWrites=true&w=majority&appName=Decks";
 const client = new MongoClient(uri);
 
