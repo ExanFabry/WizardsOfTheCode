@@ -31,3 +31,8 @@ export interface UserCard {
     type: string;
     numberOfCards: number;
 }
+
+export interface FlashMessage {
+    type: "error" | "success"
+    message: string;
+}

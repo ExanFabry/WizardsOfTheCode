@@ -357,6 +357,36 @@ export async function readCardsFromDeck(username: string, title: string) {
     }
 }
 
+export async function countCardsInDeck(username: string, deckTitle: string, cardName: string) {
+    try {
+        // Find the user
+        const user = await userCollection.findOne<User>({ username: username });
+        if (!user) {
+            throw new Error(`User "${username}" not found.`);
+        }
+
+        // Find the deck with the specified title
+        const deck = user.deck.find(deck => deck.title === deckTitle);
+        if (!deck) {
+            throw new Error(`Deck "${deckTitle}" not found for user "${username}".`);
+        }
+
+        // Find the card index in the deck
+        const cardIndex = deck.cards.findIndex(card => card.name === cardName);
+        
+        // If the card is not found, return 0
+        if (cardIndex === -1) {
+            return 0;
+        }
+
+        // Return the numberOfCards for the found card
+        return deck.cards[cardIndex].numberOfCards;
+    } catch (e) {
+        console.error(e);
+        throw e; // Re-throw the error to be handled by the caller
+    }
+}
+
 
 //Create admin login
 async function createInitialUser() {

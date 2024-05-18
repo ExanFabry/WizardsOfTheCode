@@ -1,8 +1,12 @@
 import express from "express";
 import { Card} from "../types";
-import { addCardToDeck, getCards, getUserDecks } from "../database";
+import { addCardToDeck, countCardsInDeck, getCards, getUserDecks } from "../database";
+import session from "../session";
+import { flashMiddleware } from "../flashMiddleware";
 
 const app = express();
+app.use(session);
+app.use(flashMiddleware);
 
 let cachedCards : Card[];
 
@@ -20,6 +24,9 @@ export function homeRouter() {
         if (result !== null) {
             userDecks = result
         }
+
+        const message = req.session.message;
+        delete req.session.message;
 
         let q = typeof req.query.q === 'string' ? req.query.q : "";
         let page = parseInt(typeof req.query.page === 'string' ? req.query.page : "1");
@@ -40,7 +47,8 @@ export function homeRouter() {
             page: page,
             totalPages: totalPages,
             userDecks : userDecks,
-            user: req.session.user?.username
+            user: req.session.user?.username,
+            message: message
         });
     });
 
@@ -50,10 +58,16 @@ export function homeRouter() {
         let multiverseid = req.body.multiverseid;
         let type = req.body.type;
         
-        await addCardToDeck("dennis", selectedDeck, namecard, multiverseid, type)
-        console.log()
+        let cardsInDeck = await countCardsInDeck("dennis", selectedDeck, namecard)
 
-        res.redirect("/home");
+        if (type !== "Land" && cardsInDeck >= 4) {
+            req.session.message = {type: "error", message: `Het limiet van 4 kaarten is bereikt in deck: ${selectedDeck}. De kaart is niet toegevoegd.`};
+        }
+        else {
+            await addCardToDeck("dennis", selectedDeck, namecard, multiverseid, type)
+            req.session.message = {type: "success", message: `Kaart toegevoegd aan deck: ${selectedDeck}`};
+        }
+        res.redirect("back");
     });
     
     return router;

@@ -23,6 +23,14 @@
                 <button>Search</button>
             </form>
         </section>
+        <section>
+            <% if (!message) { %>
+                <br>
+            <% } %>  
+            <% if (message) { %>
+                <p class="<%= message.type %>"><%= message.message %></p>
+            <% } %>   
+        </section>
         <section id="HomeCards">
             <% for (const card of cards) { %>
                 <% if (card.multiverseid) { %>
@@ -32,7 +40,6 @@
                         </a>
                         <p><%= card.name %></p>
                     </article>
-                    
                 <% } %>
             <% } %>
         </section>

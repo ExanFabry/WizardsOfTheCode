@@ -1,5 +1,5 @@
 import express from "express";
-import { cards, decksArr, azorius, azoriusMultiverseIds } from "../data";
+import { cards } from "../data";
 import { addNewDeck, changeDeckName, deleteDeck, getUserDecks } from "../database";
 
 export function decksRouter() {

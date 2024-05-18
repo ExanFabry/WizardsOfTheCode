@@ -1,5 +1,4 @@
 import express from "express";
-import { decksArr, azorius, azoriusMultiverseIds } from "../data";
 import { Card, UserCard } from "../types";
 import { addCardToDeck, changeDeckName, deleteCardFromDeck, getCards, readCardsFromDeck } from "../database";
 
@@ -61,7 +60,7 @@ export function newDeckRouter() {
             let encodedDeckName = encodeURIComponent(newDeckName);
             redirectURL = "/newDeck?deckName=" + encodedDeckName + "&newDeck=true";
         } else {
-            redirectURL = "/newDeck" + (req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '');
+            redirectURL = "back";
         }
         
         res.redirect(redirectURL);

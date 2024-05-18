@@ -17,7 +17,7 @@
                 <h2>Wijzigingen aanbrengen in deck: <%= deckName %></h2>
             <% } %>
         </section>
-        <section>
+        <section class="NewDeckFinished">
             <p>When you're finished, press the button below.</p>
             <button>
                 <a href="/decks" class="LeaveLink">Done</a>
@@ -39,12 +39,21 @@
                     <p><%= card.name %></p>
                     <p>Cards in deck: <%= card.numberOfCards %></p>
                     <section>
-                        <form action="" method="post">
-                            <input type="hidden" name="nameToAdd" value="<%= card.name %>">
-                            <input type="hidden" name="idToAdd" value="<%= card.multiverseid %>">
-                            <input type="hidden" name="typeToAdd" value="<%= card.type %>">
-                            <button type="submit">▲</button>
-                        </form>
+                        <% if (card.type !== "Land" && card.numberOfCards >= 4) { %>
+                            <button type="submit" class="popup" onclick="togglePopup(this)">▲
+                                <span class="popuptext" id="myPopup">
+                                    4 cards max per deck
+                                </span>
+                            </button>
+
+                        <% } else { %>
+                            <form action="" method="post">
+                                <input type="hidden" name="nameToAdd" value="<%= card.name %>">
+                                <input type="hidden" name="idToAdd" value="<%= card.multiverseid %>">
+                                <input type="hidden" name="typeToAdd" value="<%= card.type %>">
+                                <button type="submit">▲</button>
+                            </form>
+                        <% } %>
                         <form action="" method="post">
                             <input type="hidden" name="nameToRemove" value="<%= card.name %>">
                             <button type="submit">▼</button>
@@ -97,5 +106,26 @@
             </div>
         </div>
     </main>
+
+    <script>
+        function togglePopup(button) {
+            var popup = button.parentElement.querySelector('.popuptext');
+            if (popup) {
+                var isVisible = popup.getAttribute('data-visible');
+                if (isVisible === 'true') {
+                    popup.classList.remove("show");
+                    popup.setAttribute('data-visible', 'false');
+                } else {
+                    popup.classList.add("show");
+                    popup.setAttribute('data-visible', 'true');
+                    setTimeout(function() {
+                        popup.classList.remove("show");
+                        popup.setAttribute('data-visible', 'false');
+                    }, 2000);
+                }
+            }
+        }
+    </script>
+    
 </body>
 </html>
