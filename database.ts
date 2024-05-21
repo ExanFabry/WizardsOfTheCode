@@ -81,10 +81,6 @@ async function exit() {
     process.exit(0);
 }
 
-
-
-
-
 const userCollection : Collection<User> = client.db("mtgProject").collection<User>("users");
 
 export async function addUser(username: string, password: string) {

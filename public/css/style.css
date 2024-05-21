@@ -72,8 +72,11 @@ footer p:last-of-type {
 select, button, input {
     border-radius: 10px;
 }
-select, button {
+select, button, input {
     cursor: pointer;
+}
+button {
+    padding: 4px;
 }
 /* ---------------- Modals ---------------- */
 .Modal {
@@ -92,10 +95,9 @@ select, button {
     background-image: url("../assets/modalBackground.webp");
     border: 1px solid #fff8;
     border-radius: 10px;
-    padding: 15px;
+    padding: 30px;
     margin: auto;
     width: 60%;
-    gap: 10px;
 }
 .ModalContent figure, .ModalContent section:first-of-type, .ModalContent form {
     display: inline-block;
@@ -115,9 +117,10 @@ select, button {
 }
 .ModalContent select {
     border: solid 2px #fff;
+    padding: 3px;
 }
-.ModalContent button {
-    padding: 0.6 1rem;
+.ModalContent form input {
+    padding: 4px;
 }
 .ModalClose {
     transition: color 0.25s;
@@ -243,7 +246,7 @@ a .IndexFigure:hover {
 }
 #HomeCards {
     justify-content: center;
-    margin: 3% 0 3% 0;
+    margin: 1% 0 3% 0;
     flex-wrap: wrap;
     padding: 0 10%;
     display: flex;
@@ -290,7 +293,7 @@ a .IndexFigure:hover {
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 8% 10%;
+    margin: 3% 10%;
     display: flex;
     gap: 3%;
 }
@@ -452,10 +455,31 @@ option {
     display: flex;
     gap: 10px
 }
-.NewDeckFinished {
-    float: right;
-    margin-top: -30px;
+.NewDeckContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
+.NewDeckContainer > section:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.NewDeckContainer > section:first-of-type button {
+    width: 180px;
+}
+.NewDeckContainer > section:first-of-type form button {
+    width: 140px;
+}
+.NewDeckContainer > section:nth-child(3) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.NewDeckContainer > section:nth-child(3) button {
+    width: 60px;
+}
+
 /* ---------------- Pop Up ---------------- */
 .popup {
     position: relative;
@@ -500,18 +524,18 @@ option {
     to {opacity:1 ;}
 }
 /* ---------------- Error Message ---------------- */
+.HomeErrorContainer {
+    display: flex;
+    justify-content: center;
+}
 .error {
-    margin-left: 20%;
-    margin-right: 10%;
-    color:  #fff8; 
-    font-weight:300;
-    animation: fadeOut 3s forwards; 
+    color: #fff8; 
+    font-weight: 300;
+    animation: fadeOut 5s forwards; 
 }
 .success {
-    margin-left: 35%;
-    margin-right: 30%;
-    color:  #fff8; 
-    font-weight:300;
+    color: #fff8; 
+    font-weight: 300;
     animation: fadeOut 3s forwards; 
 }
 @keyframes fadeOut {

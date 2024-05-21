@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('views', path.join(__dirname, "views"));
 app.use(session);
 
-app.set("port", process.env.PORT || 4000);
+app.set("port", process.env.PORT || 3000);
 
 app.use("/decks", decksRouter());
 app.use("/drawtest", drawTestRouter());

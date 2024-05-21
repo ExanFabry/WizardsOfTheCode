@@ -17,6 +17,14 @@
         <% } %>
     </header>
     <main>
+        <section class="HomeErrorContainer">
+            <% if (!message) { %>
+                <br>
+            <% } %>  
+            <% if (message) { %>
+                <p class="<%= message.type %>"><%= message.message %></p>
+            <% } %>   
+        </section>
         <section id="DecksGallery">
             <% for (let i = 0; i < decks.length; i++) { %>
                 <figure>
@@ -25,15 +33,21 @@
                     </a>
                     <figcaption>
                         <h3><%= decks[i] %></h3>
-                        <button class="DecksChangeNameBtn">Change Name</button>
+                        <button class="DecksChangeNameBtn">Naam Wijzigen</button>
                         <form action="" method="post">
                             <input type="hidden" name="oldDeckName" value="<%= decks[i] %>">
-                            <input type="text" name="newDeckName" class="DecksNewDeckInput" placeholder="New Deck Name" style="display:none" required>
-                            <button type="submit" class="DecksSaveBtn" style="display:none">Save</button>
+                            <input type="text" name="newDeckName" class="DecksNewDeckInput" placeholder="Nieuwe Deck Naam" style="display:none" maxlength="20" required>
+                            <button type="submit" class="DecksSaveBtn" style="display:none">Opslaan</button>
                         </form>
                         <form action="" method="post" class="DecksDeleteForm">
-                            <input type="hidden" value="<%= decks[i] %>">
-                            <button type="submit" class="DecksDeleteBtn">Delete</button>
+                            <input type="hidden" name="deckDelete" value="<%= decks[i] %>">
+                            <button type="button" class="DecksDeleteBtn">Verwijderen</button>
+                            <div class="DeleteConfirmation" style="display:none">
+                                <p>Weet je zeker dat je</p>
+                                <p>dit deck wilt verwijderen?</p><br>
+                                <button type="button" class="DecksConfirmDeleteBtn">OK</button>
+                                <button type="button" class="DecksCancelDeleteBtn">Annuleren</button>
+                            </div>
                         </form>
                     </figcaption>
                 </figure>
@@ -63,14 +77,14 @@
         </div>
         <div class="ModalNewDeck Modal">
             <div class="ModalContent">
-                <p>Maak een nieuw deck:</p>
+                <p>Maak een nieuw deck:</p><br>
                 <form action="" method="post">
                     <label for="name">Naam:</label>
-                    <input type="text" name="nameNew" id="name">
+                    <input type="text" name="nameNew" id="name" maxlength="20" required>
                     <input type="submit" value="Create">
                 </form>
                 <form action="" method="post">
-                    <button>Foto uploaden</button>
+                    <button>Voer de URL in voor de achtergrond</button>
                 </form>
                 <span class="ModalClose">X</span>
             </div>

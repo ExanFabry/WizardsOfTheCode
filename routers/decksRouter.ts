@@ -1,6 +1,11 @@
 import express from "express";
-import { cards } from "../data";
 import { addNewDeck, changeDeckName, deleteDeck, getUserDecks } from "../database";
+import session from "../session";
+import { flashMiddleware } from "../flashMiddleware";
+
+const app = express();
+app.use(session);
+app.use(flashMiddleware);
 
 export function decksRouter() {
     const router = express.Router();
@@ -9,41 +14,65 @@ export function decksRouter() {
 
         let userDecks: string[] = [] 
         const result =  await getUserDecks("dennis");
-    
+
         if (result !== null) {
             userDecks = result
         }
 
+        const message = req.session.message;
+        delete req.session.message;
+
         res.render("decks", {
             title: "Decks",
             decks : userDecks,
-            cards : cards,
-            user: req.session.user?.username
+            user: req.session.user?.username,
+            message: message
         })
     })
 
     router.post("/", async (req, res) => {
         let newDeck : boolean = false;
-        let deckName = req.body.nameNew;
-        let newDeckName = req.body.newDeckName;
-        let oldDeckName = req.body.oldDeckName;
-        let deckDelete = req.body.deckDelete;
+        let deckName : string = req.body.nameNew;
+        let newDeckName : string = req.body.newDeckName;
+        let oldDeckName : string = req.body.oldDeckName;
+        let deckDelete : string = req.body.deckDelete;
 
         if (deckDelete) {
             await deleteDeck("dennis", deckDelete)
-            res.redirect("/decks");
-            return
+            req.session.message = {type: "success", message: `Het deck "${deckDelete}" is verwijderd.`};
+            return req.session.save(() => {
+                res.redirect("/decks");
+            });
         }
         
         if (newDeckName) {
-            await changeDeckName("dennis", oldDeckName, newDeckName)
-            res.redirect("/decks");
-            return
+            const userDecks = await getUserDecks("dennis");
+            if (userDecks && userDecks.includes(newDeckName)) {
+                req.session.message = {type: "error", message: `De naam "${newDeckName}" is al in gebruik.`};
+                return req.session.save(() => {
+                    res.redirect("/decks");
+                });
+            }
+            else {
+                await changeDeckName("dennis", oldDeckName, newDeckName)
+                return req.session.save(() => {
+                res.redirect("/decks");
+                });
+            }
         }
 
         if (deckName) {
-            newDeck = true;
-            await addNewDeck("dennis", deckName)
+            const userDecks = await getUserDecks("dennis");
+            if (userDecks && userDecks.includes(deckName)) {
+                req.session.message = {type: "error", message: `De naam "${deckName}" is al in gebruik.`};
+                return req.session.save(() => {
+                    res.redirect("/decks");
+                });
+            } else {
+                newDeck = true;
+                await addNewDeck("dennis", deckName)
+            }
+
         } else {
             deckName = req.body.nameEdit;
         }
