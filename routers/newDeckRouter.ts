@@ -1,7 +1,12 @@
 import express from "express";
-import { decksArr, azorius, azoriusMultiverseIds } from "../data";
 import { Card, UserCard } from "../types";
-import { addCardToDeck, changeDeckName, deleteCardFromDeck, getCards, readCardsFromDeck } from "../database";
+import { addCardToDeck, changeDeckName, deleteCardFromDeck, getCards, getUserDecks, readCardsFromDeck } from "../database";
+import session from "../session";
+import { flashMiddleware } from "../flashMiddleware";
+
+const app = express();
+app.use(session);
+app.use(flashMiddleware);
 
 let cachedCards : Card[];
 
@@ -19,22 +24,37 @@ export function newDeckRouter() {
         
         let cardsDeck : UserCard[] = [];
  
-        const result = await readCardsFromDeck("dennis", deckName);
-        if (result !== null) {
-            cardsDeck = result.map(cardInfo => ({
-            name: cardInfo.title,
-            multiverseid: cardInfo.multiverseid,
-            numberOfCards: cardInfo.numberOfCards,
-            type: cardInfo.type // Toevoegen van het kaarttype
-        }));
-}
+        if (deckName !== undefined) {
+            const result = await readCardsFromDeck("dennis", deckName);
+            if (result !== null) {
+                cardsDeck = result.map(cardInfo => ({
+                name: cardInfo.title,
+                multiverseid: cardInfo.multiverseid,
+                numberOfCards: cardInfo.numberOfCards,
+                type: cardInfo.type
+            }));
+        }
+        }
+
+        const numberOfCardsInDeck : number = cardsDeck.reduce((total, card) => total + card.numberOfCards, 0);
+
+        // Create a Set of multiverseid from cardsDeck
+        const deckIds = new Set(cardsDeck.map(card => card.multiverseid));
+
+        // Filter out cachedCards that are in the deckIds Set
+        const remainingCards : Card[] = cachedCards.filter(card => !deckIds.has(Number(card.multiverseid)));
+
+        const message = req.session.message;
+        delete req.session.message;
 
         res.render("newDeck", {
             title: "New Deck",
             deckName : deckName,
             newDeck : newDeck,
-            cards : cachedCards,
-            deck : cardsDeck
+            cards: remainingCards,  // Send only the remaining cards
+            deck : cardsDeck,
+            numberOfCardsInDeck: numberOfCardsInDeck,
+            message: message
         })
     });
 
@@ -48,23 +68,36 @@ export function newDeckRouter() {
 
         if (nameToAdd) {
             await addCardToDeck("dennis", deckName, nameToAdd, idToAdd, typeToAdd)
+            req.session.message = {type: "success", message: `"${nameToAdd}" toegevoegd aan deck.`};
         }
     
         if (nameToRemove) {
             await deleteCardFromDeck("dennis", deckName, nameToRemove);
+            req.session.message = {type: "success", message: `"${nameToRemove}" verwijderd uit deck.`};
         }
 
         let redirectURL : string;
 
         if (newDeckName) {
-            await changeDeckName("dennis", deckName, newDeckName)
-            let encodedDeckName = encodeURIComponent(newDeckName);
-            redirectURL = "/newDeck?deckName=" + encodedDeckName + "&newDeck=true";
+            const userDecks = await getUserDecks("dennis");
+            if (userDecks && userDecks.includes(newDeckName)) {
+                req.session.message = {type: "error", message: `De naam "${newDeckName}" is al in gebruik.`};
+                redirectURL = "/newDeck" + (req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '');
+                return req.session.save(() => {
+                    res.redirect(redirectURL);
+                });
+            } else {
+                await changeDeckName("dennis", deckName, newDeckName)
+                let encodedDeckName = encodeURIComponent(newDeckName);
+                redirectURL = "/newDeck?deckName=" + encodedDeckName + "&newDeck=true";
+            }
         } else {
             redirectURL = "/newDeck" + (req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '');
         }
         
-        res.redirect(redirectURL);
+        req.session.save(() => {
+            res.redirect(redirectURL);
+        });
     });
 
 

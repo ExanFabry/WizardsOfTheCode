@@ -24,12 +24,12 @@ function populateModal(title, multiverseid, type, rarity) {
 
     const modalContent = document.getElementById('ModalSection');
     modalContent.innerHTML = `
-        <h2>Name&colon;</h2>
-        <p>${title}</p>
+        <h2>Naam&colon;</h2>
+        <p>${title}</p><br>
         <h2>Type&colon;</h2>
-        <p>${type}</p>
+        <p>${type}</p><br>
         <h2>Rarity&colon;</h2>
-        <h2>${rarity}</h2>`;
+        <p>${rarity}</p>`;
 
         const modalFormContent = document.getElementById('ModalForm');
         modalFormContent.value = title;

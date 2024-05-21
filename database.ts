@@ -2,7 +2,7 @@ import { Collection, MongoClient } from "mongodb";
 import { Card, RootObject, User, UserDeck, UserCard } from "./types";
 import bcrypt from "bcrypt";
 
-export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mongodb.net/";
+export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mongodb.net/?retryWrites=true&w=majority&appName=Webontwikkeling";
 //export const uri = "mongodb+srv://Exan:WizardsOfTheCode@decks.9htkbkt.mongodb.net/?retryWrites=true&w=majority&appName=Decks";
 const client = new MongoClient(uri);
 
@@ -80,10 +80,6 @@ async function exit() {
     }
     process.exit(0);
 }
-
-
-
-
 
 const userCollection : Collection<User> = client.db("mtgProject").collection<User>("users");
 
@@ -354,6 +350,36 @@ export async function readCardsFromDeck(username: string, title: string) {
     } catch (e) {
         console.error(e);
         return null;
+    }
+}
+
+export async function countCardsInDeck(username: string, deckTitle: string, cardName: string) {
+    try {
+        // Find the user
+        const user = await userCollection.findOne<User>({ username: username });
+        if (!user) {
+            throw new Error(`User "${username}" not found.`);
+        }
+
+        // Find the deck with the specified title
+        const deck = user.deck.find(deck => deck.title === deckTitle);
+        if (!deck) {
+            throw new Error(`Deck "${deckTitle}" not found for user "${username}".`);
+        }
+
+        // Find the card index in the deck
+        const cardIndex = deck.cards.findIndex(card => card.name === cardName);
+        
+        // If the card is not found, return 0
+        if (cardIndex === -1) {
+            return 0;
+        }
+
+        // Return the numberOfCards for the found card
+        return deck.cards[cardIndex].numberOfCards;
+    } catch (e) {
+        console.error(e);
+        throw e; // Re-throw the error to be handled by the caller
     }
 }
 
