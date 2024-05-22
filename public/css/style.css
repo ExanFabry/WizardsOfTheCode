@@ -487,7 +487,17 @@ option {
 .NewDeckContainer > section:nth-child(3) button {
     width: 60px;
 }
-
+/* ---------------- Error Page ---------------- */
+#ErrorHeader {
+    display: flex;
+    margin: 3rem;
+}
+#ErrorMessage {
+    padding: 8rem;
+}
+#ErrorMessage h1 {
+    font-size: 80px;
+}
 /* ---------------- Pop Up ---------------- */
 .popup {
     position: relative;
