@@ -1,6 +1,7 @@
 <%- include("partials/header") %>
     <script src="/js/modalDrawTest.js" defer></script>
     <script src="/js/drawTestSelectedDeck.js" defer></script>
+    <script src="/js/sentFormOnChange.js" defer></script>
     <script src="/routers/drawTestRouter.ts" defer></script>
     <!--<script src="/js/modalDrawTestDiscard.js" defer></script>-->
     <title><%= title %></title>
@@ -51,13 +52,14 @@
         <% } %>
     </header>
     <main>
-        <form action="/selectedDeck" method="GET" id="DrawTestSelection">
+        <form action="/drawTest/selectedDeck" method="GET" id="DrawTestSelection">
             <select name="devices" id="deckSelect">
                 <option value="chooseADeck">Kies een deck</option>
-                <% for( let index = 0; index < decks.length; index++ ) { %>
-                    <option value=""><%= decks[index] %></option>
-                    <%= deck = decks[index] %>
-                    <% console.log(deck.cards); %>
+                <% if (decks !== null) { %>
+                    <% for( let index = 0; index < decks.length; index++ ) { %>
+                        <option value=""><%= decks[index].title %></option>
+                        <%= deck = decks[index] %>
+                    <% } %>
                 <% } %>
             </select>
         </form>
@@ -98,7 +100,9 @@
                 <section id="drawPileCards">
                     <% for( let index = 0; index < cardImage.length; index++ ) { %>
                         <form action="/addToDiscardPile" method="get">
-                            <button onclick="addItemToDiscard()"><img src="<%= cardImage[index] %>" alt="" width="300px"></button>
+                            <%= console.log(cardImage[index]); %>
+                            <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= cardImage[index].multiverseid %>&type=card" alt="<%= card.name %>">
+                            <!-- <button onclick="addItemToDiscard()"><img src="<%= cardImage[index] %>" alt="" width="300px"></button> -->
                             <% function addItemToDiscard(){
                                 discardPile.push(cardImage[index].name);
                                 cardImage.splice(index, 1);

@@ -1,12 +1,20 @@
-import express from "express";
-import { getUserDecks, cards } from "../database";
+import express, { Express } from "express";
+import { getUserDecks, cards, readCardsFromDeck, getUserDecksFullDeck, getUserDecksWithCards } from "../database";
 import { Card, UserCard, UserDeck } from "../types";
+const app : Express = express();
+app.use(express.static('public'));
 
 //Declaratie van arrays
-let deck : UserDeck;
+// let deck : UserDeck;
 let drawPile : UserCard[] = [];
 let discardPile : UserCard[] = [];
 let result : UserDeck[] | undefined;
+//Deck wordt geinitialiseerd in de html.
+let deck: UserDeck = {
+    title: 'Default Deck',
+    cards: []
+  };
+  
 /*(async () => {
     try {
         result = await cards();
@@ -68,13 +76,16 @@ function MakePilesEmpty() : void{
 
 //Voeg toe aan drawpile
 function AddToDrawPile() : void{
-    console.log("hallo");
+    // console.log(deck);
+    //Er wordt een random kaart gekozen uit deck.
     let randomNumber : number = Math.floor(Math.random() * deck.cards.length); //.cards?.length
+    //Dat wordt toegevoegd aan drawpile.
     drawPile.push(deck.cards[randomNumber]);
+    //De kaart wordt uit deck gehaald.
     deck.cards.splice(randomNumber, 1);
-    for(let i = 0; i < drawPile.length; i++){
-        console.log(drawPile[i]);
-    }
+    // for(let i = 0; i < drawPile.length; i++){
+    //     console.log(drawPile[i]);
+    // }
 }
 
 //Voeg toe aan drawpile
@@ -94,11 +105,15 @@ function AddToDiscardPile(image : number) : void{
 }
 
 function CountingSpecificCard(arrayOfCards : UserCard[]) : { [key: string]: number }{
+    //Declareert de variabele counts en ik steek er een lege waarde in.
     let counts : { [key: string]: number } = {};
+    //De loop blijft zich herhalen afhankelijk van hoeveel waardes er zitten in arrayOfCards
     for(let i : number = 0; i < arrayOfCards.length; i++){
+        //Als de kaart al in counts zit dan gaat de waarde omhoog.
         if(counts.hasOwnProperty(arrayOfCards[i].name)){
             counts[arrayOfCards[i].name]++;
         }
+        //Anders is het totale aantal van de kaart 1.
         else{
             counts[arrayOfCards[i].name] = 1;
         }
@@ -122,7 +137,21 @@ export function drawTestRouter() {
     
     router.get("/", async (req, res) => {
         cardCounts = CountingSpecificCard(discardPile);
-        const result =  await getUserDecks("dennis");
+        const result =  await getUserDecksFullDeck("dennis");
+        const resultDecks = await getUserDecksFullDeck("dennis");
+        result?.forEach(deck => {
+            deck.cards.forEach(cards => {
+                console.log(cards.multiverseid);
+            });
+        });
+        // console.log(resultDecks);
+        // result?.forEach(deck => {
+        //     console.log(deck);
+        //   });
+        //console.log(JSON.stringify(result));
+        /*for(let i = 0; i < result?.length; i++){
+            readCardsFromDeck(req.session.user.name, result[i]);
+        }*/
         res.render("drawTest", {
             title: "Draw Test",
             cardImage: drawPile,
@@ -130,20 +159,28 @@ export function drawTestRouter() {
             cardImageDiscard: Object.keys(cardCounts),
             numberOfCards: Object.values(cardCounts),
             user: req.session.user?.username,
-            decks: result,
-            deck: deck
+            decks: result
         })
     });
 
-    router.get("/draw", (req, res) => {
+    router.get("/draw", async (req, res) => {
+        //Add to draw pile.
         AddToDrawPile();
+        //In cardCounts zitten de kaarten en hoeveel ervan de kaarten in het deck zitten.
         cardCounts = CountingSpecificCard(discardPile);
+        //Returnt de decks.
+        const result =  await getUserDecksFullDeck("dennis");
+        console.log(drawPile);
         res.render("drawTest", {
+            //Title is Draw Test
             title: "Draw Test",
             cardImage: drawPile,
             discardPile: discardPile,
+            user: req.session.user?.username,
             cardImageDiscard: Object.keys(cardCounts),
-            numberOfCards: Object.values(cardCounts)
+            numberOfCards: Object.values(cardCounts),
+            decks: result,
+            deck: deck
         })
     });
 
@@ -157,7 +194,7 @@ export function drawTestRouter() {
         })
     });
 
-    router.get("/selectedDeck", (req, res) => {
+    /*router.get("/selectedDeck", (req, res) => {
         cardCounts = CountingSpecificCard(discardPile);
         MakePilesEmpty(); 
         res.render("drawTest", { 
@@ -165,7 +202,7 @@ export function drawTestRouter() {
             cardImage: drawPile,
             cardImageDiscard: discardPile
         })
-    });
+    });*/
     
     router.get("/addToDiscardPile", (req, res) => {
         cardCounts = CountingSpecificCard(discardPile);
@@ -179,6 +216,32 @@ export function drawTestRouter() {
             addToDiscard: addToDiscard
         })
     });
+    
+    router.get("/selectedDeck", async (req, res) => {
+        // const selectedDeckTitle = req.query.selectedDeck as string;
+        const selectedDeckTitle = req.query.deckSelect as string;
+        const allDecks = await getUserDecksFullDeck("dennis");
+        const selectedDeck = allDecks?.find(deck => deck.title === selectedDeckTitle);
+        // console.log(req.query.selectedDeck);
+        console.log(selectedDeckTitle);
+        if (selectedDeck) {
+          deck = selectedDeck;
+          MakePilesEmpty(); // Optioneel, als je wilt dat de stapels worden geleegd bij het selecteren van een nieuw deck
+          console.log(deck.cards);
+        }
+    
+        cardCounts = CountingSpecificCard(discardPile);
+        res.render("drawTest", {
+          title: "Draw Test",
+          cardImage: drawPile,
+          discardPile: discardPile,
+          cardImageDiscard: Object.keys(cardCounts),
+          numberOfCards: Object.values(cardCounts),
+          user: req.session.user?.username,
+          decks: allDecks,
+          deck: deck
+        });
+      });
     
     return router;
 }

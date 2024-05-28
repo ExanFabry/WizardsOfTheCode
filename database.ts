@@ -213,6 +213,60 @@ export async function getUserDecks(username: string) {
     }
 }
 
+export async function getUserDecksFullDeck(username: string) {
+    try {
+        // Find the user
+        const user = await userCollection.findOne({ username: username });
+        if (!user) {
+            throw new Error(`User "${username}" not found.`);
+        }
+
+        // Extract the titles from user's decks
+        const deckTitles = user.deck.map(deck => deck.title);
+
+        // Log whether decks are found or not
+        if (deckTitles.length > 0) {
+            console.log(`Decks found for user "${username}".`);
+        } else {
+            console.log(`No decks found for user "${username}".`);
+        }
+
+        // Return the user's deck titles
+        return user.deck;
+    } catch (e) {
+        //Returns null
+        console.error(e);
+        return null;
+    }
+}
+
+export async function getUserDecksWithCards(username: string) {
+    try {
+        // Find the user
+        const user = await userCollection.findOne({ username: username });
+        if (!user) {
+            throw new Error(`User "${username}" not found.`);
+        }
+
+        // Extract the titles from user's decks
+        const decks = user.deck;
+
+        // Log whether decks are found or not
+        if (decks.length > 0) {
+            console.log(`Decks found for user "${username}".`);
+        } else {
+            console.log(`No decks found for user "${username}".`);
+        }
+
+        // Return the user's deck titles
+        return user.deck;
+    } catch (e) {
+        //Returns null
+        console.error(e);
+        return null;
+    }
+}
+
 export async function changeDeckName(username: string, currentTitle: string, newTitle: string) {
     try {
         // Find the user and the deck
