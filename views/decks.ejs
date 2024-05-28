@@ -28,19 +28,19 @@
         <section id="DecksGallery">
             <% for (let i = 0; i < decks.length; i++) { %>
                 <figure>
-                    <a href="#" class="ModalTrigger" title="<%= decks[i] %>">
-                        <img src="assets/images/deck<%= i+1 %>.jpg" alt="<%= decks[i] %>">
+                    <a href="#" class="ModalTrigger" title="<%= decks[i].title %>">
+                        <img src="<%= decks[i].urlBackground %>" alt="<%= decks[i].title %>">
                     </a>
                     <figcaption>
-                        <h3><%= decks[i] %></h3>
+                        <h3><%= decks[i].title %></h3>
                         <button class="DecksChangeNameBtn">Naam Wijzigen</button>
                         <form action="" method="post">
-                            <input type="hidden" name="oldDeckName" value="<%= decks[i] %>">
+                            <input type="hidden" name="oldDeckName" value="<%= decks[i].title %>">
                             <input type="text" name="newDeckName" class="DecksNewDeckInput" placeholder="Nieuwe Deck Naam" style="display:none" maxlength="20" required>
                             <button type="submit" class="DecksSaveBtn" style="display:none">Opslaan</button>
                         </form>
                         <form action="" method="post" class="DecksDeleteForm">
-                            <input type="hidden" name="deckDelete" value="<%= decks[i] %>">
+                            <input type="hidden" name="deckDelete" value="<%= decks[i].title %>">
                             <button type="button" class="DecksDeleteBtn">Verwijderen</button>
                             <div class="DeleteConfirmation" style="display:none">
                                 <p>Weet je zeker dat je</p>
@@ -81,11 +81,12 @@
                 <form action="" method="post">
                     <label for="name">Naam:</label>
                     <input type="text" name="nameNew" id="name" maxlength="20" required>
-                    <input type="submit" value="Create">
+                    <label for="backgroundUrl" id="toggleBackgroundUrl">Klik hier om een achtergrond toe te voegen.</label>
+                    <input type="url" name="backgroundUrl" id="backgroundUrl" maxlength="255" placeholder="url achtergrond" style="display: none; width: 90%;"  required>
+                    <br><input type="submit" value="Create">
                 </form>
-                <form action="" method="post">
-                    <button>Voer de URL in voor de achtergrond</button>
-                </form>
+                
+                    
                 <span class="ModalClose">X</span>
             </div>
         </div>

@@ -21,11 +21,13 @@ export function newDeckRouter() {
 
         const deckName: string = req.query.deckName as string;
         const newDeck: boolean = req.query.newDeck === "true";
+
+        const username : string = typeof req.session.user?.username === 'string' ? req.session.user?.username : "";
         
         let cardsDeck : UserCard[] = [];
  
         if (deckName !== undefined) {
-            const result = await readCardsFromDeck("dennis", deckName);
+            const result = await readCardsFromDeck(username, deckName);
             if (result !== null) {
                 cardsDeck = result.map(cardInfo => ({
                 name: cardInfo.title,
@@ -66,20 +68,22 @@ export function newDeckRouter() {
         let newDeckName : string = req.body.newDeckName;
         let deckName : string = typeof req.query.deckName == 'string' ? req.query.deckName : "";
 
+        const username : string = typeof req.session.user?.username === 'string' ? req.session.user?.username : "";
+
         if (nameToAdd) {
-            await addCardToDeck("dennis", deckName, nameToAdd, idToAdd, typeToAdd)
+            await addCardToDeck(username, deckName, nameToAdd, idToAdd, typeToAdd)
             req.session.message = {type: "success", message: `"${nameToAdd}" toegevoegd aan deck.`};
         }
     
         if (nameToRemove) {
-            await deleteCardFromDeck("dennis", deckName, nameToRemove);
+            await deleteCardFromDeck(username, deckName, nameToRemove);
             req.session.message = {type: "success", message: `"${nameToRemove}" verwijderd uit deck.`};
         }
 
         let redirectURL : string;
 
         if (newDeckName) {
-            const userDecks = await getUserDecks("dennis");
+            const userDecks = await getUserDecks(username);
             if (userDecks && userDecks.includes(newDeckName)) {
                 req.session.message = {type: "error", message: `De naam "${newDeckName}" is al in gebruik.`};
                 redirectURL = "/newDeck" + (req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '');
@@ -87,7 +91,7 @@ export function newDeckRouter() {
                     res.redirect(redirectURL);
                 });
             } else {
-                await changeDeckName("dennis", deckName, newDeckName)
+                await changeDeckName(username, deckName, newDeckName)
                 let encodedDeckName = encodeURIComponent(newDeckName);
                 redirectURL = "/newDeck?deckName=" + encodedDeckName + "&newDeck=true";
             }
