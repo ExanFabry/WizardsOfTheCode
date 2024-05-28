@@ -15,13 +15,14 @@ function openModal(index, trigger) {
         const title = trigger.getAttribute('title');
         modals[0].style.display = "block";
         let modalImg = document.querySelector('.Modal img');
-        modalImg.src = `assets/images/deck${index+1}.jpg`;
+        modalImg.src = trigger.querySelector('img').src;
         let modalTitle = document.querySelector('.ModalContent h2');
         modalTitle.textContent = title;
         let modalValue = document.querySelector('.ModalContent form input[name="nameEdit"]');
         modalValue.value = title;
     }
 }
+
 // modal close sequence
 function closeModal(index) {
     modals[index].style.display = "none";
@@ -90,3 +91,18 @@ document.querySelectorAll('.DecksCancelDeleteBtn').forEach(btn => {
         deleteConfirmation.style.display = 'none';
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const backgroundUrlField = document.getElementById("backgroundUrl");
+    const toggleBackgroundUrlLabel = document.getElementById("toggleBackgroundUrl");
+
+    toggleBackgroundUrlLabel.addEventListener("click", function() {
+        // Toggle de weergave van het veld voor de achtergrond-URL
+        backgroundUrlField.style.display = backgroundUrlField.style.display === "none" ? "inline" : "none";
+    });
+});
+
+
+
+
+

@@ -18,8 +18,10 @@ export function homeRouter() {
             cachedCards = await getCards();
         }
 
+        const username : string = typeof req.session.user?.username === 'string' ? req.session.user?.username : "";
+
         let userDecks: string[] = [] 
-        const result =  await getUserDecks("dennis");
+        const result =  await getUserDecks(username);
     
         if (result !== null) {
             userDecks = result
@@ -57,13 +59,15 @@ export function homeRouter() {
         let namecard : string = req.body.namecard;
         let multiverseid : number = parseInt(req.body.multiverseid);
         let type : string = req.body.type;
+
+        const username : string = typeof req.session.user?.username === 'string' ? req.session.user?.username : "";
         
-        let cardsInDeck : number = await countCardsInDeck("dennis", selectedDeck, namecard)
+        let cardsInDeck : number = await countCardsInDeck(username, selectedDeck, namecard)
 
         let cardsDeck : UserCard[] = [];
 
         if (selectedDeck !== undefined) {
-            const result = await readCardsFromDeck("dennis", selectedDeck);
+            const result = await readCardsFromDeck(username, selectedDeck);
             if (result !== null) {
                 cardsDeck = result.map(cardInfo => ({
                 name: cardInfo.title,
@@ -85,7 +89,7 @@ export function homeRouter() {
         }
         
         else {
-            await addCardToDeck("dennis", selectedDeck, namecard, multiverseid, type)
+            await addCardToDeck(username, selectedDeck, namecard, multiverseid, type)
             req.session.message = {type: "success", message: `"${namecard}" toegevoegd aan deck: "${selectedDeck}"`};
         }
         req.session.save(() => {

@@ -1,5 +1,5 @@
 import express from "express";
-import { addNewDeck, changeDeckName, deleteDeck, getUserDecks } from "../database";
+import { addNewDeck, changeDeckName, deleteDeck, getUserDecks, getUserDecksWithUrls } from "../database";
 import session from "../session";
 import { flashMiddleware } from "../flashMiddleware";
 
@@ -12,8 +12,10 @@ export function decksRouter() {
 
     router.get("/", async (req, res) => {      
 
-        let userDecks: string[] = [] 
-        const result =  await getUserDecks("dennis");
+        const username : string = typeof req.session.user?.username === 'string' ? req.session.user?.username : "";
+
+        let userDecks: { title: string; urlBackground: string }[] = [];
+        const result =  await getUserDecksWithUrls(username);
 
         if (result !== null) {
             userDecks = result
@@ -36,9 +38,12 @@ export function decksRouter() {
         let newDeckName : string = req.body.newDeckName;
         let oldDeckName : string = req.body.oldDeckName;
         let deckDelete : string = req.body.deckDelete;
+        let backgroundUrl : string = req.body.backgroundUrl;
+
+        const username : string = typeof req.session.user?.username === 'string' ? req.session.user?.username : "";
 
         if (deckDelete) {
-            await deleteDeck("dennis", deckDelete)
+            await deleteDeck(username, deckDelete)
             req.session.message = {type: "success", message: `Het deck "${deckDelete}" is verwijderd.`};
             return req.session.save(() => {
                 res.redirect("/decks");
@@ -46,7 +51,7 @@ export function decksRouter() {
         }
         
         if (newDeckName) {
-            const userDecks = await getUserDecks("dennis");
+            const userDecks = await getUserDecks(username);
             if (userDecks && userDecks.includes(newDeckName)) {
                 req.session.message = {type: "error", message: `De naam "${newDeckName}" is al in gebruik.`};
                 return req.session.save(() => {
@@ -54,7 +59,7 @@ export function decksRouter() {
                 });
             }
             else {
-                await changeDeckName("dennis", oldDeckName, newDeckName)
+                await changeDeckName(username, oldDeckName, newDeckName)
                 return req.session.save(() => {
                 res.redirect("/decks");
                 });
@@ -62,7 +67,7 @@ export function decksRouter() {
         }
 
         if (deckName) {
-            const userDecks = await getUserDecks("dennis");
+            const userDecks = await getUserDecks(username);
             if (userDecks && userDecks.includes(deckName)) {
                 req.session.message = {type: "error", message: `De naam "${deckName}" is al in gebruik.`};
                 return req.session.save(() => {
@@ -70,7 +75,7 @@ export function decksRouter() {
                 });
             } else {
                 newDeck = true;
-                await addNewDeck("dennis", deckName)
+                await addNewDeck(username, deckName, backgroundUrl)
             }
 
         } else {

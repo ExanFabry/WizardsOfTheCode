@@ -125,7 +125,7 @@ export async function deleteUser(username: string, password: string){
     }
 }
 
-export async function addNewDeck( username: string, title: string,) {
+export async function addNewDeck(username: string, title: string, urlBackground?: string) {
     try {
         // Find the user
         const user = await userCollection.findOne({ username: username });
@@ -133,10 +133,21 @@ export async function addNewDeck( username: string, title: string,) {
             throw new Error(`User "${username}" not found.`);
         }
 
-        // Create the new deck
+        // Create the new deck with a default background link if none provided
+        const defaultBackgrounds = [
+            'assets/images/deck1.jpg',
+            'assets/images/deck2.jpg',
+            'assets/images/deck3.jpg',
+            'assets/images/deck4.jpg'
+        ];
+
+        // Choose a random background link if urlBackground is not provided
+        const randomBackground = defaultBackgrounds[Math.floor(Math.random() * defaultBackgrounds.length)];
+
         const newDeck: UserDeck = {
             title: title,
-            cards: []
+            cards: [],
+            urlBackground: urlBackground || randomBackground // Use the provided urlBackground or a random one
         };
 
         // Add the new deck to the user's decks
@@ -188,7 +199,8 @@ export async function getUserDecks(username: string) {
         // Find the user
         const user = await userCollection.findOne({ username: username });
         if (!user) {
-            throw new Error(`User "${username}" not found.`);
+            console.log(`User "${username}" not found.`);
+            return null; 
         }
 
         // Extract the titles from user's decks
@@ -208,6 +220,37 @@ export async function getUserDecks(username: string) {
         return null;
     }
 }
+
+export async function getUserDecksWithUrls(username: string) {
+    try {
+        // Find the user
+        const user = await userCollection.findOne({ username: username });
+        if (!user) {
+            console.log(`User "${username}" not found.`);
+            return null;
+        }
+
+        // Extract the titles and background URLs from user's decks
+        const decksWithUrls = user.deck.map(deck => ({
+            title: deck.title,
+            urlBackground: deck.urlBackground
+        }));
+
+        // Log whether decks are found or not
+        if (decksWithUrls.length > 0) {
+            console.log(`Decks found for user "${username}".`);
+        } else {
+            console.log(`No decks found for user "${username}".`);
+        }
+
+        // Return the user's deck titles with URLs
+        return decksWithUrls;
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+}
+
 
 export async function changeDeckName(username: string, currentTitle: string, newTitle: string) {
     try {

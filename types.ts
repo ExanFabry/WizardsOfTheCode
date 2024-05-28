@@ -22,7 +22,8 @@ export interface User {
 
 export interface UserDeck {
     title: string;
-    cards: UserCard[];
+    cards: UserCard[],
+    urlBackground: string
 }
 
 export interface UserCard {
