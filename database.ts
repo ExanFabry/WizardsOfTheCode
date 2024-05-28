@@ -2,7 +2,7 @@ import { Collection, MongoClient } from "mongodb";
 import { Card, RootObject, User, UserDeck, UserCard } from "./types";
 import bcrypt from "bcrypt";
 
-export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mongodb.net/";
+export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mongodb.net/?retryWrites=true&w=majority&appName=Webontwikkeling";
 //export const uri = "mongodb+srv://Exan:WizardsOfTheCode@decks.9htkbkt.mongodb.net/?retryWrites=true&w=majority&appName=Decks";
 const client = new MongoClient(uri);
 
@@ -81,10 +81,6 @@ async function exit() {
     process.exit(0);
 }
 
-
-
-
-
 const userCollection : Collection<User> = client.db("mtgProject").collection<User>("users");
 
 export async function addUser(username: string, password: string) {
@@ -129,7 +125,7 @@ export async function deleteUser(username: string, password: string){
     }
 }
 
-export async function addNewDeck( username: string, title: string,) {
+export async function addNewDeck(username: string, title: string, urlBackground?: string) {
     try {
         // Find the user
         const user = await userCollection.findOne({ username: username });
@@ -137,10 +133,21 @@ export async function addNewDeck( username: string, title: string,) {
             throw new Error(`User "${username}" not found.`);
         }
 
-        // Create the new deck
+        // Create the new deck with a default background link if none provided
+        const defaultBackgrounds = [
+            'assets/images/deck1.jpg',
+            'assets/images/deck2.jpg',
+            'assets/images/deck3.jpg',
+            'assets/images/deck4.jpg'
+        ];
+
+        // Choose a random background link if urlBackground is not provided
+        const randomBackground = defaultBackgrounds[Math.floor(Math.random() * defaultBackgrounds.length)];
+
         const newDeck: UserDeck = {
             title: title,
-            cards: []
+            cards: [],
+            urlBackground: urlBackground || randomBackground // Use the provided urlBackground or a random one
         };
 
         // Add the new deck to the user's decks
@@ -192,7 +199,8 @@ export async function getUserDecks(username: string) {
         // Find the user
         const user = await userCollection.findOne({ username: username });
         if (!user) {
-            throw new Error(`User "${username}" not found.`);
+            console.log(`User "${username}" not found.`);
+            return null; 
         }
 
         // Extract the titles from user's decks
@@ -213,11 +221,16 @@ export async function getUserDecks(username: string) {
     }
 }
 
+<<<<<<< HEAD
 export async function getUserDecksFullDeck(username: string) {
+=======
+export async function getUserDecksWithUrls(username: string) {
+>>>>>>> bcee765f94a38c82db49d13077213dba70da0ce2
     try {
         // Find the user
         const user = await userCollection.findOne({ username: username });
         if (!user) {
+<<<<<<< HEAD
             throw new Error(`User "${username}" not found.`);
         }
 
@@ -226,20 +239,41 @@ export async function getUserDecksFullDeck(username: string) {
 
         // Log whether decks are found or not
         if (deckTitles.length > 0) {
+=======
+            console.log(`User "${username}" not found.`);
+            return null;
+        }
+
+        // Extract the titles and background URLs from user's decks
+        const decksWithUrls = user.deck.map(deck => ({
+            title: deck.title,
+            urlBackground: deck.urlBackground
+        }));
+
+        // Log whether decks are found or not
+        if (decksWithUrls.length > 0) {
+>>>>>>> bcee765f94a38c82db49d13077213dba70da0ce2
             console.log(`Decks found for user "${username}".`);
         } else {
             console.log(`No decks found for user "${username}".`);
         }
 
+<<<<<<< HEAD
         // Return the user's deck titles
         return user.deck;
     } catch (e) {
         //Returns null
+=======
+        // Return the user's deck titles with URLs
+        return decksWithUrls;
+    } catch (e) {
+>>>>>>> bcee765f94a38c82db49d13077213dba70da0ce2
         console.error(e);
         return null;
     }
 }
 
+<<<<<<< HEAD
 export async function getUserDecksWithCards(username: string) {
     try {
         // Find the user
@@ -266,6 +300,8 @@ export async function getUserDecksWithCards(username: string) {
         return null;
     }
 }
+=======
+>>>>>>> bcee765f94a38c82db49d13077213dba70da0ce2
 
 export async function changeDeckName(username: string, currentTitle: string, newTitle: string) {
     try {
@@ -408,6 +444,36 @@ export async function readCardsFromDeck(username: string, title: string) {
     } catch (e) {
         console.error(e);
         return null;
+    }
+}
+
+export async function countCardsInDeck(username: string, deckTitle: string, cardName: string) {
+    try {
+        // Find the user
+        const user = await userCollection.findOne<User>({ username: username });
+        if (!user) {
+            throw new Error(`User "${username}" not found.`);
+        }
+
+        // Find the deck with the specified title
+        const deck = user.deck.find(deck => deck.title === deckTitle);
+        if (!deck) {
+            throw new Error(`Deck "${deckTitle}" not found for user "${username}".`);
+        }
+
+        // Find the card index in the deck
+        const cardIndex = deck.cards.findIndex(card => card.name === cardName);
+        
+        // If the card is not found, return 0
+        if (cardIndex === -1) {
+            return 0;
+        }
+
+        // Return the numberOfCards for the found card
+        return deck.cards[cardIndex].numberOfCards;
+    } catch (e) {
+        console.error(e);
+        throw e; // Re-throw the error to be handled by the caller
     }
 }
 

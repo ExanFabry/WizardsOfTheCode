@@ -1,8 +1,12 @@
 import express from "express";
-import { Card} from "../types";
-import { addCardToDeck, getCards, getUserDecks } from "../database";
+import { Card, UserCard} from "../types";
+import { addCardToDeck, countCardsInDeck, getCards, getUserDecks, readCardsFromDeck } from "../database";
+import session from "../session";
+import { flashMiddleware } from "../flashMiddleware";
 
 const app = express();
+app.use(session);
+app.use(flashMiddleware);
 
 let cachedCards : Card[];
 
@@ -14,8 +18,10 @@ export function homeRouter() {
             cachedCards = await getCards();
         }
 
+        const username : string = typeof req.session.user?.username === 'string' ? req.session.user?.username : "";
+
         let userDecks: string[] = [] 
-        const result =  await getUserDecks("dennis");
+        const result =  await getUserDecks(username);
     
         if (result !== null) {
             userDecks = result
@@ -23,15 +29,18 @@ export function homeRouter() {
 
         let q = typeof req.query.q === 'string' ? req.query.q : "";
         let page = parseInt(typeof req.query.page === 'string' ? req.query.page : "1");
-        let pageSize = 10;
+        let pageSize : number = 10;
 
         let filteredCards = cachedCards.filter(card => card.name.toLowerCase().includes(q.toLowerCase()));
 
-        const totalItems = filteredCards.length;
-        const totalPages = Math.ceil(totalItems / pageSize);
-        const startIndex = (page - 1) * pageSize;
-        const endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
-        const paginatedCards = filteredCards.slice(startIndex, endIndex + 1);
+        const totalItems : number = filteredCards.length;
+        const totalPages : number = Math.ceil(totalItems / pageSize);
+        const startIndex : number = (page - 1) * pageSize;
+        const endIndex : number = Math.min(startIndex + pageSize - 1, totalItems - 1);
+        const paginatedCards : Card[] = filteredCards.slice(startIndex, endIndex + 1);
+
+        const message = req.session.message;
+        delete req.session.message;
 
         res.render("home", {
             title: "Home",
@@ -40,20 +49,52 @@ export function homeRouter() {
             page: page,
             totalPages: totalPages,
             userDecks : userDecks,
-            user: req.session.user?.username
+            user: req.session.user?.username,
+            message: message
         });
     });
 
     router.post("/", async (req, res) => {
-        let selectedDeck = req.body.selectedDeck;
-        let namecard = req.body.namecard;
-        let multiverseid = req.body.multiverseid;
-        let type = req.body.type;
-        
-        await addCardToDeck("dennis", selectedDeck, namecard, multiverseid, type)
-        console.log()
+        let selectedDeck : string = req.body.selectedDeck;
+        let namecard : string = req.body.namecard;
+        let multiverseid : number = parseInt(req.body.multiverseid);
+        let type : string = req.body.type;
 
-        res.redirect("/home");
+        const username : string = typeof req.session.user?.username === 'string' ? req.session.user?.username : "";
+        
+        let cardsInDeck : number = await countCardsInDeck(username, selectedDeck, namecard)
+
+        let cardsDeck : UserCard[] = [];
+
+        if (selectedDeck !== undefined) {
+            const result = await readCardsFromDeck(username, selectedDeck);
+            if (result !== null) {
+                cardsDeck = result.map(cardInfo => ({
+                name: cardInfo.title,
+                multiverseid: cardInfo.multiverseid,
+                numberOfCards: cardInfo.numberOfCards,
+                type: cardInfo.type
+            }));
+        }
+        }
+
+        const numberOfCardsInDeck : number = cardsDeck.reduce((total, card) => total + card.numberOfCards, 0);
+
+
+        if (numberOfCardsInDeck >= 60) {
+            req.session.message = {type: "error", message: `Het deck "${selectedDeck}" zit vol.`};
+        }
+        else if (type !== "Land" && cardsInDeck >= 4) {
+            req.session.message = {type: "error", message: `Het deck "${selectedDeck}" bevat al 4 kaarten van "${namecard}".`};
+        }
+        
+        else {
+            await addCardToDeck(username, selectedDeck, namecard, multiverseid, type)
+            req.session.message = {type: "success", message: `"${namecard}" toegevoegd aan deck: "${selectedDeck}"`};
+        }
+        req.session.save(() => {
+            res.redirect("back");
+        });
     });
     
     return router;

@@ -22,7 +22,8 @@ export interface User {
 
 export interface UserDeck {
     title: string;
-    cards: UserCard[];
+    cards: UserCard[],
+    urlBackground: string
 }
 
 export interface UserCard {
@@ -30,4 +31,9 @@ export interface UserCard {
     multiverseid: number;
     type: string;
     numberOfCards: number;
+}
+
+export interface FlashMessage {
+    type: "error" | "success"
+    message: string;
 }

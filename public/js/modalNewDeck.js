@@ -1,6 +1,4 @@
 // declarations
-let decksArr = ["Azorius", "Orzhov", "Dimir", "Rakdos" ];
-
 let modals = document.getElementsByClassName("Modal");
 let buttons = document.getElementsByClassName("ModalTrigger");
 let spans = document.getElementsByClassName("ModalClose");

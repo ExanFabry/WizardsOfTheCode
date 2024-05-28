@@ -19,9 +19,17 @@
     <main>
         <section>
             <form id="HomeSearch" action="" method="get">
-                <input type="text" placeholder="Name of a Card" name="q" value="<%= q %>">
-                <button>Search</button>
+                <input type="text" placeholder="Naam van een kaart" name="q" value="<%= q %>">
+                <button>Zoeken</button>
             </form>
+        </section>
+        <section class="HomeErrorContainer">
+            <% if (!message) { %>
+                <br>
+            <% } %>  
+            <% if (message) { %>
+                <p class="<%= message.type %>"><%= message.message %></p>
+            <% } %>   
         </section>
         <section id="HomeCards">
             <% for (const card of cards) { %>
@@ -32,7 +40,6 @@
                         </a>
                         <p><%= card.name %></p>
                     </article>
-                    
                 <% } %>
             <% } %>
         </section>
@@ -47,26 +54,27 @@
                 <button name="page" value="<%= page + 1 %>" <% if (page === totalPages) { %> disabled <% } %> >&rightarrow;</button>
             </form>
         </section>
-        <div class="Modal">
+        <div class="Modal" >
             <div class="ModalContent">
                 <figure id="ModalFigure">
                 </figure>
-                <section id="ModalSection">
+                <section id="ModalSection" style="margin: 20px 50px;"> 
                 </section>
-                <section>
+                <section style="display: inline-block;">
                     <p>Toevoegen aan deck&colon;</p>
                     <form action="" method="post" >
                         <input type="hidden" name="namecard" value="" id="ModalForm"></input>
                         <input type="hidden" name="multiverseid" value="" id="ModalForm2"></input>
                         <input type="hidden" name="type" value="" id="ModalForm3"></input>
                         <select name="selectedDeck">
-                            <option disabled selected>Choose deck</option>
+                            <option disabled selected>Kies een deck</option>
                             <% for (const deck of userDecks) { %>
                                 <option value="<%= deck %>"><%= deck %></option>
                             <% } %>
                         </select>
                         <button type="submit">Toevoegen</button>
                     </form>
+                </section>
                 <span class="ModalClose">X</span>
             </div>
         </div>
