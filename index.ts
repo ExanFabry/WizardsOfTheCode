@@ -49,6 +49,12 @@ app.get("/loginForm/login", (req, res) => {
         loginSuccesOrFailed: "Login"
     });
 });
+app.use((req, res) => {
+    res.status(404).render("404", { 
+        title: "404: Page Not Found",
+        user: req.session.user
+    });
+});
 app.post("/loginForm/login", async(req, res) => {
     const email : string = req.body.username;
     const password : string = req.body.password;
