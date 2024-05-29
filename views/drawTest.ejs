@@ -57,7 +57,7 @@
                 <option value="chooseADeck">Kies een deck</option>
                 <% if (decks !== null) { %>
                     <% for( let index = 0; index < decks.length; index++ ) { %>
-                        <option value=""><%= decks[index].title %></option>
+                        <option value="<%= decks[index] %>"><%= decks[index].title %></option>
                         <%= deck = decks[index] %>
                     <% } %>
                 <% } %>
