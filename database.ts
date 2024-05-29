@@ -7,7 +7,7 @@ export const uri = "mongodb+srv://duckaert:duckaert@webontwikkeling.canwgkr.mong
 const client = new MongoClient(uri);
 
 export async function cards() { 
-    let cursor =  client.db("mtgProject").collection("apiCardCollection").find<Card>({});
+    let cursor = client.db("mtgProject").collection("apiCardCollection").find<Card>({});
     let result : Card[] = await cursor.limit(60).toArray();
     console.log(result);
     return result;
@@ -142,7 +142,8 @@ export async function addNewDeck(username: string, title: string, urlBackground?
         ];
 
         // Choose a random background link if urlBackground is not provided
-        const randomBackground = defaultBackgrounds[Math.floor(Math.random() * defaultBackgrounds.length)];
+        let backgroundNumber = Math.floor(Math.random() * defaultBackgrounds.length);
+        const randomBackground = defaultBackgrounds[backgroundNumber];
 
         const newDeck: UserDeck = {
             title: title,

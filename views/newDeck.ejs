@@ -31,66 +31,34 @@
                     <br>
                 <% } %>  
                 <% if (message) { %>
-                    <p class="<%= message.type %>" style="margin-top: 50px;"><%= message.message %></p>
+                    <p class="<%= message.type %>" style="position:absolute; left: 40%; top: 100px;"><%= message.message %></p>
                 <% } %> 
                 </section>
             </section>
             <section class="NewDeckFinished">
-                <p>Wanneer je klaar bent, druk op de knop hieronder.</p>
                 <button>
                     <a href="/decks" class="LeaveLink">Klaar</a>
                 </button>
             </section>    
         </article>
-
-        <section class="NewDeckWindow" id="deckSection">
-            <% for (const card of deck) { %>
-                <article class="cardItem">
-                    <a href="" class="ModalTrigger">
-                        <img loading="lazy" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="Deck Image" class="NewDeckWindowImg">
-                    </a>
-                    <p><%= card.name %></p>
-                    <p>Kaarten in deck: <%= card.numberOfCards %></p>
-                    <section>
-                        <% if (card.type !== "Land" && card.numberOfCards >= 4) { %>
-                            <button type="submit" class="popup" onclick="togglePopup(this)">▲
-                                <span class="popuptext" id="myPopup">
-                                    4 kaarten max per deck
-                                </span>
-                            </button>
-                        <% } else if (numberOfCardsInDeck >= 60) { %>
-                            <button type="submit" class="popup" onclick="togglePopup(this)">▲
-                                <span class="popuptext" id="myPopup">
-                                        Deck zit vol
-                                    </span>
-                                </button>
-                        <% } else { %>
-                            <form action="" method="post">
-                                <input type="hidden" name="nameToAdd" value="<%= card.name %>">
-                                <input type="hidden" name="idToAdd" value="<%= card.multiverseid %>">
-                                <input type="hidden" name="typeToAdd" value="<%= card.type %>">
-                                <button type="submit">▲</button>
-                            </form>
-                        <% } %>
-                        <form action="" method="post">
-                            <input type="hidden" name="nameToRemove" value="<%= card.name %>">
-                            <button type="submit">▼</button>
-                        </form>
-                    </section>
-                </article>
-            <% } %>
-        </section>
-        <section class="NewDeckWindow" id="deckSection">
-            <% for (const card of cards) { %>
-                <% if (card.multiverseid) { %>
+        <fieldset>
+            <legend>In Deck&colon;</legend>
+            <section class="NewDeckWindow" id="deckSection">
+                <% for (const card of deck) { %>
                     <article class="cardItem">
-                        <a href="" class="ModalTrigger2">
-                            <img loading="lazy" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
+                        <a href="" class="ModalTrigger">
+                            <img loading="lazy" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="Deck Image" class="NewDeckWindowImg">
                         </a>
                         <p><%= card.name %></p>
-                        <p>Kaarten in deck: 0</p>
+                        <p>Kaarten in deck: <%= card.numberOfCards %></p>
                         <section>
-                            <% if (numberOfCardsInDeck >= 60) { %>
+                            <% if (card.type !== "Land" && card.numberOfCards >= 4) { %>
+                                <button type="submit" class="popup" onclick="togglePopup(this)">▲
+                                    <span class="popuptext" id="myPopup">
+                                        4 kaarten max per deck
+                                    </span>
+                                </button>
+                            <% } else if (numberOfCardsInDeck >= 60) { %>
                                 <button type="submit" class="popup" onclick="togglePopup(this)">▲
                                     <span class="popuptext" id="myPopup">
                                             Deck zit vol
@@ -106,15 +74,51 @@
                             <% } %>
                             <form action="" method="post">
                                 <input type="hidden" name="nameToRemove" value="<%= card.name %>">
-                                <input type="hidden" name="idToRemove" value="<%= card.multiverseid %>">
                                 <button type="submit">▼</button>
                             </form>
                         </section>
-
                     </article>
                 <% } %>
-            <% } %>
-        </section>
+            </section>
+        </fieldset>
+        <fieldset>
+            <legend>Beschikbare Kaarten&colon;</legend>
+            <section class="NewDeckWindow" id="deckSection">
+                <% for (const card of cards) { %>
+                    <% if (card.multiverseid) { %>
+                        <article class="cardItem">
+                            <a href="" class="ModalTrigger2">
+                                <img loading="lazy" src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=<%= card.multiverseid %>&type=card" alt="<%= card.name %>">
+                            </a>
+                            <p><%= card.name %></p>
+                            <p>Kaarten in deck: 0</p>
+                            <section>
+                                <% if (numberOfCardsInDeck >= 60) { %>
+                                    <button type="submit" class="popup" onclick="togglePopup(this)">▲
+                                        <span class="popuptext" id="myPopup">
+                                                Deck zit vol
+                                            </span>
+                                        </button>
+                                <% } else { %>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="nameToAdd" value="<%= card.name %>">
+                                        <input type="hidden" name="idToAdd" value="<%= card.multiverseid %>">
+                                        <input type="hidden" name="typeToAdd" value="<%= card.type %>">
+                                        <button type="submit">▲</button>
+                                    </form>
+                                <% } %>
+                                <form action="" method="post">
+                                    <input type="hidden" name="nameToRemove" value="<%= card.name %>">
+                                    <input type="hidden" name="idToRemove" value="<%= card.multiverseid %>">
+                                    <button type="submit">▼</button>
+                                </form>
+                            </section>
+    
+                        </article>
+                    <% } %>
+                <% } %>
+            </section>
+        </fieldset>
         <div class="Modal">
             <div class="ModalContent">
                 <figure>

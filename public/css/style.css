@@ -112,20 +112,32 @@ button {
     vertical-align: top;
     margin-right: 1rem;
 }
-.ModalContent section h2, .ModalContent section p {
-    margin-bottom: 20px;
-}
 .ModalContent section h2 {
-    margin-bottom: 2rem;
+    display: inline-block;
+    margin-right: 10px;
     font-size: 160%;
-    line-height: 0;
+}
+.ModalContent section figure {
+    margin-top: 20px;
+    display: block;
+}
+.ModalContent section figure img {
+    border-radius: 15px;
+    width: 60%;
 }
 .ModalContent form button {
+    transition: background-color 0.25s, color 0.25s;
+    vertical-align: middle;
     height: auto;
 }
+.ModalContent form button:hover {
+    background-color: #fff;
+    color: #000;
+}
 .ModalContent select {
-    border: solid 2px #fff;
+    border: solid 3px #fff;
     padding: 3px;
+    width: 150%;
 }
 .ModalContent form input {
     padding: 4px;
@@ -143,6 +155,9 @@ button {
 .ModalClose:hover, .ModalClose:focus {
     text-decoration: none;
     color: #000;
+}
+#ModalFigure img {
+    border-radius: 10px;
 }
 /* ---------------- All Pages ---------------- */
 .AllActiveLink {
@@ -231,7 +246,7 @@ a .IndexFigure:hover {
 }
 /* ---------------- Home Page ---------------- */
 #HomeSearch {
-    margin-bottom: 30px;
+    margin: 30px 0 30px 0;
     padding: 0 14%;
     display: flex;
     width: 100%;
@@ -338,7 +353,9 @@ a .IndexFigure:hover {
 }
 #DecksGallery figure img {
     transition: filter 0.25s;
+    object-position: center;
     border-radius: 20px;
+    object-fit: cover;
 }
 #DecksGallery figure img:hover {
     filter: brightness(1.4);
@@ -458,10 +475,25 @@ option {
 .NewDeckWindowImg {
     width: 100%;
 }
+fieldset {
+    border: 1px solid #fff8;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+legend {
+    font-size: 130%;
+    margin-left: 20px;
+}
+.cardItem p {
+    text-align: center;
+}
 .cardItem section {
-    justify-content: left;
+    justify-content: center;
     display: flex;
     gap: 10px
+}
+.cardItem .ModalTrigger img, .cardItem .ModalTrigger2 img {
+    border-radius: 10px;
 }
 .NewDeckContainer {
     display: flex;
@@ -486,6 +518,13 @@ option {
 }
 .NewDeckContainer > section:nth-child(3) button {
     width: 60px;
+}
+.NewDeckFinished button {
+    transition: background-color 0.25s, color 0.25s;
+}
+.NewDeckFinished button:hover {
+    background-color: #fff;
+    color: #000;
 }
 /* ---------------- Error Page ---------------- */
 #ErrorHeader {
@@ -543,8 +582,8 @@ option {
 }
 /* ---------------- Error Message ---------------- */
 .HomeErrorContainer {
-    display: flex;
     justify-content: center;
+    display: flex;
 }
 .error {
     color: #fff8; 

@@ -46,15 +46,15 @@
         <section id="HomeButtons">
             <form action="/home" method="get">
                 <input type="hidden" name="q" value="<%= q %>">
-                <button name="page" value="<%= page - 1 %>" <% if (page === 1) { %> disabled <% } %> >&leftarrow;</button>
+                <button name="page" value="<%= page - 1 %>" <% if (page === 1) { %> disabled <% } %>>&leftarrow;</button>
             </form>
             <p><%= page %>/<%= totalPages %></p>
             <form action="/home" method="get">
                 <input type="hidden" name="q" value="<%= q %>">
-                <button name="page" value="<%= page + 1 %>" <% if (page === totalPages) { %> disabled <% } %> >&rightarrow;</button>
+                <button name="page" value="<%= page + 1 %>" <% if (page === totalPages) { %> disabled <% } %>>&rightarrow;</button>
             </form>
         </section>
-        <div class="Modal" >
+        <div class="Modal">
             <div class="ModalContent">
                 <figure id="ModalFigure">
                 </figure>
@@ -62,7 +62,7 @@
                 </section>
                 <section style="display: inline-block;">
                     <p>Toevoegen aan deck&colon;</p>
-                    <form action="" method="post" >
+                    <form action="" method="post">
                         <input type="hidden" name="namecard" value="" id="ModalForm"></input>
                         <input type="hidden" name="multiverseid" value="" id="ModalForm2"></input>
                         <input type="hidden" name="type" value="" id="ModalForm3"></input>
@@ -71,7 +71,7 @@
                             <% for (const deck of userDecks) { %>
                                 <option value="<%= deck %>"><%= deck %></option>
                             <% } %>
-                        </select>
+                        </select><br>
                         <button type="submit">Toevoegen</button>
                     </form>
                 </section>
