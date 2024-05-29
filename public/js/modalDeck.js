@@ -97,12 +97,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const toggleBackgroundUrlLabel = document.getElementById("toggleBackgroundUrl");
 
     toggleBackgroundUrlLabel.addEventListener("click", function() {
-        // Toggle de weergave van het veld voor de achtergrond-URL
-        backgroundUrlField.style.display = backgroundUrlField.style.display === "none" ? "inline" : "none";
+        // Toggle de weergave van het veld voor de achtergrond-URL en wis de inhoud
+        if (backgroundUrlField.style.display === "none" || backgroundUrlField.style.display === "") {
+            backgroundUrlField.style.display = "inline";
+        } else {
+            backgroundUrlField.style.display = "none";
+            backgroundUrlField.value = ""; // Wis de inhoud van het veld
+        }
     });
 });
-
-
-
-
-
