@@ -221,16 +221,11 @@ export async function getUserDecks(username: string) {
     }
 }
 
-<<<<<<< HEAD
 export async function getUserDecksFullDeck(username: string) {
-=======
-export async function getUserDecksWithUrls(username: string) {
->>>>>>> bcee765f94a38c82db49d13077213dba70da0ce2
     try {
         // Find the user
         const user = await userCollection.findOne({ username: username });
         if (!user) {
-<<<<<<< HEAD
             throw new Error(`User "${username}" not found.`);
         }
 
@@ -239,7 +234,24 @@ export async function getUserDecksWithUrls(username: string) {
 
         // Log whether decks are found or not
         if (deckTitles.length > 0) {
-=======
+            console.log(`Decks found for user "${username}".`);
+        } else {
+            console.log(`No decks found for user "${username}".`);
+        }
+
+        // Return the user's deck titles
+        return user.deck;
+    } catch (e) {
+        //Returns null
+        console.error(e);
+        return null;
+    }
+}
+export async function getUserDecksWithUrls(username: string) {
+    try {
+        // Find the user
+        const user = await userCollection.findOne({ username: username });
+        if (!user) {
             console.log(`User "${username}" not found.`);
             return null;
         }
@@ -252,28 +264,18 @@ export async function getUserDecksWithUrls(username: string) {
 
         // Log whether decks are found or not
         if (decksWithUrls.length > 0) {
->>>>>>> bcee765f94a38c82db49d13077213dba70da0ce2
             console.log(`Decks found for user "${username}".`);
         } else {
             console.log(`No decks found for user "${username}".`);
         }
 
-<<<<<<< HEAD
-        // Return the user's deck titles
-        return user.deck;
-    } catch (e) {
-        //Returns null
-=======
         // Return the user's deck titles with URLs
         return decksWithUrls;
     } catch (e) {
->>>>>>> bcee765f94a38c82db49d13077213dba70da0ce2
         console.error(e);
         return null;
     }
 }
-
-<<<<<<< HEAD
 export async function getUserDecksWithCards(username: string) {
     try {
         // Find the user
@@ -300,8 +302,6 @@ export async function getUserDecksWithCards(username: string) {
         return null;
     }
 }
-=======
->>>>>>> bcee765f94a38c82db49d13077213dba70da0ce2
 
 export async function changeDeckName(username: string, currentTitle: string, newTitle: string) {
     try {
@@ -514,4 +514,3 @@ export async function login(username: string, password: string) {
         throw new Error("User not found");
     }
 }
-

@@ -1,8 +1,9 @@
 import express, { Express } from "express";
 import { getUserDecks, cards, readCardsFromDeck, getUserDecksFullDeck, getUserDecksWithCards } from "../database";
-import { Card, UserCard, UserDeck } from "../types";
+import { Card, UserCard, UserDeck, User } from "../types";
 const app : Express = express();
 app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
 //Declaratie van arrays
 // let deck : UserDeck;
@@ -12,7 +13,8 @@ let result : UserDeck[] | undefined;
 //Deck wordt geinitialiseerd in de html.
 let deck: UserDeck = {
     title: 'Default Deck',
-    cards: []
+    cards: [],
+    urlBackground: ""
   };
   
 /*(async () => {
@@ -136,14 +138,18 @@ export function drawTestRouter() {
     let cardCounts = CountingSpecificCard(discardPile);
     
     router.get("/", async (req, res) => {
+        let user : User | undefined = req.session.user;
+        let result;
         cardCounts = CountingSpecificCard(discardPile);
-        const result =  await getUserDecksFullDeck("dennis");
-        const resultDecks = await getUserDecksFullDeck("dennis");
-        result?.forEach(deck => {
-            deck.cards.forEach(cards => {
-                console.log(cards.multiverseid);
-            });
-        });
+        if(user !== undefined){
+            result =  await getUserDecksFullDeck(user.username);
+            const resultDecks = await getUserDecksFullDeck(user.username);
+        }
+        // result?.forEach(deck => {
+        //     deck.cards.forEach(cards => {
+        //         console.log(cards.multiverseid);
+        //     });
+        // });
         // console.log(resultDecks);
         // result?.forEach(deck => {
         //     console.log(deck);
@@ -164,13 +170,32 @@ export function drawTestRouter() {
     });
 
     router.get("/draw", async (req, res) => {
+        console.log(deck);
         //Add to draw pile.
         AddToDrawPile();
         //In cardCounts zitten de kaarten en hoeveel ervan de kaarten in het deck zitten.
         cardCounts = CountingSpecificCard(discardPile);
-        //Returnt de decks.
-        const result =  await getUserDecksFullDeck("dennis");
-        console.log(drawPile);
+        //Ik steek de user in de variabele user.
+        let user : User | undefined = req.session.user;
+        //Ik initialiseer de variabele result.
+        let result;
+        //Telt hoeveel van dezelfde kaarten in de discard pile zit.
+        cardCounts = CountingSpecificCard(discardPile);
+        //Als de user niet undefined is.
+        if(user !== undefined){
+            //Returnt de decks.
+            result =  await getUserDecksFullDeck(user.username);
+        }
+        // //Voor elk deck.
+        // result?.forEach(deck => {
+        //     //Voor elke kaart.
+        //     deck.cards.forEach(cards => {
+        //         //Leest de multiverse id van de kaart uit.
+        //         console.log(cards.multiverseid);
+        //     });
+        // });
+        // //Leest de draw pile uit.
+        // console.log(drawPile);
         res.render("drawTest", {
             //Title is Draw Test
             title: "Draw Test",
@@ -218,9 +243,18 @@ export function drawTestRouter() {
     });
     
     router.get("/selectedDeck", async (req, res) => {
+        console.log(deck);
         // const selectedDeckTitle = req.query.selectedDeck as string;
         const selectedDeckTitle = req.query.deckSelect as string;
-        const allDecks = await getUserDecksFullDeck("dennis");
+        //Ik steek de user in de variabele
+        let user : User | undefined = req.session.user;
+        //Ik initialiseer de variabele allDecks.
+        let allDecks;
+        //Als de de user niet undefined is.
+        if(user !== undefined){
+            //Haalt de decks op.
+            allDecks = await getUserDecksFullDeck(user.username);
+        }
         const selectedDeck = allDecks?.find(deck => deck.title === selectedDeckTitle);
         // console.log(req.query.selectedDeck);
         console.log(selectedDeckTitle);
@@ -241,7 +275,7 @@ export function drawTestRouter() {
           decks: allDecks,
           deck: deck
         });
-      });
+    });
     
     return router;
 }
